@@ -1,0 +1,18 @@
+Idées de structure pour le moteur de jeu :
+- Grille : tableau 2D de caractères (à voir la taille car la grille record doit pouvoir tenir dedans)
+
+Méthodes (possibles) à implémenter :
+- checkPossible : renvoie true/false si l'emplacement choisi par le joueur est valide (vide et crée une nouvelle ligne de 5) (peut-être à diviser en 2 méthodes)
+- newMove : déroulement d'un coup 
+- checkIfOver : parcours de la grille pour trouver un emplacement valide, pour savoir si la partie peut continuer ou non
+- chooseTypeGame : choix du mode de jeu de l'utilisateur, important de le connaitre pour décider de la méthode checkPossible en fonction du choix
+- saveGame ? garder en mémoire la grille dans un fichier texte pour la reprendre plus tard
+- loadGame ? Va de paire, pour charger la partie du fichier texte
+
+Différence 5T/5D :
+- 5T : les lignes de points peuvent se superposer, donc il suffira de vérifier si le point placé forme une nouvelle ligne de 5 points (qui contient le point)
+- 5D : les lignes de points ne peuvent pas se superposer, donc il va falloir garder en mémoire les points qui sont déjà dans une ligne de 5, pour ne pas les réutiliser dans d'autres lignes
+
+Méthode de recherche de solution automatique :
+- méthode naïve : on cherche un emplacement libre qui crée une nouvelle ligne de points, en parcourant le tableau de manière linéaire 
+- meilleur départ : partir du centre du tableau, et "dérouler" pour essayer de trouver un emplacement qui fonctionne (on est plus proche des points de départ)
