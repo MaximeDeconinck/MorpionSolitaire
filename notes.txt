@@ -3,7 +3,7 @@ Idées de structure pour le moteur de jeu :
 
 Méthodes (possibles) à implémenter :
 - checkPossible : renvoie true/false si l'emplacement choisi par le joueur est valide (vide et crée une nouvelle ligne de 5) (peut-être à diviser en 2 méthodes)
-- newMove : déroulement d'un coup 
+- newMove : déroulement d'un coup (assigner a chaque coups un numéro pour avoir l'ordre des coups)
 - checkIfOver : parcours de la grille pour trouver un emplacement valide, pour savoir si la partie peut continuer ou non
 - chooseTypeGame : choix du mode de jeu de l'utilisateur, important de le connaitre pour décider de la méthode checkPossible en fonction du choix
 - saveGame ? garder en mémoire la grille dans un fichier texte pour la reprendre plus tard
