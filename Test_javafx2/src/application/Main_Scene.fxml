@@ -13,7 +13,7 @@
       <TextField layoutX="434.0" layoutY="361.0" prefHeight="25.0" prefWidth="231.0" />
       <Button layoutX="490.0" layoutY="183.0" mnemonicParsing="false" onAction="#btnRefreshClicked" prefHeight="25.0" prefWidth="161.0" text="Refresh" />
       <Button layoutX="489.0" layoutY="218.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="161.0" text="Recherche de solution" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="395.0" layoutX="6.0" layoutY="82.0" stroke="BLACK" strokeType="INSIDE" width="413.0" />
-      <ChoiceBox layoutX="496.0" layoutY="48.0" prefWidth="150.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="323.0" layoutX="86.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="247.0" />
+      <ChoiceBox layoutX="496.0" layoutY="65.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
