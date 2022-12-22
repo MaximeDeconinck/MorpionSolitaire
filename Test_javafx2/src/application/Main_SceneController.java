@@ -17,7 +17,7 @@ public class Main_SceneController {
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void btnOkClicked(ActionEvent event) {
+	public void btnRefreshClicked(ActionEvent event) {
 		Stage mainWindow = (Stage) tfTitle.getScene().getWindow();
 		String title = tfTitle.getText();
 		mainWindow.setTitle(title);
