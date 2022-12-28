@@ -1,7 +1,7 @@
 package application;
 
 import javafx.fxml.FXML;
-
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 import javafx.event.ActionEvent;
@@ -14,6 +14,9 @@ public class Main_SceneController {
 	private AnchorPane title;
 	@FXML
 	private TextField tfTitle;
+	@FXML
+	private ChoiceBox tfCHoicebox;
+	
 
 	// Event Listener on Button.onAction
 	@FXML
