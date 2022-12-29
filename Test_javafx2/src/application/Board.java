@@ -3,29 +3,28 @@ package application;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.TreeMap;
 
 public class Board {
 	public int size;
 	public String name;
-	public Map<String, List<Boolean>> grid;
+	public String[][] grid;
 	
 	public Board(int size, String name)	{
 		this.size = size;
 		this.name = name;
-		Map<String, List<Boolean>> grid1 = new TreeMap<>();
+		String[][] grid1 = new String[this.size][this.size];
 		for (int i = 0; i < this.size; i++) {
 			for (int j = 0; j < this.size; j++) {
-				String tempkey = i + "." + j;
-				List<Boolean> tempvalue = new ArrayList<>();
-				tempvalue.add(false);
-				grid1.put(tempkey, tempvalue);
+				grid1[i][j] = "F";
 			}
 		}
 		this.grid = grid1;
 	}
 	
+	/*
 	public boolean checkHorizontalPossible(int x, int y) {
 		TODO();
 		return true;
@@ -50,9 +49,19 @@ public class Board {
 		TODO();
 		return true;
 	}
+	*/
 	
 	@Override
 	public String toString() {
-		return this.grid.keySet().toString();
+		String lineSeparator = System.lineSeparator();
+		StringBuilder sb = new StringBuilder();
+
+		for (String[] row : this.grid) {
+		    sb.append(Arrays.toString(row))
+		      .append(lineSeparator);
+		}
+
+		String result = sb.toString();
+		return result;
 	}
 }
