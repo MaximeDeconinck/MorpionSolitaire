@@ -26,6 +26,31 @@ public class Board {
 		this.grid = grid1;
 	}
 	
+	public boolean checkHorizontalPossible(int x, int y) {
+		TODO();
+		return true;
+	}
+	
+	public boolean checkVerticalPossible(int x, int y) {
+		TODO();
+		return true;
+	}
+	
+	public boolean checkLeftDiagPossible(int x, int y) {
+		TODO();
+		return true;
+	}
+	
+	public boolean checkRightDiagPossible(int x, int y) {
+		TODO();
+		return true;
+	}
+	
+	public boolean checkPossible(String x, String y) {
+		TODO();
+		return true;
+	}
+	
 	@Override
 	public String toString() {
 		return this.grid.keySet().toString();
