@@ -105,7 +105,7 @@ public class Board {
 				for (int j = 5; j > 0; j--) {
 					temp.add(this.grid[x-j+1+i][y]);
 				}
-				System.out.println(temp);
+				// System.out.println(temp);
 				if (UtilFunctions.containsOnce(temp, "F")) { 
 					result = true;
 					break;
@@ -132,20 +132,112 @@ public class Board {
 		return false;
 	}
 	
-	/*
+	
 	public boolean checkLeftDiagPossible(int x, int y) {
-		TODO();
-		return true;
+	    int distanceToTopLeftBorder = Math.min(x, y);
+	    int distanceToBottomRightBorder = Math.min(this.size - x - 1, this.size - y - 1);
+	    boolean result = false;
+
+	    if (distanceToTopLeftBorder > 3) {
+	        if (distanceToBottomRightBorder > 3) {
+	            // Enough space to check all possible diagonals
+	            for (int i = 0; i < 5; i++) {
+	                ArrayList<String> temp = new ArrayList<>();
+	                for (int j = 5; j > 0; j--) {
+	                    temp.add(this.grid[x - j + 1 + i][y - j + 1 + i]);
+	                }
+	                if (UtilFunctions.containsOnce(temp, "F")) {
+	                    result = true;
+	                    break;
+	                }
+	            }
+	            return result;
+	        }
+	        // Enough space to the top-left, but not enough to the bottom-right
+	        for (int i = 0; i < distanceToBottomRightBorder + 1; i++) {
+	            ArrayList<String> temp = new ArrayList<>();
+	            for (int j = 5; j > 0; j--) {
+	                temp.add(this.grid[x - j + 1 + i][y - j + 1 + i]);
+	            }
+	            if (UtilFunctions.containsOnce(temp, "F")) {
+	                result = true;
+	                break;
+	            }
+	        }
+	        return result;
+	    }
+	    if (distanceToBottomRightBorder > 3) {
+	        // Not enough space to the top-left, but enough to the bottom-right
+	        for (int i = 0; i < distanceToTopLeftBorder + 1; i++) {
+	            ArrayList<String> temp = new ArrayList<>();
+	            for (int j = 0; j < 5; j++) {
+	                temp.add(this.grid[x + j + i][y + j + i]);
+	            }
+	            if (UtilFunctions.containsOnce(temp, "F")) {
+	                result = true;
+	                break;
+	            }
+	        }
+	        return result;
+	    }
+	    // Impossible situation in our case
+	    return false;
 	}
 	
-	public boolean checkRightDiagPossible(int x, int y) {
-		TODO();
-		return true;
+	public boolean checkRightDiagonalPossible(int x, int y) {
+	    int distanceToTopRightBorder = Math.min(x, this.size - y - 1);
+	    int distanceToBottomLeftBorder = Math.min(this.size - x - 1, y);
+	    boolean result = false;
+
+	    if (distanceToTopRightBorder > 3) {
+	        if (distanceToBottomLeftBorder > 3) {
+	            // Enough space to check all possible diagonals
+	            for (int i = 0; i < 5; i++) {
+	                ArrayList<String> temp = new ArrayList<>();
+	                for (int j = 5; j > 0; j--) {
+	                    temp.add(this.grid[x - j + 1 + i][y + j - 1 - i]);
+	                }
+	                if (UtilFunctions.containsOnce(temp, "F")) {
+	                    result = true;
+	                    break;
+	                }
+	            }
+	            return result;
+	        }
+	        // Enough space to the top-right, but not enough to the bottom-left
+	        for (int i = 0; i < distanceToBottomLeftBorder + 1; i++) {
+	            ArrayList<String> temp = new ArrayList<>();
+	            for (int j = 5; j > 0; j--) {
+	                temp.add(this.grid[x - j + 1 + i][y + j - 1 - i]);
+	            }
+	            if (UtilFunctions.containsOnce(temp, "F")) {
+	                result = true;
+	                break;
+	            }
+	        }
+	        return result;
+	    }
+	    if (distanceToBottomLeftBorder > 3) {
+	        // Not enough space to the top-right, but enough to the bottom-left
+	        for (int i = 0; i < distanceToTopRightBorder + 1; i++) {
+	            ArrayList<String> temp = new ArrayList<>();
+	            for (int j = 0; j < 5; j++) {
+	                temp.add(this.grid[x + j + i][y - j - i]);
+	            }
+	            if (UtilFunctions.containsOnce(temp, "F")) {
+	                result = true;
+	                break;
+	            }
+	        }
+	        return result;
+	    }
+	    // Impossible situation in our case
+	    return false;
 	}
-	*/
+
 	
 	public boolean checkPossible(int x, int y) {
-		return checkHorizontalPossible(x, y) || checkVerticalPossible(x, y);
+		return checkHorizontalPossible(x, y) || checkVerticalPossible(x, y) || checkLeftDiagPossible(x, y) || checkRightDiagonalPossible(x, y);
 	}
 	
 	@Override
