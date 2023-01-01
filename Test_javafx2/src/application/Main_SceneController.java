@@ -23,6 +23,8 @@ public class Main_SceneController {
 	public void btnRefreshClicked(ActionEvent event) {
 		Stage mainWindow = (Stage) tfTitle.getScene().getWindow();
 		String title = tfTitle.getText();
+		
+		
 		mainWindow.setTitle(title);
 	}
 }
