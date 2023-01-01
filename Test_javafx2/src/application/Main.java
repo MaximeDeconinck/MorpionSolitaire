@@ -50,15 +50,15 @@ public class Main extends Application {
         List<Line> verticalLines = new ArrayList<>();
         
         
-        for (int i = 0; i <= 15; i++) {
-            horizontalLines.add(new Line(30, 70 + (i * 30), 480, 70 + (i * 30)));
+        for (int i = 0; i <= 17; i++) {
+            horizontalLines.add(new Line(30, 70 + (i * 30), 540, 70 + (i * 30)));
         }
         linesGroup.getChildren().addAll(horizontalLines);
         
         
-        verticalLines.add(new Line(30, 70, 30, 520));
-        for (int i = 0; i <= 15; i++) {
-            verticalLines.add(new Line(30 + (i * 30), 70, 30 + (i * 30), 520));
+        verticalLines.add(new Line(30, 70, 30, 580));
+        for (int i = 0; i <= 17; i++) {
+            verticalLines.add(new Line(30 + (i * 30), 70, 30 + (i * 30), 580));
         }
         
         linesGroup.getChildren().addAll(verticalLines);
@@ -84,16 +84,21 @@ public class Main extends Application {
         
         Group checkBoxGroup = new Group();
         
-        List<CheckBox> intersectionCheckBoxes = finder.getIntersectionCheckBoxes(intersectionCoordinates);
-        checkBoxGroup.getChildren().addAll(intersectionCheckBoxes);
+        //List<CheckBox> intersectionCheckBoxes = finder.getIntersectionCheckBoxes(intersectionCoordinates);
+        //checkBoxGroup.getChildren().addAll(intersectionCheckBoxes);
         
         
         
-        /*
+        
         LineIntersectionDrawer drawer = new LineIntersectionDrawer();
         List<Circle> intersectionPoints = drawer.drawIntersections(horizontalLines, verticalLines);
         linesGroup.getChildren().addAll(intersectionPoints);
-        */
+        
+        for (Circle intersectionPoint : intersectionPoints) {
+        	Point2D coordinate = (Point2D) intersectionPoint.getUserData();
+        	System.out.println(coordinate);
+        	}
+        
         
         anchor.getChildren().addAll(label, button1, button2, linesGroup, checkBoxGroup);
         
