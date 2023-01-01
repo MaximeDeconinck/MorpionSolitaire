@@ -54,8 +54,6 @@ public class LineIntersectionFinder {
         List<CheckBox> intersectionCheckBoxes = new ArrayList<>();
         for (Point2D intersectionCoordinate : intersectionCoordinates) {
             CheckBox checkBox = new CheckBox();
-            checkBox.setScaleX(0.7);
-            checkBox.setScaleY(0.7);
             checkBox.setLayoutX(intersectionCoordinate.getX());
             checkBox.setLayoutY(intersectionCoordinate.getY());
             

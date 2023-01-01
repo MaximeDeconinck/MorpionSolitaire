@@ -89,11 +89,11 @@ public class Main extends Application {
         
         
         
-        
+        /*
         LineIntersectionDrawer drawer = new LineIntersectionDrawer();
         List<Circle> intersectionPoints = drawer.drawIntersections(horizontalLines, verticalLines);
         linesGroup.getChildren().addAll(intersectionPoints);
-        
+        */
         
         anchor.getChildren().addAll(label, button1, button2, linesGroup, checkBoxGroup);
         
