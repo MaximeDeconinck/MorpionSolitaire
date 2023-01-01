@@ -56,7 +56,7 @@ public class Main extends Application {
         linesGroup.getChildren().addAll(horizontalLines);
         
         
-        verticalLines.add(new Line(30, 70, 30, 580));
+        
         for (int i = 0; i <= 17; i++) {
             verticalLines.add(new Line(30 + (i * 30), 70, 30 + (i * 30), 580));
         }
