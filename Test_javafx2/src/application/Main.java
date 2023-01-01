@@ -1,5 +1,7 @@
 package application;
 	
+import java.util.ArrayList;
+import java.util.List;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -14,8 +16,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         AnchorPane anchor = new AnchorPane();
-        anchor.setPrefHeight(626.4);
-        anchor.setPrefWidth(799.2);
+        anchor.setPrefHeight(650.68);
+        anchor.setPrefWidth(959.04);
         
         Label label = new Label("Morpion Solitaire");
         label.setLayoutX(281);
@@ -39,25 +41,23 @@ public class Main extends Application {
         button2.setPrefWidth(161);
         
         Group linesGroup = new Group();
-
-        Line line1 = new Line(30, 70, 330, 70);
-        Line line2 = new Line(30, 100, 330, 100);
-        Line line3 = new Line(30, 130, 330, 130);
-        Line line4 = new Line(30, 160, 330, 160);
-        Line line5 = new Line(30, 190, 330, 190);
-        Line line6 = new Line(30, 220, 330, 220);
-        Line line7 = new Line(30, 250, 330, 250);
-        Line line8 = new Line(30, 280, 330, 280);
-        Line line9 = new Line(30, 310, 330, 310);
-        Line line10 = new Line(30, 340, 330, 340);
-        Line line11 = new Line(30, 370, 330, 370);
-        Line line12 = new Line(30, 400, 330, 400);
-        Line line13 = new Line(30, 430, 330, 430);
-        Line line14 = new Line(30, 460, 330, 460);
-        Line line15 = new Line(30, 490, 330, 490);
-        Line line16 = new Line(30, 520, 330, 520);
         
-        linesGroup.getChildren().addAll(line1, line2,line3,line4, line5, line6, line7,line8,line9,line10,line11, line12, line13, line14, line15, line16 );
+        List<Line> horizontalLines = new ArrayList<>();
+        List<Line> verticalLines = new ArrayList<>();
+        
+        
+        for (int i = 0; i <= 15; i++) {
+            horizontalLines.add(new Line(30, 70 + (i * 30), 480, 70 + (i * 30)));
+        }
+        linesGroup.getChildren().addAll(horizontalLines);
+        
+        
+        verticalLines.add(new Line(30, 70, 30, 520));
+        for (int i = 0; i <= 15; i++) {
+            verticalLines.add(new Line(30 + (i * 30), 70, 30 + (i * 30), 520));
+        }
+        
+        linesGroup.getChildren().addAll(verticalLines);
         
         
         anchor.getChildren().addAll(label, button1, button2, linesGroup);
