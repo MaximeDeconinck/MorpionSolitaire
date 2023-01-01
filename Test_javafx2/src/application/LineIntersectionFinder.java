@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Point2D;
+import javafx.scene.control.CheckBox;
 import javafx.scene.shape.Line;
 
 public class LineIntersectionFinder {
@@ -12,6 +13,7 @@ public class LineIntersectionFinder {
         for (Line horizontalLine : horizontalLines) {
             for (Line verticalLine : verticalLines) {
                 Point2D intersection = getIntersection(horizontalLine, verticalLine);
+                
                 if (intersection != null) {
                     intersectionCoordinates.add(intersection);
                 }
@@ -20,34 +22,49 @@ public class LineIntersectionFinder {
         return intersectionCoordinates;
     }
     
-    private Point2D getIntersection(Line line1, Line line2) {
-        double x1 = line1.getStartX();
-        double y1 = line1.getStartY();
-        double x2 = line1.getEndX();
-        double y2 = line1.getEndY();
-        double x3 = line2.getStartX();
-        double y3 = line2.getStartY();
-        double x4 = line2.getEndX();
-        double y4 = line2.getEndY();
-        double det1And2 = determinant(x1, y1, x2, y2);
-        double det3And4 = determinant(x3, y3, x4, y4);
-        double x1y2_y1x2 = determinant(x1, y1, x2, y2);
-        double x3y4_y3x4 = determinant(x3, y3, x4, y4);
-        double xIntersection = determinant(det1And2, x1y2_y1x2, det3And4, x3y4_y3x4) / determinant(x1 - x2, x3 - x4, y1 - y2, y3 - y4);
-        double yIntersection = determinant(det1And2, x1y2_y1x2, det3And4, x3y4_y3x4) / determinant(x1 - x2, x3 - x4, y1 - y2, y3 - y4);
-        if (isBetween(xIntersection, x1, x2) && isBetween(xIntersection, x3, x4)) {
-            return new Point2D(xIntersection, yIntersection);
+	private Point2D getIntersection(Line line1, Line line2) {
+		double x1 = line1.getStartX();
+		double y1 = line1.getStartY();
+		double x2 = line1.getEndX();
+		double y2 = line1.getEndY();
+		double x3 = line2.getStartX();
+		double y3 = line2.getStartY();
+		double x4 = line2.getEndX();
+		double y4 = line2.getEndY();
+		// Calcul du déterminant
+		double det = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+
+		// Si le déterminant est nul, cela signifie que les lignes sont parallèles et qu'elles n'ont donc pas d'intersection
+		if (det == 0) {
+		    return null;
+		}
+
+		// Calcul de l'abscisse de l'intersection
+		double xIntersection = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / det;
+		// Calcul de l'ordonnée de l'intersection
+		double yIntersection = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) / det;
+
+		// Vérification que l'intersection se trouve bien sur les deux lignes
+		
+
+		return new Point2D(xIntersection, yIntersection);
+}
+	
+	public List<CheckBox> getIntersectionCheckBoxes(List<Point2D> intersectionCoordinates) {
+        List<CheckBox> intersectionCheckBoxes = new ArrayList<>();
+        for (Point2D intersectionCoordinate : intersectionCoordinates) {
+            CheckBox checkBox = new CheckBox();
+            checkBox.setScaleX(0.7);
+            checkBox.setScaleY(0.7);
+            checkBox.setLayoutX(intersectionCoordinate.getX());
+            checkBox.setLayoutY(intersectionCoordinate.getY());
+            
+            intersectionCheckBoxes.add(checkBox);
         }
-		return null;
-
+        return intersectionCheckBoxes;
     }
 
-    private double determinant(double a, double b, double c, double d) {
-        return a * d - b * c;
-    }
     
-    private boolean isBetween(double x, double start, double end) {
-        return (start < x && x < end) || (end < x && x < start);
-    }
+    
   
 }

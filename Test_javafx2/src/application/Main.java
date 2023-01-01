@@ -7,10 +7,13 @@ import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public class Main extends Application {
 
@@ -47,7 +50,7 @@ public class Main extends Application {
         List<Line> verticalLines = new ArrayList<>();
         
         
-        for (int i = 0; i <= 17; i++) {
+        for (int i = 0; i <= 15; i++) {
             horizontalLines.add(new Line(30, 70 + (i * 30), 480, 70 + (i * 30)));
         }
         linesGroup.getChildren().addAll(horizontalLines);
@@ -68,6 +71,7 @@ public class Main extends Application {
       
         List<Point2D> intersectionCoordinates = finder.getIntersectionCoordinates(horizontalLines, verticalLines);
         
+        // retourne les corrdonées des intersections.
         System.out.println(intersectionCoordinates);
         for (Point2D intersection : intersectionCoordinates) {
         	
@@ -78,8 +82,20 @@ public class Main extends Application {
         }
         
         
+        Group checkBoxGroup = new Group();
         
-        anchor.getChildren().addAll(label, button1, button2, linesGroup);
+        List<CheckBox> intersectionCheckBoxes = finder.getIntersectionCheckBoxes(intersectionCoordinates);
+        checkBoxGroup.getChildren().addAll(intersectionCheckBoxes);
+        
+        
+        
+        
+        LineIntersectionDrawer drawer = new LineIntersectionDrawer();
+        List<Circle> intersectionPoints = drawer.drawIntersections(horizontalLines, verticalLines);
+        linesGroup.getChildren().addAll(intersectionPoints);
+        
+        
+        anchor.getChildren().addAll(label, button1, button2, linesGroup, checkBoxGroup);
         
        
         Scene scene = new Scene(anchor);
