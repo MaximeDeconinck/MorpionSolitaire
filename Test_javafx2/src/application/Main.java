@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Application;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,21 +21,21 @@ public class Main extends Application {
         anchor.setPrefWidth(959.04);
         
         Label label = new Label("Morpion Solitaire");
-        label.setLayoutX(281);
+        label.setLayoutX((anchor.getPrefWidth() - label.getPrefWidth()) / 2);
         label.setLayoutY(23);
         label.setPrefHeight(17);
         label.setPrefWidth(103);
-        
+
         Button button1 = new Button("Refresh");
-        button1.setLayoutX(469);
+        button1.setLayoutX(label.getLayoutX() + label.getPrefWidth() + 50);
         button1.setLayoutY(118);
         button1.setMnemonicParsing(false);
         button1.setOnAction(event -> btnRefreshClicked());
         button1.setPrefHeight(25);
         button1.setPrefWidth(161);
-        
+
         Button button2 = new Button("Recherche de solution");
-        button2.setLayoutX(469);
+        button2.setLayoutX(label.getLayoutX() + label.getPrefWidth() + 50);
         button2.setLayoutY(199);
         button2.setMnemonicParsing(false);
         button2.setPrefHeight(25);
@@ -46,7 +47,7 @@ public class Main extends Application {
         List<Line> verticalLines = new ArrayList<>();
         
         
-        for (int i = 0; i <= 15; i++) {
+        for (int i = 0; i <= 17; i++) {
             horizontalLines.add(new Line(30, 70 + (i * 30), 480, 70 + (i * 30)));
         }
         linesGroup.getChildren().addAll(horizontalLines);
@@ -60,6 +61,24 @@ public class Main extends Application {
         linesGroup.getChildren().addAll(verticalLines);
         
         
+        
+        LineIntersectionFinder finder = new LineIntersectionFinder();
+        
+       
+      
+        List<Point2D> intersectionCoordinates = finder.getIntersectionCoordinates(horizontalLines, verticalLines);
+        
+        System.out.println(intersectionCoordinates);
+        for (Point2D intersection : intersectionCoordinates) {
+        	
+            double x = intersection.getX();
+            double y = intersection.getY();
+            System.out.println("Coordonnées de l'intersection: (" + x + ", " + y + ")");
+            
+        }
+        
+        
+        
         anchor.getChildren().addAll(label, button1, button2, linesGroup);
         
        
@@ -67,6 +86,9 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    
+    
+    
     
     private void btnRefreshClicked() {
         // Code exécuté lorsque le bouton "Refresh" est cliqué
