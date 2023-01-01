@@ -56,7 +56,7 @@ public class Main extends Application {
         linesGroup.getChildren().addAll(horizontalLines);
         
         
-        
+     
         for (int i = 0; i <= 17; i++) {
             verticalLines.add(new Line(30 + (i * 30), 70, 30 + (i * 30), 580));
         }
@@ -94,11 +94,18 @@ public class Main extends Application {
         List<Circle> intersectionPoints = drawer.drawIntersections(horizontalLines, verticalLines);
         linesGroup.getChildren().addAll(intersectionPoints);
         
+        // affiche les id des cicles
         for (Circle intersectionPoint : intersectionPoints) {
         	Point2D coordinate = (Point2D) intersectionPoint.getUserData();
         	System.out.println(coordinate);
         	}
         
+        // crée l'evenement de clique
+        for (Circle circle : intersectionPoints) {
+            circle.setOnMouseClicked(event -> circle.setOpacity(circle.getOpacity() == 0 ? 1 : 0));
+        }
+        
+       
         
         anchor.getChildren().addAll(label, button1, button2, linesGroup, checkBoxGroup);
         
@@ -109,7 +116,7 @@ public class Main extends Application {
     }
     
     
-    
+   
     
     private void btnRefreshClicked() {
         // Code exécuté lorsque le bouton "Refresh" est cliqué

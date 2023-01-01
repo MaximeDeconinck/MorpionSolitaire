@@ -22,6 +22,7 @@ public class LineIntersectionDrawer {
         for (Point2D point : intersectionCoordinates) {
             Circle circle = new Circle(point.getX(), point.getY(), RADIUS);
             circle.setFill(FILL_COLOR);
+            circle.setOpacity(0);
             circle.setUserData(new Point2D(row, col));
             intersectionPoints.add(circle);
             col++;
