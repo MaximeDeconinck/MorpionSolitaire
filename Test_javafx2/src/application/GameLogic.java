@@ -9,11 +9,11 @@ public class GameLogic {
 		Board tab = new Board(16, "Tableau de jeu");
 		
 		// System.out.println(tab);
-		tab.grid[1][4] = "T";
-		tab.grid[2][3] = "T";
-		tab.grid[3][2] = "T";
-		tab.grid[4][1] = "T";
-		System.out.println(tab);
+		tab.addPoint(1, 4);
+		tab.addPoint(2, 3);
+		tab.addPoint(3, 2);
+		tab.addPoint(4, 1);
+		tab.printBoard();
 		
 		System.out.println(tab.checkPossible(5, 0));
 	}
