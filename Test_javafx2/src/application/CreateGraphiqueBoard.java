@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -18,6 +19,7 @@ public class CreateGraphiqueBoard extends Application {
 	   private List<Line> verticalLines;
 	   private List<Circle> intersectionPoints;
 	   private Group linesGroup;
+	   private Group lineDraw;
 	   private AnchorPane anchor;
 	   private Label label;
 	   private Button button1;
@@ -63,7 +65,7 @@ public class CreateGraphiqueBoard extends Application {
 	      this.horizontalLines = createHorizontalLines();
 	      this.verticalLines = createVerticalLines();
 	      this.linesGroup = new Group();
-	      
+	      this.lineDraw = new Group();
 	      
 	      
 	      
@@ -77,7 +79,9 @@ public class CreateGraphiqueBoard extends Application {
 	      // Ajoutez les éléments à anchor ici
 	      
 	      setMouseEvent_cicle();
-	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup);
+	      //drawLine(1, 1, 4, 4 );
+	     
+	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw);
 	      
 	      // Créez la scène et affichez la fenêtre ici
 	        
@@ -117,13 +121,51 @@ public class CreateGraphiqueBoard extends Application {
 	   
 	   private void setMouseEvent_cicle() {
 		   for (Circle circle : intersectionPoints) {
-	            circle.setOnMouseClicked(event -> circle.setOpacity(circle.getOpacity() == 0 ? 1 : 0));
-	        }
-	   }
+		        Point2D point = (Point2D)circle.getUserData();
+		        if(!LineIntersectionDrawer.Point_depart().contains(point)) {
+		            circle.setOnMouseClicked(event -> circle.setOpacity(circle.getOpacity() == 0 ? 1 : 0));
+		        }
+		   }
+		}
 	   
 	   private void btnRefreshClicked() {
-	        // Votre code ici
-	    }
+		    for (Circle circle : intersectionPoints) {
+		        Point2D data = (Point2D) circle.getUserData();
+		        if (!LineIntersectionDrawer.Point_depart().contains(data)) {
+		            circle.setOpacity(0);
+		        }
+		    }
+		    lineDraw.getChildren().clear();
+		}
+
+	   
+	   private void drawLine(double x1, double y1, double x2, double y2) {
+		    Circle c1 = null;
+		    Circle c2 = null;
+		    for (Circle circle : intersectionPoints) {
+		        Point2D data = (Point2D) circle.getUserData();
+		        if (data.getX() == x1 && data.getY() == y1) {
+		            c1 = circle;
+		          
+		        }
+		        if (data.getX() == x2 && data.getY() == y2) {
+		            c2 = circle;
+		            
+		        }
+		    }
+		    if (c1 != null && c2 != null) {
+		        Line line = new Line();
+		        
+		        line.setStartX(c1.getCenterX());
+		        line.setStartY(c1.getCenterY());
+		        line.setEndX(c2.getCenterX());
+		        line.setEndY(c2.getCenterY());
+		        line.setStroke(Color.BLUE);
+		        line.setStrokeWidth(5);
+		        System.out.println(line);
+		        lineDraw.getChildren().add(line);
+		    }
+		}
 	   
 	   // Autres méthodes de la classe (si nécessaire)
 	}

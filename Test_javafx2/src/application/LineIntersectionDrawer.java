@@ -53,7 +53,7 @@ public class LineIntersectionDrawer {
         return intersectionPoints;
     }
     
-     public List<Point2D> Point_depart() {
+     public static List<Point2D> Point_depart() {
         List<Point2D> points = new ArrayList<>();
         
         points.add(new Point2D(3, 7));
