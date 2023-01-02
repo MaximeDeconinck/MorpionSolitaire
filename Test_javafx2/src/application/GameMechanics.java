@@ -1,63 +1,71 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import application.Line;
 
 public class GameMechanics {
 	
 	static ArrayList<ArrayList<Integer>> moves = new ArrayList<>();
-	static ArrayList<ArrayList<Object>> lines = new ArrayList<>();
+	static ArrayList<Line> lines = new ArrayList<>();
 	
-	public static boolean checkHorizontalPossible(int x, int y, Board board) {
+	public static Line checkHorizontalPossible(int x, int y, Board board) {
         int distanceToLeftBorder = y;
         int distanceToRightBorder = board.size - y - 1;
-        boolean result = false;
 
         if (distanceToLeftBorder > 3) {
             if (distanceToRightBorder > 3) {
                 // Assez de place pour vérifier toutes les lignes possibles
                 for (int i = 0; i < 5; i++) {
                     ArrayList<Boolean> temp = new ArrayList<>();
+                    Line line = new Line();
+                    line.dir = "hor";
                     for (int j = 5; j > 0; j--) {
                         temp.add(board.grid.get(x).get(y-j+1+i));
+                        line.points.add(x);
+                        line.points.add(y-j+1+i);
                     }
                     // System.out.println(temp);
-                    if (UtilFunctions.containsOnce(temp, false)) { 
-                        result = true;
-                        break;
+                    if (UtilFunctions.containsOnce(temp, false)) {
+                    	return line;
                     }
                 }
-                return result;
             }
             // Assez de place à gauche mais pas à droite
             for (int i = 0; i < distanceToRightBorder + 1; i++) {
                 ArrayList<Boolean> temp = new ArrayList<>();
+                Line line = new Line();
+                line.dir = "hor";
                 for (int j = 5; j > 0; j--) {
                     temp.add(board.grid.get(x).get(y-j+1+i));
+                    line.points.add(x);
+                    line.points.add(y-j+1+i);
                 }
                 if (UtilFunctions.containsOnce(temp, false)) { 
-                    result = true;
-                    break;
+                	return line;
                 }
             }
-            return result;
         }
         if (distanceToRightBorder > 3) {
             // Pas de place à gauche mais assez à droite
             for (int i = 0; i < distanceToLeftBorder + 1; i++) {
                 ArrayList<Boolean> temp = new ArrayList<>();
+                Line line = new Line();
+                line.dir = "hor";
                 for (int j = 0; j < 5; j++) {
                     temp.add(board.grid.get(x).get(y+j+i));
+                    line.points.add(x);
+                    line.points.add(y-j+1+i);
                 }
                 // System.out.println(temp);
                 if (UtilFunctions.containsOnce(temp, false)) { 
-                    result = true;
-                    break;
+                    return line;
                 }
             }
-            return result;
         }
         // Situation impossible dans notre cas
-        return false;
+        Line line = new Line();
+        return line;
     }
 
 	
@@ -218,7 +226,7 @@ public class GameMechanics {
 
 	
 	public static boolean checkPossible(int x, int y, Board board) {
-		return checkHorizontalPossible(x, y, board) || checkVerticalPossible(x, y, board) || checkLeftDiagPossible(x, y, board) || checkRightDiagonalPossible(x, y, board);
+		return /*checkHorizontalPossible(x, y, board) || */ checkVerticalPossible(x, y, board) || checkLeftDiagPossible(x, y, board) || checkRightDiagonalPossible(x, y, board);
 	}
 	
 	public static void playMove(int x, int y, Board board) {

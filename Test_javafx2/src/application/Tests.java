@@ -23,5 +23,7 @@ public class Tests {
 		
 		tab.initBoard();
 		tab.printBoard();
+		Line line = GameMechanics.checkHorizontalPossible(3, 5, tab);
+		System.out.println(line);
 	}
 }
