@@ -76,7 +76,7 @@ public class CreateGraphiqueBoard extends Application {
 	      
 	      // Ajoutez les éléments à anchor ici
 	      
-	      drawIntersections();
+	      setMouseEvent_cicle();
 	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup);
 	      
 	      // Créez la scène et affichez la fenêtre ici
@@ -114,8 +114,8 @@ public class CreateGraphiqueBoard extends Application {
 	       return myVerticalLines;
 	   }
 	   
-	   // Méthode pour dessiner les intersections entre les lignes horizontal et vertical
-	   private void drawIntersections() {
+	   
+	   private void setMouseEvent_cicle() {
 		   for (Circle circle : intersectionPoints) {
 	            circle.setOnMouseClicked(event -> circle.setOpacity(circle.getOpacity() == 0 ? 1 : 0));
 	        }

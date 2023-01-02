@@ -32,8 +32,29 @@ public class LineIntersectionDrawer {
             }
             
         }
-        List<Point2D> points = new ArrayList<>();
+      
        
+        
+        
+        
+        for (Circle circle : intersectionPoints) {
+            Point2D point = (Point2D) circle.getUserData();
+            if (Point_depart().contains(point)) {
+                circle.setOpacity(1);
+            }
+        }
+        
+        
+        
+        
+        
+    
+        
+        return intersectionPoints;
+    }
+    
+     public List<Point2D> Point_depart() {
+        List<Point2D> points = new ArrayList<>();
         
         points.add(new Point2D(3, 7));
         points.add(new Point2D(3, 8));
@@ -70,24 +91,9 @@ public class LineIntersectionDrawer {
         points.add(new Point2D(10, 6));
         points.add(new Point2D(10, 9));
         points.add(new Point2D(11, 6));
-        points.add(new Point2D(11, 9)); 
+        points.add(new Point2D(11, 9));
         
-        for (Circle circle : intersectionPoints) {
-            Point2D point = (Point2D) circle.getUserData();
-            if (points.contains(point)) {
-                circle.setOpacity(1);
-            }
+        return points;
         }
-        
-        
-        
-        
-        
-    
-        
-        return intersectionPoints;
-    }
-    
-    
     
 }
