@@ -115,6 +115,14 @@ public class Main extends Application {
         Scene scene = new Scene(anchor);
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        
+     
+     
+
+
+
+
     }
     
     
