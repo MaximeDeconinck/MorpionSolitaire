@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javafx.geometry.Point2D;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,15 +49,22 @@ public class CreateGraphiqueBoard extends Application {
 	       this.anchor.setPrefHeight(650.68);
 	       this.anchor.setPrefWidth(959.04);
 	       
-	       this.label = new Label("Morpion Solitaire");
+	       this.label = new Label("");
 	       this.label.setLayoutX((anchor.getPrefWidth() - label.getPrefWidth()) / 2);
-	       
 	       this.label.setLayoutY(23);
-	       this.label.setPrefHeight(17);
-	       this.label.setPrefWidth(200);
+	       this.label.setPrefHeight(0);
+	       this.label.setPrefWidth(100);
 	       
 	       
-	   
+	       Label title = new Label("Morpion Solitaire");
+	       Font comicSans = Font.font("Georgia", 20);
+	       title.setFont(comicSans);
+	       title.setPrefWidth(959.04); // largeur de la fenêtre
+	       title.setAlignment(Pos.TOP_CENTER);
+	       title.setLayoutY(25);
+	       
+	       
+	       anchor.getChildren().add(title);
 
 	       this.button1 = new Button("Reset");
 	       this.button1.setLayoutX(label.getLayoutX() + label.getPrefWidth() + 50);
