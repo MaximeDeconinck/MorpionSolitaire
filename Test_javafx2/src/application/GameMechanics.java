@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 public class GameMechanics {
 	
+	static ArrayList<ArrayList<Integer>> moves = new ArrayList<>();
+	static ArrayList<ArrayList<Object>> lines = new ArrayList<>();
+	
 	public static boolean checkHorizontalPossible(int x, int y, Board board) {
         int distanceToLeftBorder = y;
         int distanceToRightBorder = board.size - y - 1;
@@ -220,6 +223,10 @@ public class GameMechanics {
 	
 	public static void playMove(int x, int y, Board board) {
 		if (checkPossible(x, y, board)) {
+			ArrayList<Integer> temp = new ArrayList<>();
+			temp.add(x);
+			temp.add(y);
+			moves.add(temp);
 			board.addPoint(x, y);
 		}
 	}
