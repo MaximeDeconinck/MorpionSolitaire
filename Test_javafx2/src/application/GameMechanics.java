@@ -6,7 +6,7 @@ import application.Line;
 
 public class GameMechanics {
 	
-	static ArrayList<ArrayList<Integer>> moves = new ArrayList<>();
+	static ArrayList<Point> moves = new ArrayList<>();
 	static ArrayList<Line> lines = new ArrayList<>();
 	static String gameRule;
 	
@@ -267,20 +267,51 @@ public class GameMechanics {
 		return true;
 	}
 	
-	public static void playMove(int x, int y, Board board, String gameRule) {
-		if (checkPossible(x, y, board)) {
-			if (!checkHorizontalPossible(x, y, board).isEmpty()) {
-				ArrayList<Line> testLines = checkHorizontalPossible(x, y, board);
-				
-				ArrayList<Integer> temp = new ArrayList<>();
-				temp.add(x);
-				temp.add(y);
-				moves.add(temp);
-				board.addPoint(x, y);
-				// Partie graphique
+	public static void playMove(int x, int y, Board board) {
+		if (gameRule.equals("5D")) {
+			if (checkPossible(x, y, board)) {
+				if (!checkHorizontalPossible(x, y, board).isEmpty()) {
+					ArrayList<Line> testLines = checkHorizontalPossible(x, y, board);
+					if (!UtilFunctions.canPlay5D(testLines, lines).getPoints().isEmpty()) {
+						System.out.println(UtilFunctions.canPlay5D(testLines, lines));
+						lines.add(UtilFunctions.canPlay5D(testLines, lines));
+						moves.add(new Point(x, y));
+						board.addPoint(x, y);
+						return;
+					}
+				}
+				if (!checkVerticalPossible(x, y, board).isEmpty()) {
+					ArrayList<Line> testLines = checkVerticalPossible(x, y, board);
+					if (!UtilFunctions.canPlay5D(testLines, lines).getPoints().isEmpty()) {
+						lines.add(UtilFunctions.canPlay5D(testLines, lines));
+						moves.add(new Point(x, y));
+						board.addPoint(x, y);
+						return;
+					}
+				}
+				if (!checkLeftDiagPossible(x, y, board).isEmpty()) {
+					ArrayList<Line> testLines = checkLeftDiagPossible(x, y, board);
+					if (!UtilFunctions.canPlay5D(testLines, lines).getPoints().isEmpty()) {
+						lines.add(UtilFunctions.canPlay5D(testLines, lines));
+						moves.add(new Point(x, y));
+						board.addPoint(x, y);
+						return;
+					}
+				}
+				if (!checkRightDiagPossible(x, y, board).isEmpty()) {
+					ArrayList<Line> testLines = checkRightDiagPossible(x, y, board);
+					if (!UtilFunctions.canPlay5D(testLines, lines).getPoints().isEmpty()) {
+						lines.add(UtilFunctions.canPlay5D(testLines, lines));
+						moves.add(new Point(x, y));
+						board.addPoint(x, y);
+						return;
+					}
+				}
 			}
+			// Pas possible de jouer, on ne fait rien
 		}
-		// Pas possible de jouer, graphiquement on ne fait rien
+		// Partie en 5T
+		
 	}
 	
 	public static void setGameRule(String gameRule) {

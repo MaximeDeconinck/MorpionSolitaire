@@ -12,6 +12,10 @@ public class Line {
 		this.points = new ArrayList<>();
 	}
 	
+	public ArrayList<Point> getPoints() {
+	    return points;
+	}
+	
 	@Override
 	public String toString() {
 		return points.toString() + dir;

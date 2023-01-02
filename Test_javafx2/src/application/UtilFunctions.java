@@ -19,24 +19,27 @@ public class UtilFunctions {
 	}
 	
 	public static Line canPlay5D(ArrayList<Line> testLines, ArrayList<Line> playedLines) {
-        for (Line testLine : testLines) {
-            boolean canPlay = true;
-            int intersections = 0;
-            for (Line playedLine : playedLines) {
-                for (int point : testLine.points) {
-                    if (playedLine.points.contains(point)) {
-                        intersections++;
-                        if (intersections > 1 || playedLine.dir.equals(testLine.dir)) {
-                            canPlay = false;
-                            break;
-                        }
-                    }
-                }
-            }
-            if (canPlay) {
-                return testLine;
-            }
-        }
-        return null;
-    }
+	    for (Line testLine : testLines) {
+	        boolean valid = true;
+	        for (Line playedLine : playedLines) {
+	            for (Point point : testLine.getPoints()) {
+	                if (playedLine.getPoints().contains(point)) {
+	                    if (playedLine.dir.equals(testLine.dir)) {
+	                        valid = false;
+	                        break;
+	                    }
+	                }
+	            }
+	            if (!valid) {
+	                break;
+	            }
+	        }
+	        if (valid) {
+	            return testLine;
+	        }
+	    }
+	    return null;
+	}
+
+
 }

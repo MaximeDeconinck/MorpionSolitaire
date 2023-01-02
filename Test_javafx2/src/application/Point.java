@@ -13,5 +13,10 @@ public class Point {
 	public boolean equals(Point point) {
 		return (this.x == point.x) && (this.y == point.y);
 	}
+	
+	@Override
+	public String toString() {
+		return "("+x+","+y+")";
+	}
 
 }

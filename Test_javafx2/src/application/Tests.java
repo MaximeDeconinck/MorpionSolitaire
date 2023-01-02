@@ -7,15 +7,14 @@ public class Tests {
 	
 	public static void main(String[] args) {
 		Board tab = new Board(16, "Tableau de jeu");
+		GameMechanics.gameRule = "5D";
 
 		tab.initBoard();
-		tab.addPoint(1, 4);
-		tab.addPoint(2, 3);
-		tab.addPoint(3, 2);
-		tab.addPoint(4, 1);
 		
 		tab.printBoard();
-
-		
+		GameMechanics.playMove(3, 5, tab);
+		tab.printBoard();
+		GameMechanics.playMove(3, 4, tab);
+		tab.printBoard();
 	}
 }
