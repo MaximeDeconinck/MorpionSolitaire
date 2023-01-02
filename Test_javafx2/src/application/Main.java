@@ -154,8 +154,8 @@ public class Main {
     	Application.launch(CreateGraphiqueBoard.class, args);  */
     	
     	
-    	Point2D point = new Point2D(5, 9);
-    	Score.addPoint(3, point, "score.txt");
+    	//Point2D point = new Point2D(5, 9);
+    	//Score.addPoint(3, point, "score.txt");
 		
     	Score.readFile("score.txt");
     	
