@@ -20,9 +20,10 @@ public class GameMechanics {
 		// partie graphique
 	}
 	
-	public static Line checkHorizontalPossible(int x, int y, Board board) {
+	public static ArrayList<Line> checkHorizontalPossible(int x, int y, Board board) {
         int distanceToLeftBorder = y;
         int distanceToRightBorder = board.size - y - 1;
+        ArrayList<Line> lines1 = new ArrayList<>();
 
         if (distanceToLeftBorder > 3) {
             if (distanceToRightBorder > 3) {
@@ -38,11 +39,10 @@ public class GameMechanics {
                     }
                     // System.out.println(temp);
                     if (UtilFunctions.containsOnce(temp, false)) {
-                    	return line;
+                    	lines1.add(line);
                     }
                 }
-                Line line = new Line();
-                return line;  
+                return lines1;  
             }
             // Assez de place à gauche mais pas à droite
             for (int i = 0; i < distanceToRightBorder + 1; i++) {
@@ -55,11 +55,10 @@ public class GameMechanics {
                     line.points.add(y-j+1+i);
                 }
                 if (UtilFunctions.containsOnce(temp, false)) { 
-                	return line;
+                	lines1.add(line);
                 }
             }
-            Line line = new Line();
-            return line;  
+            return lines1;  
         }
         if (distanceToRightBorder > 3) {
             // Pas de place à gauche mais assez à droite
@@ -74,21 +73,20 @@ public class GameMechanics {
                 }
                 // System.out.println(temp);
                 if (UtilFunctions.containsOnce(temp, false)) { 
-                    return line;
+                	lines1.add(line);
                 }
             }
-            Line line = new Line();
-            return line;  
+            return lines;  
         }
         // Situation impossible dans notre cas
-        Line line = new Line();
-        return line;
+        return lines;
     }
 
 	
-    public static Line checkVerticalPossible(int x, int y, Board board) {
+    public static ArrayList<Line> checkVerticalPossible(int x, int y, Board board) {
         int distanceToUpBorder = x;
         int distanceToDownBorder = board.size - x - 1;
+        ArrayList<Line> lines1 = new ArrayList<>();
 
         if (distanceToUpBorder > 3) {
             if (distanceToDownBorder > 3) {
@@ -103,11 +101,10 @@ public class GameMechanics {
                         line.points.add(y);
                     }
                     if (UtilFunctions.containsOnce(temp, false)) { 
-                    	return line;
+                    	lines1.add(line);
                     }
                 }
-                Line line = new Line();
-                return line;  
+                return lines1;  
             }
             // Assez de place en haut mais pas en bas
             for (int i = 0; i < distanceToDownBorder + 1; i++) {
@@ -120,11 +117,10 @@ public class GameMechanics {
                     line.points.add(y);
                 }
                 if (UtilFunctions.containsOnce(temp, false)) { 
-                    return line;
+                    lines1.add(line);
                 }
             }
-            Line line = new Line();
-            return line;  
+            return lines1;  
         }
         if (distanceToDownBorder > 3) {
             // Pas de place en haut mais assez en bas
@@ -138,21 +134,20 @@ public class GameMechanics {
                     line.points.add(y);
                 }
                 if (UtilFunctions.containsOnce(temp, false)) { 
-                    return line;
+                    lines1.add(line);
                 }
             }
-            Line line = new Line();
-            return line;  
+            return lines1;  
         }
         // Situation impossible dans notre cas
-        Line line = new Line();
-        return line;    
+        return lines1;    
     }
 	
 	
-    public static Line checkLeftDiagPossible(int x, int y, Board board) {
+    public static ArrayList<Line> checkLeftDiagPossible(int x, int y, Board board) {
         int distanceToTopLeftBorder = Math.min(x, y);
         int distanceToBottomRightBorder = Math.min(board.size - x - 1, board.size - y - 1);
+        ArrayList<Line> lines1 = new ArrayList<>();
 
         if (distanceToTopLeftBorder > 3) {
             if (distanceToBottomRightBorder > 3) {
@@ -167,11 +162,10 @@ public class GameMechanics {
                         line.points.add(y-j+1+i);
                     }
                     if (UtilFunctions.containsOnce(temp, false)) {
-                        return line;
+                        lines1.add(line);
                     }
                 }
-                Line line = new Line();
-                return line;  
+                return lines1;  
             }
             // Enough space to the top-left, but not enough to the bottom-right
             for (int i = 0; i < distanceToBottomRightBorder + 1; i++) {
@@ -184,11 +178,10 @@ public class GameMechanics {
                     line.points.add(y-j+1+i);
                 }
                 if (UtilFunctions.containsOnce(temp, false)) {
-                    return line;
+                    lines1.add(line);
                 }
             }
-            Line line = new Line();
-            return line; 
+            return lines1; 
         }
         if (distanceToBottomRightBorder > 3) {
             // Not enough space to the top-left, but enough to the bottom-right
@@ -202,21 +195,20 @@ public class GameMechanics {
                     line.points.add(y-j+i);
                 }
                 if (UtilFunctions.containsOnce(temp, false)) {
-                    return line;
+                    lines1.add(line);
                 }
             }
-            Line line = new Line();
-            return line; 
+            return lines1; 
         }
         // Impossible situation in our case
-        Line line = new Line();
-        return line; 
+        return lines1; 
     }          
 
 	
-	public static Line checkRightDiagPossible(int x, int y, Board board) {
+	public static ArrayList<Line> checkRightDiagPossible(int x, int y, Board board) {
 	    int distanceToTopRightBorder = Math.min(x, board.size - y - 1);
 	    int distanceToBottomLeftBorder = Math.min(board.size - x - 1, y);
+	    ArrayList<Line> lines1 = new ArrayList<>();
 
 	    if (distanceToTopRightBorder > 3) {
 	        if (distanceToBottomLeftBorder > 3) {
@@ -231,11 +223,10 @@ public class GameMechanics {
 	                    line.points.add(y+j-1-i);
 	                }
 	                if (UtilFunctions.containsOnce(temp, false)) {
-	                    return line;
+	                    lines1.add(line);
 	                }
 	            }
-	            Line line = new Line();
-	            return line; 
+	            return lines1; 
 	        }
 	        // Enough space to the top-right, but not enough to the bottom-left
 	        for (int i = 0; i < distanceToBottomLeftBorder + 1; i++) {
@@ -248,11 +239,10 @@ public class GameMechanics {
                     line.points.add(y+j-1-i);
 	            }
 	            if (UtilFunctions.containsOnce(temp, false)) {
-	                return line;
+	            	lines1.add(line);
 	            }
 	        }
-	        Line line = new Line();
-            return line; 
+            return lines1; 
 	    }
 	    if (distanceToBottomLeftBorder > 3) {
 	        // Not enough space to the top-right, but enough to the bottom-left
@@ -266,23 +256,21 @@ public class GameMechanics {
                     line.points.add(y+j-1-i);
 	            }
 	            if (UtilFunctions.containsOnce(temp, false)) {
-	                return line;
+	            	lines1.add(line);
 	            }
 	        }
-	        Line line = new Line();
-            return line; 
+            return lines1; 
 	    }
 	    // Impossible situation in our case
-	    Line line = new Line();
-        return line; 
+        return lines1; 
 	}
 
 	
 	public static boolean checkPossible(int x, int y, Board board) {
-		if (checkHorizontalPossible(x, y, board).points.isEmpty()) {
-			if (checkVerticalPossible(x, y, board).points.isEmpty()) {
-				if (checkLeftDiagPossible(x, y, board).points.isEmpty()) {
-					if (checkRightDiagPossible(x, y, board).points.isEmpty()) {
+		if (checkHorizontalPossible(x, y, board).isEmpty()) {
+			if (checkVerticalPossible(x, y, board).isEmpty()) {
+				if (checkLeftDiagPossible(x, y, board).isEmpty()) {
+					if (checkRightDiagPossible(x, y, board).isEmpty()) {
 						return false;
 					}
 				}
@@ -293,7 +281,7 @@ public class GameMechanics {
 	
 	public static void playMove(int x, int y, Board board) {
 		if (checkPossible(x, y, board)) {
-			if (!checkHorizontalPossible(x, y, board).points.isEmpty()) {
+			if (!checkHorizontalPossible(x, y, board).isEmpty()) {
 				ArrayList<Integer> temp = new ArrayList<>();
 				temp.add(x);
 				temp.add(y);
