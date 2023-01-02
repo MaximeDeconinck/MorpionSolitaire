@@ -11,7 +11,7 @@ import javafx.scene.shape.Circle;
 public class LineIntersectionDrawer {
     
     private static final double RADIUS = 5;
-    private static final Paint FILL_COLOR = Color.RED;
+    private static final Paint FILL_COLOR = Color.BLUE;
     int row = 1;
     int col = 1;
     
@@ -26,13 +26,68 @@ public class LineIntersectionDrawer {
             circle.setUserData(new Point2D(row, col));
             intersectionPoints.add(circle);
             col++;
-            if (col > 18) {
+            if (col > 16) {
                 row++;
                 col = 1;
             }
             
         }
+        List<Point2D> points = new ArrayList<>();
+       
+        
+        points.add(new Point2D(3, 7));
+        points.add(new Point2D(3, 8));
+        points.add(new Point2D(3, 9));
+        points.add(new Point2D(6, 3));
+        points.add(new Point2D(6, 4));
+        points.add(new Point2D(6, 5));
+        points.add(new Point2D(6, 6));
+        points.add(new Point2D(6, 9));
+        points.add(new Point2D(6, 10));
+        points.add(new Point2D(6, 11));
+        points.add(new Point2D(6, 12));
+        points.add(new Point2D(9, 3));
+        points.add(new Point2D(9, 4));
+        points.add(new Point2D(9, 5));
+        points.add(new Point2D(9, 6));
+        points.add(new Point2D(9, 9));
+        points.add(new Point2D(9, 10));
+        points.add(new Point2D(9, 11));
+        points.add(new Point2D(9, 12));
+        points.add(new Point2D(12, 6));
+        points.add(new Point2D(12, 7));
+        points.add(new Point2D(12, 8));
+        points.add(new Point2D(12, 9));
+        points.add(new Point2D(4, 6));
+        points.add(new Point2D(4, 9));
+        points.add(new Point2D(5, 6));
+        points.add(new Point2D(3, 6));
+        points.add(new Point2D(5, 9));
+        points.add(new Point2D(7, 3));
+        points.add(new Point2D(7, 12));
+        points.add(new Point2D(8, 3));
+        points.add(new Point2D(8, 12));
+        points.add(new Point2D(10, 6));
+        points.add(new Point2D(10, 9));
+        points.add(new Point2D(11, 6));
+        points.add(new Point2D(11, 9)); 
+        
+        for (Circle circle : intersectionPoints) {
+            Point2D point = (Point2D) circle.getUserData();
+            if (points.contains(point)) {
+                circle.setOpacity(1);
+            }
+        }
+        
+        
+        
+        
+        
+    
+        
         return intersectionPoints;
     }
+    
+    
     
 }

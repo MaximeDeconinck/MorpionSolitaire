@@ -53,14 +53,17 @@ public class Main extends Application {
         for (int i = 0; i <= 17; i++) {
             horizontalLines.add(new Line(30, 70 + (i * 30), 540, 70 + (i * 30)));
         }
+        
+        horizontalLines.remove(0);
+        horizontalLines.remove(horizontalLines.size() - 1);
         linesGroup.getChildren().addAll(horizontalLines);
-        
-        
      
         for (int i = 0; i <= 17; i++) {
             verticalLines.add(new Line(30 + (i * 30), 70, 30 + (i * 30), 580));
         }
         
+        verticalLines.remove(0);
+        verticalLines.remove(verticalLines.size() - 1); 
         linesGroup.getChildren().addAll(verticalLines);
         
         
