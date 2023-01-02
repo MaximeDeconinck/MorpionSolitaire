@@ -1,6 +1,7 @@
 package application;
 
 import application.*;
+import javafx.application.Application;
 
 public class Tests {
 	
@@ -14,6 +15,7 @@ public class Tests {
 		tab.addPoint(4, 1);
 		
 		tab.printBoard();
+
 		
 	}
 }

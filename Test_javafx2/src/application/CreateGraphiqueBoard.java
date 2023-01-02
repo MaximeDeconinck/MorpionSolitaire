@@ -28,6 +28,7 @@ public class CreateGraphiqueBoard extends Application {
 	   private Label label;
 	   private Button button1;
 	   private Button button2;
+	   private static Board board;
 	   
 	   
 	
@@ -52,7 +53,7 @@ public class CreateGraphiqueBoard extends Application {
 	       
 	   
 
-	       this.button1 = new Button("Refresh");
+	       this.button1 = new Button("Reset");
 	       this.button1.setLayoutX(label.getLayoutX() + label.getPrefWidth() + 50);
 	       this.button1.setLayoutY(118);
 	       this.button1.setMnemonicParsing(false);
@@ -96,7 +97,7 @@ public class CreateGraphiqueBoard extends Application {
 	      // Ajoutez les éléments à anchor ici
 	      
 	      setMouseEvent_cicle();
-	      //drawLine(1, 1, 4, 4 );
+	      drawLine(1, 1, 4, 4 );
 	     
 	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw , choiceBox);
 	      
@@ -153,6 +154,9 @@ public class CreateGraphiqueBoard extends Application {
 		        }
 		    }
 		    lineDraw.getChildren().clear();
+		    GameMechanics.reset(board);
+		    board.printBoard();
+		
 		}
 
 	   
@@ -184,5 +188,8 @@ public class CreateGraphiqueBoard extends Application {
 		    }
 		}
 	   
-	   // Autres méthodes de la classe (si nécessaire)
+	   public static void linkBoard(Board board1) { // ajoutez cette fonction à votre classe
+		    board = board1;
+		}
+
 	}

@@ -71,12 +71,12 @@ public class Board {
     }
     
     public void resetBoard() {
-    	for (int i = 0; i < this.size; i++) {
-    		for (int j = 0; j < this.size; i++) {
-    			this.grid.get(i).set(j, false);
-    		}
-    	}
-    	initBoard();
+        for (int i = 0; i < this.size; i++) {
+            for (int j = 0; j < this.size; j++) {
+                this.grid.get(i).set(j, false);
+            }
+        }
+        initBoard();
     }
     
     public void addPoint(int x, int y) {
