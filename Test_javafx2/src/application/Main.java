@@ -1,4 +1,6 @@
 package application;	
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Application;
@@ -132,7 +134,8 @@ public class Main {
     
  
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+    	
     	
     	Board tab = new Board(16, "Tableau de jeu");
 
@@ -144,11 +147,19 @@ public class Main {
 		
 		tab.printBoard();
 		
+		
+		
 
 		CreateGraphiqueBoard.linkBoard(tab);
-    	Application.launch(CreateGraphiqueBoard.class, args);
+    	Application.launch(CreateGraphiqueBoard.class, args);  
     	
-
+    	
+    	Point2D point = new Point2D(5, 9);
+    	Score.addPoint(3, point, "score.txt");
+		
+        Score.readFile("score.txt");
+        
+   
     	
     	
     }
