@@ -138,7 +138,7 @@ public class Main {
     	
     	
     	Board tab = new Board(16, "Tableau de jeu");
-
+        /*
 		tab.initBoard();
 		tab.addPoint(1, 4);
 		tab.addPoint(2, 3);
@@ -151,13 +151,17 @@ public class Main {
 		
 
 		CreateGraphiqueBoard.linkBoard(tab);
-    	Application.launch(CreateGraphiqueBoard.class, args);  
+    	Application.launch(CreateGraphiqueBoard.class, args);  */
     	
     	
     	Point2D point = new Point2D(5, 9);
     	Score.addPoint(3, point, "score.txt");
 		
-        Score.readFile("score.txt");
+    	Score.readFile("score.txt");
+    	
+   
+
+
         
    
     	
