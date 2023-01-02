@@ -14,11 +14,12 @@ import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class Main extends Application {
+public class Main {
 
+  /*	
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        AnchorPane anchor = new AnchorPane();
+    public void start(Stage primaryStage) throws Exception { */
+        /*AnchorPane anchor = new AnchorPane();
         anchor.setPrefHeight(650.68);
         anchor.setPrefWidth(959.04);
         
@@ -41,10 +42,10 @@ public class Main extends Application {
         button2.setLayoutY(199);
         button2.setMnemonicParsing(false);
         button2.setPrefHeight(25);
-        button2.setPrefWidth(161);
+        button2.setPrefWidth(161); */
         
-        Group linesGroup = new Group();
-        
+        //Group linesGroup = new Group();
+        /*
         List<Line> horizontalLines = new ArrayList<>();
         List<Line> verticalLines = new ArrayList<>();
         
@@ -63,17 +64,16 @@ public class Main extends Application {
         
         verticalLines.remove(0);
         verticalLines.remove(verticalLines.size() - 1); 
-        linesGroup.getChildren().addAll(verticalLines);
+        linesGroup.getChildren().addAll(verticalLines); */
         
         
         
-        LineIntersectionFinder finder = new LineIntersectionFinder();
-        
-       
-      
-        List<Point2D> intersectionCoordinates = finder.getIntersectionCoordinates(horizontalLines, verticalLines);
+       /* LineIntersectionFinder finder = new LineIntersectionFinder();  
+        List<Point2D> intersectionCoordinates = finder.getIntersectionCoordinates(horizontalLines, verticalLines); */
         
         // retourne les corrdonées des intersections.
+        
+        /*
         System.out.println(intersectionCoordinates);
         for (Point2D intersection : intersectionCoordinates) {
         	
@@ -82,57 +82,59 @@ public class Main extends Application {
             System.out.println("Coordonnées de l'intersection: (" + x + ", " + y + ")");
             
         }
+        */
         
-        
+        /*
         Group checkBoxGroup = new Group();
         
-        //List<CheckBox> intersectionCheckBoxes = finder.getIntersectionCheckBoxes(intersectionCoordinates);
-        //checkBoxGroup.getChildren().addAll(intersectionCheckBoxes);
+        List<CheckBox> intersectionCheckBoxes = finder.getIntersectionCheckBoxes(intersectionCoordinates);
+        checkBoxGroup.getChildren().addAll(intersectionCheckBoxes);  */
         
         
         
         
-        LineIntersectionDrawer drawer = new LineIntersectionDrawer();
-        List<Circle> intersectionPoints = drawer.drawIntersections(horizontalLines, verticalLines);
-        linesGroup.getChildren().addAll(intersectionPoints);
+        /*LineIntersectionDrawer drawer = new LineIntersectionDrawer();
+        List<Circle> intersectionPoints = drawer.drawIntersections(horizontalLines, verticalLines); */
         
+        
+        //linesGroup.getChildren().addAll(intersectionPoints);
+        
+        /*
         // affiche les id des cicles
         for (Circle intersectionPoint : intersectionPoints) {
         	Point2D coordinate = (Point2D) intersectionPoint.getUserData();
         	System.out.println(coordinate);
         	}
         
+        */
         // crée l'evenement de clique
-        for (Circle circle : intersectionPoints) {
+        /*for (Circle circle : intersectionPoints) {
             circle.setOnMouseClicked(event -> circle.setOpacity(circle.getOpacity() == 0 ? 1 : 0));
-        }
+        } */
         
        
-        
-        anchor.getChildren().addAll(label, button1, button2, linesGroup, checkBoxGroup);
+        /*
+        anchor.getChildren().addAll(label, button1, button2, linesGroup );
         
        
         Scene scene = new Scene(anchor);
         primaryStage.setScene(scene);
         primaryStage.show();
-        
+        */
         
      
+    	
+
+  
+
+
+   //}
+    
      
-
-
-
-
-    }
     
-    
-   
-    
-    private void btnRefreshClicked() {
-        // Code exécuté lorsque le bouton "Refresh" est cliqué
-    }
+  
     
     public static void main(String[] args) {
-        launch(args);
+    	Application.launch(args);
     }
 }
