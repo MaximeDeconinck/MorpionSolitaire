@@ -1,10 +1,11 @@
 package application;
 
 import java.util.ArrayList;
+import application.Point;
 
 public class Line {
 	
-	ArrayList<Integer> points;
+	ArrayList<Point> points;
 	String dir;
 	
 	public Line() {

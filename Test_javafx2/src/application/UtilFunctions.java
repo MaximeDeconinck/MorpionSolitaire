@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import application.Line;
 
 public class UtilFunctions {
 	
@@ -16,5 +17,26 @@ public class UtilFunctions {
 		}
 		return result;
 	}
-
+	
+	public static Line canPlay5D(ArrayList<Line> testLines, ArrayList<Line> playedLines) {
+        for (Line testLine : testLines) {
+            boolean canPlay = true;
+            int intersections = 0;
+            for (Line playedLine : playedLines) {
+                for (int point : testLine.points) {
+                    if (playedLine.points.contains(point)) {
+                        intersections++;
+                        if (intersections > 1 || playedLine.dir.equals(testLine.dir)) {
+                            canPlay = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (canPlay) {
+                return testLine;
+            }
+        }
+        return null;
+    }
 }

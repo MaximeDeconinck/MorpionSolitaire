@@ -34,8 +34,7 @@ public class GameMechanics {
                     line.dir = "hor";
                     for (int j = 5; j > 0; j--) {
                         temp.add(board.grid.get(x).get(y-j+1+i));
-                        line.points.add(x);
-                        line.points.add(y-j+1+i);
+                        line.points.add(new Point(x, y-j+1+i));
                     }
                     // System.out.println(temp);
                     if (UtilFunctions.containsOnce(temp, false)) {
@@ -51,8 +50,7 @@ public class GameMechanics {
                 line.dir = "hor";
                 for (int j = 5; j > 0; j--) {
                     temp.add(board.grid.get(x).get(y-j+1+i));
-                    line.points.add(x);
-                    line.points.add(y-j+1+i);
+                    line.points.add(new Point(x, y-j+1+i));
                 }
                 if (UtilFunctions.containsOnce(temp, false)) { 
                 	lines1.add(line);
@@ -68,8 +66,7 @@ public class GameMechanics {
                 line.dir = "hor";
                 for (int j = 0; j < 5; j++) {
                     temp.add(board.grid.get(x).get(y+j+i));
-                    line.points.add(x);
-                    line.points.add(y-j+i);
+                    line.points.add(new Point(x, y+j+i));
                 }
                 // System.out.println(temp);
                 if (UtilFunctions.containsOnce(temp, false)) { 
@@ -97,8 +94,7 @@ public class GameMechanics {
                     line.dir = "ver";
                     for (int j = 5; j > 0; j--) {
                         temp.add(board.grid.get(x-j+1+i).get(y));
-                        line.points.add(x-j+1+i);
-                        line.points.add(y);
+                        line.points.add(new Point(x-j+1+i, y));
                     }
                     if (UtilFunctions.containsOnce(temp, false)) { 
                     	lines1.add(line);
@@ -113,8 +109,7 @@ public class GameMechanics {
                 line.dir = "ver";
                 for (int j = 5; j > 0; j--) {
                     temp.add(board.grid.get(x-j+1+i).get(y));
-                    line.points.add(x-j+1+i);
-                    line.points.add(y);
+                    line.points.add(new Point(x-j+1+i, y));
                 }
                 if (UtilFunctions.containsOnce(temp, false)) { 
                     lines1.add(line);
@@ -130,8 +125,7 @@ public class GameMechanics {
                 line.dir = "ver";
                 for (int j = 0; j < 5; j++) {
                     temp.add(board.grid.get(x+j+i).get(y));
-                    line.points.add(x-j+i);
-                    line.points.add(y);
+                    line.points.add(new Point(x+j+i, y));
                 }
                 if (UtilFunctions.containsOnce(temp, false)) { 
                     lines1.add(line);
@@ -158,8 +152,7 @@ public class GameMechanics {
                     line.dir = "leftDiag";
                     for (int j = 5; j > 0; j--) {
                         temp.add(board.grid.get(x - j + 1 + i).get(y - j + 1 + i));
-                        line.points.add(x-j+1+i);
-                        line.points.add(y-j+1+i);
+                        line.points.add(new Point(x-j+1+i, y-j+1+i));
                     }
                     if (UtilFunctions.containsOnce(temp, false)) {
                         lines1.add(line);
@@ -174,8 +167,7 @@ public class GameMechanics {
                 line.dir = "leftDiag";
                 for (int j = 5; j > 0; j--) {
                     temp.add(board.grid.get(x - j + 1 + i).get(y - j + 1 + i));
-                    line.points.add(x-j+1+i);
-                    line.points.add(y-j+1+i);
+                    line.points.add(new Point(x-j+1+i, y-j+1+i));
                 }
                 if (UtilFunctions.containsOnce(temp, false)) {
                     lines1.add(line);
@@ -191,8 +183,7 @@ public class GameMechanics {
                 line.dir = "leftDiag";
                 for (int j = 0; j < 5; j++) {
                     temp.add(board.grid.get(x + j + i).get(y + j + i));
-                    line.points.add(x-j+i);
-                    line.points.add(y-j+i);
+                    line.points.add(new Point(x+j+i, y+j+i));
                 }
                 if (UtilFunctions.containsOnce(temp, false)) {
                     lines1.add(line);
@@ -219,8 +210,7 @@ public class GameMechanics {
 	                line.dir = "rightDiag";
 	                for (int j = 5; j > 0; j--) {
 	                    temp.add(board.grid.get(x - j + 1 + i).get(y + j - 1 - i));
-	                    line.points.add(x-j+1+i);
-	                    line.points.add(y+j-1-i);
+	                    line.points.add(new Point(x-j+1+i, y+j-1-i));
 	                }
 	                if (UtilFunctions.containsOnce(temp, false)) {
 	                    lines1.add(line);
@@ -235,8 +225,7 @@ public class GameMechanics {
                 line.dir = "rightDiag";
 	            for (int j = 5; j > 0; j--) {
 	                temp.add(board.grid.get(x - j + 1 + i).get(y + j - 1 - i));
-	                line.points.add(x-j+1+i);
-                    line.points.add(y+j-1-i);
+                    line.points.add(new Point(x-j+1+i, y+j-1-i));
 	            }
 	            if (UtilFunctions.containsOnce(temp, false)) {
 	            	lines1.add(line);
@@ -252,8 +241,7 @@ public class GameMechanics {
                 line.dir = "rightDiag";
 	            for (int j = 0; j < 5; j++) {
 	                temp.add(board.grid.get(x + j + i).get(y - j - i));
-	                line.points.add(x-j+1+i);
-                    line.points.add(y+j-1-i);
+                    line.points.add(new Point(x+j+i, y-j-i));
 	            }
 	            if (UtilFunctions.containsOnce(temp, false)) {
 	            	lines1.add(line);
@@ -279,9 +267,11 @@ public class GameMechanics {
 		return true;
 	}
 	
-	public static void playMove(int x, int y, Board board) {
+	public static void playMove(int x, int y, Board board, String gameRule) {
 		if (checkPossible(x, y, board)) {
 			if (!checkHorizontalPossible(x, y, board).isEmpty()) {
+				ArrayList<Line> testLines = checkHorizontalPossible(x, y, board);
+				
 				ArrayList<Integer> temp = new ArrayList<>();
 				temp.add(x);
 				temp.add(y);
