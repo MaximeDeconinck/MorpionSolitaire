@@ -7,7 +7,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javafx.geometry.Point2D;
 
 public class Score {
@@ -62,32 +64,29 @@ public class Score {
 	    }
 	}
 	
-	public static String[][] readFileG(String textFile) {
-	    List<String[]> lines = new ArrayList<>();
+	public static Map<Integer, List<Object>> getScores(String textFile) {
+	    Map<Integer, List<Object>> scores = new HashMap<>();
 	    try {
 	        BufferedReader reader = new BufferedReader(new FileReader(textFile));
 	        String line;
 	        while ((line = reader.readLine()) != null) {
 	            String[] parts = line.split(", ");
-	            String numGame = parts[0].split(": ")[1];
-	            String moves = parts[1].split(": ")[1];
+	            int numGame = Integer.parseInt(parts[0].split(": ")[1]);
+	            int moves = Integer.parseInt(parts[1].split(": ")[1]);
 	            String coordinates = "";
 	            for (int i = 2; i < parts.length; i++) {
 	                coordinates += parts[i] + " ";
 	            }
-	            lines.add(new String[]{numGame, moves, coordinates});
+	            List<Object> score = new ArrayList<>();
+	            score.add(moves);
+	            score.add(coordinates);
+	            scores.put(numGame, score);
 	        }
 	        reader.close();
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
-	    String[][] result = new String[3][lines.size()];
-	    for (int i = 0; i < lines.size(); i++) {
-	        result[0][i] = lines.get(i)[0];
-	        result[1][i] = lines.get(i)[1];
-	        result[2][i] = lines.get(i)[2];
-	    }
-	    return result;
+	    return scores;
 	}
 
 	public static void clear(String textFile) {

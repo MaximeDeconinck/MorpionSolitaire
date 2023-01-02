@@ -1,12 +1,16 @@
 package application;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -48,7 +52,7 @@ public class CreateGraphiqueBoard extends Application {
 	       
 	       this.label.setLayoutY(23);
 	       this.label.setPrefHeight(17);
-	       this.label.setPrefWidth(103);
+	       this.label.setPrefWidth(200);
 	       
 	       
 	   
@@ -99,7 +103,7 @@ public class CreateGraphiqueBoard extends Application {
 	      this.linesGroup = new Group();
 	      this.lineDraw = new Group();
 	      
-	      
+	      createScoresTable();
 	      
 	      LineIntersectionDrawer drawer = new LineIntersectionDrawer();
 	      this.intersectionPoints = drawer.drawIntersections(horizontalLines, verticalLines);
@@ -206,6 +210,28 @@ public class CreateGraphiqueBoard extends Application {
 	   
 	   public static void linkBoard(Board board1) { // ajoutez cette fonction à votre classe
 		    board = board1;
+		}
+	   
+	   private void createScoresTable() {
+		    Map<Integer, List<Object>> scores = Score.getScores("score.txt");
+		    TableView<Map.Entry<Integer, List<Object>>> table = new TableView<>();
+
+		    TableColumn<Map.Entry<Integer, List<Object>>, String> numgameColumn = new TableColumn<>("Numéro de partie");
+		    numgameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getKey().toString()));
+
+		    TableColumn<Map.Entry<Integer, List<Object>>, String> movesColumn = new TableColumn<>("Mouvements");
+		    movesColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().get(0).toString()));
+
+		    ObservableList<Map.Entry<Integer, List<Object>>> data = FXCollections.observableArrayList(scores.entrySet());
+		    table.setItems(data);
+		    table.getColumns().addAll(numgameColumn, movesColumn);
+
+		    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		    table.setMaxHeight(350);
+
+		    this.anchor.getChildren().add(table);
+		    AnchorPane.setTopAnchor(table, button2.getLayoutY() + button2.getPrefHeight() +30 );
+		    AnchorPane.setLeftAnchor(table, label.getLayoutX() + 120);
 		}
 
 	}
