@@ -6,8 +6,8 @@ public class Tests {
 	
 	public static void main(String[] args) {
 		Board tab = new Board(16, "Tableau de jeu");
-		
-		/* System.out.println(tab);
+
+		tab.initBoard();
 		tab.addPoint(1, 4);
 		tab.addPoint(2, 3);
 		tab.addPoint(3, 2);
@@ -15,15 +15,5 @@ public class Tests {
 		
 		tab.printBoard();
 		
-		GameMechanics.playMove(5, 0, tab);
-		GameMechanics.playMove(6, 0, tab);
-		
-		tab.printBoard()
-		*/
-		
-		tab.initBoard();
-		tab.printBoard();
-		Line line = GameMechanics.checkHorizontalPossible(3, 5, tab);
-		System.out.println(line);
 	}
 }

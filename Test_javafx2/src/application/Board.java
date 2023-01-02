@@ -70,6 +70,15 @@ public class Board {
     	addPoint(11, 9);
     }
     
+    public void resetBoard() {
+    	for (int i = 0; i < this.size; i++) {
+    		for (int j = 0; j < this.size; i++) {
+    			this.grid.get(i).set(j, false);
+    		}
+    	}
+    	initBoard();
+    }
+    
     public void addPoint(int x, int y) {
     	grid.get(x).set(y, true);
     }

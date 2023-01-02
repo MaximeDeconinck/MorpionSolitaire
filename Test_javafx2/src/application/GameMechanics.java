@@ -8,6 +8,16 @@ public class GameMechanics {
 	
 	static ArrayList<ArrayList<Integer>> moves = new ArrayList<>();
 	static ArrayList<Line> lines = new ArrayList<>();
+	static String gameRule;
+	
+	// Ajouter fonction qui modifie gameRule en fonction du menu déroulant
+	
+	public static void reset(Board board) {
+		board.resetBoard();
+		moves = new ArrayList<>();
+		lines = new ArrayList<>();
+		// partie graphique
+	}
 	
 	public static Line checkHorizontalPossible(int x, int y, Board board) {
         int distanceToLeftBorder = y;
@@ -282,12 +292,16 @@ public class GameMechanics {
 	
 	public static void playMove(int x, int y, Board board) {
 		if (checkPossible(x, y, board)) {
-			ArrayList<Integer> temp = new ArrayList<>();
-			temp.add(x);
-			temp.add(y);
-			moves.add(temp);
-			board.addPoint(x, y);
+			if (!checkHorizontalPossible(x, y, board).points.isEmpty()) {
+				ArrayList<Integer> temp = new ArrayList<>();
+				temp.add(x);
+				temp.add(y);
+				moves.add(temp);
+				board.addPoint(x, y);
+				// Partie graphique
+			}
 		}
+		// Pas possible de jouer, graphiquement on ne fait rien
 	}
 
 }
