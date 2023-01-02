@@ -10,6 +10,7 @@ public class GameMechanics {
 	static ArrayList<Line> lines = new ArrayList<>();
 	static String gameRule;
 	
+	
 	// Ajouter fonction qui modifie gameRule en fonction du menu déroulant
 	
 	public static void reset(Board board) {
@@ -302,6 +303,11 @@ public class GameMechanics {
 			}
 		}
 		// Pas possible de jouer, graphiquement on ne fait rien
+	}
+	
+	public static void setGameRule(String gameRule) {
+		GameMechanics.gameRule = gameRule;
+		System.out.println("game mech" + GameMechanics.gameRule);
 	}
 
 }

@@ -55,7 +55,7 @@ public class CreateGraphiqueBoard extends Application {
 
 	       this.button1 = new Button("Reset");
 	       this.button1.setLayoutX(label.getLayoutX() + label.getPrefWidth() + 50);
-	       this.button1.setLayoutY(118);
+	       this.button1.setLayoutY(150);
 	       this.button1.setMnemonicParsing(false);
 	       this.button1.setOnAction(event -> btnRefreshClicked());
 	       this.button1.setPrefHeight(25);
@@ -68,6 +68,20 @@ public class CreateGraphiqueBoard extends Application {
 		   choiceBox.setLayoutY(70);
 		   choiceBox.setPrefHeight(button1.getPrefHeight());
 		   choiceBox.setPrefWidth(button1.getPrefWidth());
+		   
+		   
+		   Button buttonValider = new Button("Valider");
+		   buttonValider.setLayoutX(label.getLayoutX() + label.getPrefWidth() + 50);
+		   buttonValider.setLayoutY(choiceBox.getLayoutY() + choiceBox.getPrefHeight() + 20); // +20 pour l'espacement
+		   buttonValider.setMnemonicParsing(false);
+		   buttonValider.setPrefHeight(25);
+		   buttonValider.setPrefWidth(161);
+		   
+		   buttonValider.setOnAction(event -> {
+			   String selectedValue = choiceBox.getValue();
+			   System.out.println(selectedValue);
+			   GameMechanics.setGameRule(selectedValue);
+			});
 
 	       this.button2 = new Button("Recherche de solution");
 	       this.button2.setLayoutX(label.getLayoutX() + label.getPrefWidth() + 50);
@@ -99,7 +113,7 @@ public class CreateGraphiqueBoard extends Application {
 	      setMouseEvent_cicle();
 	      drawLine(1, 1, 4, 4 );
 	     
-	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw , choiceBox);
+	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw , choiceBox ,buttonValider);
 	      
 	      // Créez la scène et affichez la fenêtre ici
 	        
@@ -158,6 +172,8 @@ public class CreateGraphiqueBoard extends Application {
 		    board.printBoard();
 		
 		}
+	   
+	   
 
 	   
 	   private void drawLine(double x1, double y1, double x2, double y2) {
