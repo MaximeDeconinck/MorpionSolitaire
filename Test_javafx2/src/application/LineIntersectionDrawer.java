@@ -12,8 +12,8 @@ public class LineIntersectionDrawer {
     
     private static final double RADIUS = 5;
     private static final Paint FILL_COLOR = Color.BLUE;
-    int row = 1;
-    int col = 1;
+    int row = 0;
+    int col = 0;
     
     public List<Circle> drawIntersections(List<Line> horizontalLines, List<Line> verticalLines) {
         LineIntersectionFinder finder = new LineIntersectionFinder();
