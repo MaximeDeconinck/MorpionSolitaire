@@ -12,12 +12,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ChoiceBox;
 
 public class CreateGraphiqueBoard extends Application {
 	   // Attributs de la classe
 	   private List<Line> horizontalLines;
 	   private List<Line> verticalLines;
 	   private List<Circle> intersectionPoints;
+	   private ChoiceBox<String> choiceBox;
 	   private Group linesGroup;
 	   private Group lineDraw;
 	   private AnchorPane anchor;
@@ -32,6 +36,8 @@ public class CreateGraphiqueBoard extends Application {
 	   public CreateGraphiqueBoard() {
 	      // Initialise les membres
 		   
+		 
+		   
 		   this.anchor = new AnchorPane();
 	       this.anchor.setPrefHeight(650.68);
 	       this.anchor.setPrefWidth(959.04);
@@ -42,6 +48,9 @@ public class CreateGraphiqueBoard extends Application {
 	       this.label.setLayoutY(23);
 	       this.label.setPrefHeight(17);
 	       this.label.setPrefWidth(103);
+	       
+	       
+	   
 
 	       this.button1 = new Button("Refresh");
 	       this.button1.setLayoutX(label.getLayoutX() + label.getPrefWidth() + 50);
@@ -50,6 +59,14 @@ public class CreateGraphiqueBoard extends Application {
 	       this.button1.setOnAction(event -> btnRefreshClicked());
 	       this.button1.setPrefHeight(25);
 	       this.button1.setPrefWidth(161);
+	       
+	       ObservableList<String> options = FXCollections.observableArrayList("5D", "5T");
+		   choiceBox = new ChoiceBox<>(options);
+		   choiceBox.setValue("5D"); // définit la valeur par défaut
+		   choiceBox.setLayoutX(label.getLayoutX() + label.getPrefWidth() + 50);
+		   choiceBox.setLayoutY(70);
+		   choiceBox.setPrefHeight(button1.getPrefHeight());
+		   choiceBox.setPrefWidth(button1.getPrefWidth());
 
 	       this.button2 = new Button("Recherche de solution");
 	       this.button2.setLayoutX(label.getLayoutX() + label.getPrefWidth() + 50);
@@ -81,7 +98,7 @@ public class CreateGraphiqueBoard extends Application {
 	      setMouseEvent_cicle();
 	      //drawLine(1, 1, 4, 4 );
 	     
-	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw);
+	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw , choiceBox);
 	      
 	      // Créez la scène et affichez la fenêtre ici
 	        
