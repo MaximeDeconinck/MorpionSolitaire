@@ -23,7 +23,7 @@ public class GameMechanics {
 	public static ArrayList<Line> checkHorizontalPossible(int x, int y, Board board) {
 	    ArrayList<Line> lines1 = new ArrayList<>();
 	    for (int i = 0; i < 5; i++) {
-	    	if (y-4+i >= 0 && y+i <= board.size) {
+	    	if (y-4+i >= 0 && y+i < board.size && y-4+i < board.size && y+i >= 0) {
 		        ArrayList<Boolean> temp = new ArrayList<>();
 		        Line line = new Line();
 		        line.dir = "hor";
@@ -43,7 +43,7 @@ public class GameMechanics {
 	public static ArrayList<Line> checkVerticalPossible(int x, int y, Board board) {
 	    ArrayList<Line> lines1 = new ArrayList<>();
 	    for (int i = 0; i < 5; i++) {
-	    	if (x-4+i >= 0 && x+i <= board.size) {
+	    	if (x-4+i >= 0 && x+i < board.size && x-4+i < board.size && x+i >= 0) {
 		        ArrayList<Boolean> temp = new ArrayList<>();
 		        Line line = new Line();
 		        line.dir = "vert";
@@ -63,7 +63,7 @@ public class GameMechanics {
 	public static ArrayList<Line> checkLeftDiagPossible(int x, int y, Board board) {
 	    ArrayList<Line> lines1 = new ArrayList<>();
 	    for (int i = 0; i < 5; i++) {
-	    	if (x-4+i >= 0 && x+i <= board.size && y-4+i >= 0 && y+i <= board.size) {
+	    	if (x-4+i >= 0 && x-4+i < board.size && x+i < board.size && x+i >= 0 && y-4+i >= 0 && y-4+i < board.size && y+i >= 0 && y+i < board.size) {
 		        ArrayList<Boolean> temp = new ArrayList<>();
 		        Line line = new Line();
 		        line.dir = "leftdiag";
@@ -83,7 +83,7 @@ public class GameMechanics {
 	public static ArrayList<Line> checkRightDiagPossible(int x, int y, Board board) {
 	    ArrayList<Line> lines1 = new ArrayList<>();
 	    for (int i = 0; i < 5; i++) {
-	    	if (x-4+i >= 0 && x+i <= board.size && y+4-i >= 0 && y-i <= board.size) {
+	    	if (x-4+i >= 0 && x-4+i < board.size && x+i < board.size && x+i >= 0 && y+4-i >= 0 && y+4-i < board.size && y-i < board.size && y-i >= 0) {
 		        ArrayList<Boolean> temp = new ArrayList<>();
 		        Line line = new Line();
 		        line.dir = "rightdiag";
