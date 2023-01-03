@@ -20,7 +20,7 @@ public class GameMechanics {
 		// partie graphique
 	}
 	
-	public static ArrayList<Line> checkHorizontalPossible(int x, int y, Board board) {
+	public static ArrayList<Line> isHorizontalPossible(int x, int y, Board board) {
 	    ArrayList<Line> lines1 = new ArrayList<>();
 	    for (int i = 0; i < 5; i++) {
 	    	if (y-4+i >= 0 && y+i < board.size && y-4+i < board.size && y+i >= 0) {
@@ -40,7 +40,7 @@ public class GameMechanics {
 	}
 
 	
-	public static ArrayList<Line> checkVerticalPossible(int x, int y, Board board) {
+	public static ArrayList<Line> isVerticalPossible(int x, int y, Board board) {
 	    ArrayList<Line> lines1 = new ArrayList<>();
 	    for (int i = 0; i < 5; i++) {
 	    	if (x-4+i >= 0 && x+i < board.size && x-4+i < board.size && x+i >= 0) {
@@ -60,7 +60,7 @@ public class GameMechanics {
 	}
 	
 	
-	public static ArrayList<Line> checkLeftDiagPossible(int x, int y, Board board) {
+	public static ArrayList<Line> isLeftDiagPossible(int x, int y, Board board) {
 	    ArrayList<Line> lines1 = new ArrayList<>();
 	    for (int i = 0; i < 5; i++) {
 	    	if (x-4+i >= 0 && x-4+i < board.size && x+i < board.size && x+i >= 0 && y-4+i >= 0 && y-4+i < board.size && y+i >= 0 && y+i < board.size) {
@@ -80,7 +80,7 @@ public class GameMechanics {
 	}
 
 	
-	public static ArrayList<Line> checkRightDiagPossible(int x, int y, Board board) {
+	public static ArrayList<Line> isRightDiagPossible(int x, int y, Board board) {
 	    ArrayList<Line> lines1 = new ArrayList<>();
 	    for (int i = 0; i < 5; i++) {
 	    	if (x-4+i >= 0 && x-4+i < board.size && x+i < board.size && x+i >= 0 && y+4-i >= 0 && y+4-i < board.size && y-i < board.size && y-i >= 0) {
@@ -100,11 +100,11 @@ public class GameMechanics {
 	}
 
 	
-	public static boolean checkPossible(int x, int y, Board board) {
-		if (checkHorizontalPossible(x, y, board).isEmpty()) {
-			if (checkVerticalPossible(x, y, board).isEmpty()) {
-				if (checkLeftDiagPossible(x, y, board).isEmpty()) {
-					if (checkRightDiagPossible(x, y, board).isEmpty()) {
+	public static boolean isPossible(int x, int y, Board board) {
+		if (isHorizontalPossible(x, y, board).isEmpty()) {
+			if (isVerticalPossible(x, y, board).isEmpty()) {
+				if (isLeftDiagPossible(x, y, board).isEmpty()) {
+					if (isRightDiagPossible(x, y, board).isEmpty()) {
 						return false;
 					}
 				}
@@ -113,33 +113,50 @@ public class GameMechanics {
 		return true;
 	}
 	
-	public static boolean playMove(int x, int y, Board board) {
+	/**
+	 * Determines if a move can be made at the specified coordinates on the board.
+	 * 
+	 * @param x The x coordinate of the move.
+	 * @param y The y coordinate of the move.
+	 * @param board The board on which to check for a playable move.
+	 * @return A Line object representing the line that can be formed by making the move, or null if the move is not playable.
+	 */
+	public static Line isPlayable(int x, int y, Board board) {
+		ArrayList<Line> testLines = new ArrayList<>();
+		if (!isHorizontalPossible(x, y, board).isEmpty()) { testLines.addAll(isHorizontalPossible(x, y, board)); }
+		if (!isVerticalPossible(x, y, board).isEmpty()) { testLines.addAll(isVerticalPossible(x, y, board)); }
+		if (!isLeftDiagPossible(x, y, board).isEmpty()) { testLines.addAll(isLeftDiagPossible(x, y, board)); }
+		if (!isRightDiagPossible(x, y, board).isEmpty()) { testLines.addAll(isRightDiagPossible(x, y, board)); }
+		// System.out.println(testLines);
+		if (!UtilFunctions.canPlay5D(testLines, lines).points.isEmpty()) {
+			Line newLine = UtilFunctions.canPlay5D(testLines, lines);
+			return newLine;
+		}
+		return null;
+	}
+	
+	/**
+	 * Makes a move on the board at the specified coordinates.
+	 * 
+	 * @param x The x coordinate of the move.
+	 * @param y The y coordinate of the move.
+	 * @param board The board on which to make the move.
+	 */
+	public static void playMove(int x, int y, Board board) {
 		if (!board.grid.get(x).get(y)) {
 			if (gameRule.equals("5D")) {
-				if (checkPossible(x, y, board)) {
-					ArrayList<Line> testLines = new ArrayList<>();
-					if (!checkHorizontalPossible(x, y, board).isEmpty()) { testLines.addAll(checkHorizontalPossible(x, y, board)); }
-					if (!checkVerticalPossible(x, y, board).isEmpty()) { testLines.addAll(checkVerticalPossible(x, y, board)); }
-					if (!checkLeftDiagPossible(x, y, board).isEmpty()) { testLines.addAll(checkLeftDiagPossible(x, y, board)); }
-					if (!checkRightDiagPossible(x, y, board).isEmpty()) { testLines.addAll(checkRightDiagPossible(x, y, board)); }
-					// System.out.println(testLines);
-					if (!UtilFunctions.canPlay5D(testLines, lines).points.isEmpty()) {
-						Line newLine = UtilFunctions.canPlay5D(testLines, lines);
+				if (isPossible(x, y, board)) {
+					if (!isPlayable(x, y, board).equals(null)) {
+						Line newLine = isPlayable(x, y, board);
 						lines.add(newLine);
 						moves.add(new Point(x, y));
 						board.grid.get(x).set(y, true);
-						return true;
 					}
-					// Pas de ligne jouable en 5D, on ne fait rien
 				}
-				// Pas possible de jouer, on ne fait rien
 			}
-			// Partie en 5T
 		}
-		return false;
-		// Case occupée, on ne fait rien
 	}
-	
+		
 	public static void setGameRule(String gameRule) {
 		GameMechanics.gameRule = gameRule;
 		System.out.println("game mech" + GameMechanics.gameRule);
