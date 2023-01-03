@@ -38,6 +38,7 @@ public class CreateGraphiqueBoard extends Application {
 	   private Button button1;
 	   private Button button2;
 	   private static Board board;
+	   private int counter = 1;
 	   
 	   
 	
@@ -172,12 +173,28 @@ public class CreateGraphiqueBoard extends Application {
 	   
 	   private void setMouseEvent_cicle() {
 		   for (Circle circle : intersectionPoints) {
-		        Point2D point = (Point2D)circle.getUserData();
-		        if(!LineIntersectionDrawer.Point_depart().contains(point)) {
-		            circle.setOnMouseClicked(event -> circle.setOpacity(circle.getOpacity() == 0 ? 1 : 0));
-		        }
-		   }
-		}
+		   Point2D point = (Point2D)circle.getUserData();
+		   if(!LineIntersectionDrawer.Point_depart().contains(point)) {
+		   // Crée un événement qui se déclenche lorsque l'utilisateur clique sur le cercle
+		   circle.setOnMouseClicked(event -> {
+		   // Modifie l'opacité du cercle
+		   circle.setOpacity(circle.getOpacity() == 0 ? 1 : 0);
+           // Crée un canvas de la même taille et position que le cercle
+           Canvas canvas = new Canvas(20, 20);
+           canvas.setLayoutX(circle.getCenterX() - 12);
+           canvas.setLayoutY(circle.getCenterY() -5);
+
+           // Dessine le nombre 1 sur le canvas
+           canvas.getGraphicsContext2D().setFill(Color.WHITE);
+           canvas.getGraphicsContext2D().setFont(new Font("Arial", 10));
+           canvas.getGraphicsContext2D().fillText(Integer.toString(counter), circle.getRadius(), circle.getRadius());
+
+           // Ajoute le canvas à l'anchor
+           anchor.getChildren().add(canvas);
+           counter++;
+       });
+   }
+		   }}
 	   
 	   private void btnRefreshClicked() {
 		    for (Circle circle : intersectionPoints) {
