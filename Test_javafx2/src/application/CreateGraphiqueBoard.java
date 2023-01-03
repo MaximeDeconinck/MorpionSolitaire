@@ -260,7 +260,7 @@ public class CreateGraphiqueBoard extends Application {
 		        line.setEndX(c2.getCenterX());
 		        line.setEndY(c2.getCenterY());
 		        line.setStroke(Color.BLUE);
-		        line.setStrokeWidth(50);
+		        line.setStrokeWidth(3);
 		        System.out.println(line);
 		        lineDraw.getChildren().add(line);
 		    }
