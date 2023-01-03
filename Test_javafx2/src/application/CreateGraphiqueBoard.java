@@ -262,6 +262,7 @@ public class CreateGraphiqueBoard extends Application {
 		    movesColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().get(0).toString()));
 
 		    ObservableList<Map.Entry<Integer, List<Object>>> data = FXCollections.observableArrayList(scores.entrySet());
+		    data.sort((entry1, entry2) -> ((Integer)entry2.getValue().get(0)).compareTo((Integer)entry1.getValue().get(0)));
 		    table.setItems(data);
 		    table.getColumns().addAll(numgameColumn, movesColumn);
 
@@ -272,5 +273,6 @@ public class CreateGraphiqueBoard extends Application {
 		    AnchorPane.setTopAnchor(table, button2.getLayoutY() + button2.getPrefHeight() +30 );
 		    AnchorPane.setLeftAnchor(table, label.getLayoutX() + 120);
 		}
+
 
 	}
