@@ -160,13 +160,7 @@ public class Main {
 		
     	Score.readFile("score.txt");
     	
-    	Map<Integer, List<Object>> scores = Score.getScores("score.txt");
-    	for (Map.Entry<Integer, List<Object>> entry : scores.entrySet()) {
-    	    System.out.println("Numéro de partie : " + entry.getKey());
-    	    System.out.println("Mouvements : " + entry.getValue().get(0));
-    	    System.out.println("Coordonnées : " + entry.getValue().get(1));
-    	}
-   
+    	
 
 
         

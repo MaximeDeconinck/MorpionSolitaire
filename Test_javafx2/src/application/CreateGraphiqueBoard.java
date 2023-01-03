@@ -28,7 +28,7 @@ public class CreateGraphiqueBoard extends Application {
 	   private List<Line> horizontalLines;
 	   private List<Line> verticalLines;
 	   private List<Circle> intersectionPoints;
-	   private List<Canvas> intersectionCanvas;
+	   private List<Canvas> Canvaslist;
 	   private ChoiceBox<String> choiceBox;
 	   private Group linesGroup;
 	   private Group lineDraw;
@@ -49,6 +49,7 @@ public class CreateGraphiqueBoard extends Application {
 	      // Initialise les membres
 		   
 		 
+		   Canvaslist = new ArrayList<>();
 		   
 		   this.anchor = new AnchorPane();
 	       this.anchor.setPrefHeight(650.68);
@@ -195,27 +196,35 @@ public class CreateGraphiqueBoard extends Application {
            canvas.getGraphicsContext2D().setFill(Color.WHITE);
            canvas.getGraphicsContext2D().setFont(new Font("Arial", 10));
            canvas.getGraphicsContext2D().fillText(Integer.toString(counter), circle.getRadius(), circle.getRadius());
-
+     
            // Ajoute le canvas à l'anchor
            anchor.getChildren().add(canvas);
+           
            counter++;
+           Canvaslist.add(canvas);
        });
    }
 		   }}
 	   
 	   private void btnRefreshClicked() {
-		    for (Circle circle : intersectionPoints) {
-		        Point2D data = (Point2D) circle.getUserData();
-		        if (!LineIntersectionDrawer.Point_depart().contains(data)) {
-		            circle.setOpacity(0);
-		        }
-		    }
-		    lineDraw.getChildren().clear();
-		    GameMechanics.reset(board);
-		    board.printBoard();
-		
-		}
-	   
+		   for (Circle circle : intersectionPoints) {
+		   Point2D data = (Point2D) circle.getUserData();
+		   if (!LineIntersectionDrawer.Point_depart().contains(data)) {
+		   circle.setOpacity(0);
+		   }
+		   }
+		   lineDraw.getChildren().clear();
+		   GameMechanics.reset(board);
+		   board.printBoard();
+		// Supprime tous les canvas de l'anchor
+		   for (Canvas c : Canvaslist) {
+		       anchor.getChildren().remove(c);
+		   }
+		   // Vide la liste de canvas
+		   Canvaslist.clear();
+	   }
+
+
 	   
 
 	   
