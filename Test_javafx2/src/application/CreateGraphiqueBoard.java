@@ -174,37 +174,46 @@ public class CreateGraphiqueBoard extends Application {
 	   
 	   
 	   private void setMouseEvent_cicle() {
-		   for (Circle circle : intersectionPoints) {
-		   
-		   Point2D point = (Point2D)circle.getUserData();
-		   if(!LineIntersectionDrawer.Point_depart().contains(point)) {
-		   // Crée un événement qui se déclenche lorsque l'utilisateur clique sur le cercle
-		   circle.setOnMouseClicked(event -> {
-		   // Modifie l'opacité du cercle
-		   circle.setOpacity(circle.getOpacity() == 0 ? 1 : 0);
-           // Crée un canvas de la même taille et position que le cercle
-           Canvas canvas = new Canvas(20, 20);
-           
-           if (counter >= 10) {
-        	   valx = 15;
-        	   }
+		    for (Circle circle : intersectionPoints) {
+		        Point2D point = (Point2D)circle.getUserData();
+		        if(!containsPoint2D(LineIntersectionDrawer.Point_depart(), point)) {
+		            // Crée un événement qui se déclenche lorsque l'utilisateur clique sur le cercle
+		            circle.setOnMouseClicked(event -> {
+		                // Appelle la fonction playMove
+		            	System.out.println((int)point.getX());
+		            	System.out.println((int)point.getY());
+		                if (GameMechanics.playMove((int)point.getX(), (int)point.getY(), board)) {
+		                    // Modifie l'opacité du cercle
+		                	System.out.println("vrai");
+		                    circle.setOpacity(circle.getOpacity() == 0 ? 1 : 0);
+		                    // Crée un canvas de la même taille et position que le cercle
+		                    Canvas canvas = new Canvas(20, 20);
+		                    if (counter >= 10) {
+		                        valx = 15;
+		                    }
+		                    canvas.setLayoutX(circle.getCenterX() - valx);
+		                    canvas.setLayoutY(circle.getCenterY() - 5);
 
-           canvas.setLayoutX(circle.getCenterX() - valx);
-           canvas.setLayoutY(circle.getCenterY() -5);
+		                    // Dessine le nombre 1 sur le canvas
+		                    canvas.getGraphicsContext2D().setFill(Color.WHITE);
+		                    canvas.getGraphicsContext2D().setFont(new Font("Arial", 10));
+		                    canvas.getGraphicsContext2D().fillText(Integer.toString(counter), circle.getRadius(), circle.getRadius());
 
-           // Dessine le nombre 1 sur le canvas
-           canvas.getGraphicsContext2D().setFill(Color.WHITE);
-           canvas.getGraphicsContext2D().setFont(new Font("Arial", 10));
-           canvas.getGraphicsContext2D().fillText(Integer.toString(counter), circle.getRadius(), circle.getRadius());
-     
-           // Ajoute le canvas à l'anchor
-           anchor.getChildren().add(canvas);
-           
-           counter++;
-           Canvaslist.add(canvas);
-       });
-   }
-		   }}
+		                    // Ajoute le canvas à l'anchor
+		                    anchor.getChildren().add(canvas);
+
+		                    counter++;
+		                    Canvaslist.add(canvas);
+		                }
+		            });
+		        }
+		    }
+		}
+
+
+
+
+
 	   
 	   private void btnRefreshClicked() {
 		   for (Circle circle : intersectionPoints) {
@@ -281,6 +290,15 @@ public class CreateGraphiqueBoard extends Application {
 		    this.anchor.getChildren().add(table);
 		    AnchorPane.setTopAnchor(table, button2.getLayoutY() + button2.getPrefHeight() +30 );
 		    AnchorPane.setLeftAnchor(table, label.getLayoutX() + 120);
+		}
+	   
+	   private boolean containsPoint2D(List<Point2D> list, Point2D point) {
+		    for (Point2D p : list) {
+		        if (p.getX() == point.getX() && p.getY() == point.getY()) {
+		            return true;
+		        }
+		    }
+		    return false;
 		}
 
 

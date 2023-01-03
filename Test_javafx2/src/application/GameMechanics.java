@@ -8,10 +8,10 @@ public class GameMechanics {
 	
 	static ArrayList<Point> moves = new ArrayList<>();
 	static ArrayList<Line> lines = new ArrayList<>();
-	static String gameRule;
+	static String gameRule = "5D";
 	
 	
-	// Ajouter fonction qui modifie gameRule en fonction du menu déroulant
+	// Ajouter fonction qui modifie gameRule en fonction du menu d�roulant
 	
 	public static void reset(Board board) {
 		board.resetBoard();
@@ -23,7 +23,7 @@ public class GameMechanics {
 	public static ArrayList<Line> isHorizontalPossible(int x, int y, Board board) {
 	    ArrayList<Line> lines1 = new ArrayList<>();
 	    for (int i = 0; i < 5; i++) {
-	    	if (y-4+i >= 0 && y+i <= board.size) {
+	    	if (y-4+i >= 0 && y+i < board.size && y-4+i < board.size && y+i >= 0) {
 		        ArrayList<Boolean> temp = new ArrayList<>();
 		        Line line = new Line();
 		        line.dir = "hor";
@@ -43,7 +43,7 @@ public class GameMechanics {
 	public static ArrayList<Line> isVerticalPossible(int x, int y, Board board) {
 	    ArrayList<Line> lines1 = new ArrayList<>();
 	    for (int i = 0; i < 5; i++) {
-	    	if (x-4+i >= 0 && x+i <= board.size) {
+	    	if (x-4+i >= 0 && x+i < board.size && x-4+i < board.size && x+i >= 0) {
 		        ArrayList<Boolean> temp = new ArrayList<>();
 		        Line line = new Line();
 		        line.dir = "vert";
@@ -63,7 +63,7 @@ public class GameMechanics {
 	public static ArrayList<Line> isLeftDiagPossible(int x, int y, Board board) {
 	    ArrayList<Line> lines1 = new ArrayList<>();
 	    for (int i = 0; i < 5; i++) {
-	    	if (x-4+i >= 0 && x+i <= board.size && y-4+i >= 0 && y+i <= board.size) {
+	    	if (x-4+i >= 0 && x-4+i < board.size && x+i < board.size && x+i >= 0 && y-4+i >= 0 && y-4+i < board.size && y+i >= 0 && y+i < board.size) {
 		        ArrayList<Boolean> temp = new ArrayList<>();
 		        Line line = new Line();
 		        line.dir = "leftdiag";
@@ -83,7 +83,7 @@ public class GameMechanics {
 	public static ArrayList<Line> isRightDiagPossible(int x, int y, Board board) {
 	    ArrayList<Line> lines1 = new ArrayList<>();
 	    for (int i = 0; i < 5; i++) {
-	    	if (x-4+i >= 0 && x+i <= board.size && y+4-i >= 0 && y-i <= board.size) {
+	    	if (x-4+i >= 0 && x-4+i < board.size && x+i < board.size && x+i >= 0 && y+4-i >= 0 && y+4-i < board.size && y-i < board.size && y-i >= 0) {
 		        ArrayList<Boolean> temp = new ArrayList<>();
 		        Line line = new Line();
 		        line.dir = "rightdiag";
@@ -113,9 +113,6 @@ public class GameMechanics {
 		return true;
 	}
 	
-<<<<<<< HEAD
-	public static void playMove(int x, int y, Board board) {
-=======
 	/**
 	 * Determines if a move can be made at the specified coordinates on the board.
 	 * 
@@ -136,7 +133,7 @@ public class GameMechanics {
 			return newLine;
 			}
 		return null;
-		}
+	}
 	
 	/**
 	 * Makes a move on the board at the specified coordinates if possible.
@@ -147,7 +144,6 @@ public class GameMechanics {
 	 * @return true if the move was made, false if the move was not possible.
 	 */
 	public static boolean playMove(int x, int y, Board board) {
->>>>>>> 524783c0ef383153e759f1d3d64b7e33819a6af6
 		if (!board.grid.get(x).get(y)) {
 			if (gameRule.equals("5D")) {
 				if (isPossible(x, y, board)) {
@@ -156,25 +152,14 @@ public class GameMechanics {
 						lines.add(newLine);
 						moves.add(new Point(x, y));
 						board.grid.get(x).set(y, true);
-<<<<<<< HEAD
-=======
 						return true;
-						}
->>>>>>> 524783c0ef383153e759f1d3d64b7e33819a6af6
 					}
 				}
 			}
-<<<<<<< HEAD
-			// Partie en 5T
 		}
-		// Case occupée, on ne fait rien
-	}
-	
-=======
 		return false;
-		}
+	}
 		
->>>>>>> 524783c0ef383153e759f1d3d64b7e33819a6af6
 	public static void setGameRule(String gameRule) {
 		GameMechanics.gameRule = gameRule;
 		System.out.println("game mech" + GameMechanics.gameRule);
