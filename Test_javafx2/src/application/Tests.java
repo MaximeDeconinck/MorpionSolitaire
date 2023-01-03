@@ -1,6 +1,7 @@
 package application;
 
 import application.*;
+import java.util.ArrayList;
 import javafx.application.Application;
 
 public class Tests {
@@ -12,9 +13,9 @@ public class Tests {
 		tab.initBoard();
 		
 		tab.printBoard();
-		GameMechanics.playMove(3, 5, tab);
-		tab.printBoard();
-		GameMechanics.playMove(3, 4, tab);
-		tab.printBoard();
+		ArrayList<Line> lines = new ArrayList<>();
+		lines.addAll(GameMechanics.checkLeftDiagPossible(5, 10, tab));
+		lines.addAll(GameMechanics.checkVerticalPossible(2, 6, tab));
+		System.out.println(lines);
 	}
 }
