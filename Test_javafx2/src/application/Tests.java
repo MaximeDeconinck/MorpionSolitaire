@@ -12,10 +12,14 @@ public class Tests {
 
 		tab.initBoard();
 		
+		GameMechanics.playMove(3, 5, tab);
 		tab.printBoard();
-		ArrayList<Line> lines = new ArrayList<>();
-		lines.addAll(GameMechanics.checkLeftDiagPossible(5, 10, tab));
-		lines.addAll(GameMechanics.checkVerticalPossible(2, 6, tab));
-		System.out.println(lines);
+		System.out.println("lines : " + GameMechanics.lines);
+		System.out.println("moves : " + GameMechanics.moves);
+		
+		GameMechanics.playMove(3, 4, tab);
+		tab.printBoard();
+		System.out.println("lines : " + GameMechanics.lines);
+		System.out.println("moves : " + GameMechanics.moves);
 	}
 }

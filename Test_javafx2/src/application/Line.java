@@ -16,6 +16,25 @@ public class Line {
 	    return points;
 	}
 	
+	public String getDirection() {
+		return dir;
+	}
+	
+	public boolean hasCommonPoint(Line line) {
+		for (Point point1 : this.points) {
+			for (Point point2 : line.points) {
+				if (point1.equals(point2)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public boolean isParallelTo(Line line) {
+		return this.dir.equals(line.dir);
+	}
+	
 	@Override
 	public String toString() {
 		return points.toString() + dir;
