@@ -27,6 +27,20 @@ public class Board {
         this.grid = grid1;
     }
     
+    public Board(ArrayList<ArrayList<Boolean>> grid, int size, String name) {
+    	this.grid = grid;
+    	this.size = size;
+    	this.name = name;
+    }
+    
+    public Board copy() {
+        ArrayList<ArrayList<Boolean>> copiedGrid = new ArrayList<>();
+        for (ArrayList<Boolean> row : this.grid) {
+            copiedGrid.add(new ArrayList<>(row));
+        }
+        return new Board(copiedGrid, this.size, this.name);
+    }
+    
     public void initBoard() {
     	addPoint(3, 6);
     	addPoint(3, 7);

@@ -27,11 +27,11 @@ public class CreateGraphiqueBoard extends Application {
 	   // Attributs de la classe
 	   private List<Line> horizontalLines;
 	   private List<Line> verticalLines;
-	   private List<Circle> intersectionPoints;
+	   private static List<Circle> intersectionPoints;
 	   private List<Canvas> Canvaslist;
 	   private ChoiceBox<String> choiceBox;
 	   private Group linesGroup;
-	   private Group lineDraw;
+	   private static Group lineDraw;
 	   private AnchorPane anchor;
 	   private Canvas canvas;
 	   private Label label;
@@ -68,7 +68,7 @@ public class CreateGraphiqueBoard extends Application {
 	       Label title = new Label("Morpion Solitaire");
 	       Font comicSans = Font.font("Georgia", 20);
 	       title.setFont(comicSans);
-	       title.setPrefWidth(959.04); // largeur de la fenêtre
+	       title.setPrefWidth(959.04); // largeur de la fenï¿½tre
 	       title.setAlignment(Pos.TOP_CENTER);
 	       title.setLayoutY(25);
 	       
@@ -85,7 +85,7 @@ public class CreateGraphiqueBoard extends Application {
 	       
 	       ObservableList<String> options = FXCollections.observableArrayList("5D", "5T");
 		   choiceBox = new ChoiceBox<>(options);
-		   choiceBox.setValue("5D"); // définit la valeur par défaut
+		   choiceBox.setValue("5D"); // dï¿½finit la valeur par dï¿½faut
 		   choiceBox.setLayoutX(label.getLayoutX() + label.getPrefWidth() + 50);
 		   choiceBox.setLayoutY(70);
 		   choiceBox.setPrefHeight(button1.getPrefHeight());
@@ -114,7 +114,7 @@ public class CreateGraphiqueBoard extends Application {
 
 	
 	      
-	      // Créer les lignes horizontal et vertical
+	      // Crï¿½er les lignes horizontal et vertical
 	      
 	      this.horizontalLines = createHorizontalLines();
 	      this.verticalLines = createVerticalLines();
@@ -130,14 +130,14 @@ public class CreateGraphiqueBoard extends Application {
 	      linesGroup.getChildren().addAll(verticalLines);
 	      linesGroup.getChildren().addAll(intersectionPoints);
 	      
-	      // Ajoutez les éléments à anchor ici
+	      // Ajoutez les ï¿½lï¿½ments ï¿½ anchor ici
 	      
 	      setMouseEvent_cicle();
 	
 	     
 	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw , choiceBox ,buttonValider);
 	      
-	      // Créez la scène et affichez la fenêtre ici
+	      // Crï¿½ez la scï¿½ne et affichez la fenï¿½tre ici
 	        
 	   }
 	   
@@ -148,7 +148,7 @@ public class CreateGraphiqueBoard extends Application {
 	       primaryStage.show();
 	   }
 	   
-	   // Méthode pour créer les lignes horizontal
+	   // Mï¿½thode pour crï¿½er les lignes horizontal
 	   public List<Line> createHorizontalLines() {
 		    List<Line> myHorizontalLines = new ArrayList<>();
 		    for (int i = 0; i <= 17; i++) {
@@ -159,7 +159,7 @@ public class CreateGraphiqueBoard extends Application {
 		    return myHorizontalLines;
 		}
 	   
-	   // Méthode pour créer les lignes vertical
+	   // Mï¿½thode pour crï¿½er les lignes vertical
 	   private List<Line> createVerticalLines() {
 		   
 		   List<Line> myVerticalLines = new ArrayList<>();
@@ -177,16 +177,16 @@ public class CreateGraphiqueBoard extends Application {
 		    for (Circle circle : intersectionPoints) {
 		        Point2D point = (Point2D)circle.getUserData();
 		        if(!containsPoint2D(LineIntersectionDrawer.Point_depart(), point)) {
-		            // Crée un événement qui se déclenche lorsque l'utilisateur clique sur le cercle
+		            // Crï¿½e un ï¿½vï¿½nement qui se dï¿½clenche lorsque l'utilisateur clique sur le cercle
 		            circle.setOnMouseClicked(event -> {
 		                // Appelle la fonction playMove
 		            	System.out.println((int)point.getX());
 		            	System.out.println((int)point.getY());
 		                if (GameMechanics.playMove((int)point.getX(), (int)point.getY(), board)) {
-		                    // Modifie l'opacité du cercle
+		                    // Modifie l'opacitï¿½ du cercle
 		                	System.out.println("vrai");
 		                    circle.setOpacity(circle.getOpacity() == 0 ? 1 : 0);
-		                    // Crée un canvas de la même taille et position que le cercle
+		                    // Crï¿½e un canvas de la mï¿½me taille et position que le cercle
 		                    Canvas canvas = new Canvas(20, 20);
 		                    if (counter >= 10) {
 		                        valx = 15;
@@ -199,7 +199,7 @@ public class CreateGraphiqueBoard extends Application {
 		                    canvas.getGraphicsContext2D().setFont(new Font("Arial", 10));
 		                    canvas.getGraphicsContext2D().fillText(Integer.toString(counter), circle.getRadius(), circle.getRadius());
 
-		                    // Ajoute le canvas à l'anchor
+		                    // Ajoute le canvas ï¿½ l'anchor
 		                    anchor.getChildren().add(canvas);
 
 		                    counter++;
@@ -238,7 +238,7 @@ public class CreateGraphiqueBoard extends Application {
 	   
 
 	   
-	   public void drawLine(double x1, double y1, double x2, double y2) {
+	   public static void drawLine(double x1, double y1, double x2, double y2) {
 		    Circle c1 = null;
 		    Circle c2 = null;
 		    for (Circle circle : intersectionPoints) {
@@ -266,7 +266,7 @@ public class CreateGraphiqueBoard extends Application {
 		    }
 		}
 	   
-	   public static void linkBoard(Board board1) { // ajoutez cette fonction à votre classe
+	   public static void linkBoard(Board board1) { // ajoutez cette fonction ï¿½ votre classe
 		    board = board1;
 		}
 	   
@@ -274,7 +274,7 @@ public class CreateGraphiqueBoard extends Application {
 		    Map<Integer, List<Object>> scores = Score.getScores("score.txt");
 		    TableView<Map.Entry<Integer, List<Object>>> table = new TableView<>();
 
-		    TableColumn<Map.Entry<Integer, List<Object>>, String> numgameColumn = new TableColumn<>("Numéro de partie");
+		    TableColumn<Map.Entry<Integer, List<Object>>, String> numgameColumn = new TableColumn<>("Numï¿½ro de partie");
 		    numgameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getKey().toString()));
 
 		    TableColumn<Map.Entry<Integer, List<Object>>, String> movesColumn = new TableColumn<>("Mouvements");

@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 import java.util.Arrays;
 import application.Line;
+import application.CreateGraphiqueBoard;
 
 public class GameMechanics {
 	
@@ -11,7 +12,7 @@ public class GameMechanics {
 	static String gameRule = "5D";
 	
 	
-	// Ajouter fonction qui modifie gameRule en fonction du menu déroulant
+	// Ajouter fonction qui modifie gameRule en fonction du menu dï¿½roulant
 	
 	public static void reset(Board board) {
 		board.resetBoard();
@@ -147,11 +148,12 @@ public class GameMechanics {
 		if (!board.grid.get(x).get(y)) {
 			if (gameRule.equals("5D")) {
 				if (isPossible(x, y, board)) {
-					if (!isPlayable(x, y, board).equals(null)) {
+					if (isPlayable(x, y, board) != null) {
 						Line newLine = isPlayable(x, y, board);
 						lines.add(newLine);
 						moves.add(new Point(x, y));
 						board.grid.get(x).set(y, true);
+						CreateGraphiqueBoard.drawLine(newLine.points.get(0).x, newLine.points.get(0).y, newLine.points.get(newLine.points.size()-1).x, newLine.points.get(newLine.points.size()-1).y);
 						return true;
 					}
 				}
@@ -159,6 +161,23 @@ public class GameMechanics {
 		}
 		return false;
 	}
+	
+	public static ArrayList<Point> playableMoves(Board board) {
+        ArrayList<Point> playableMoves = new ArrayList<>();
+
+        for (int i = 0; i < board.size; i++) {
+            for (int j = 0; j < board.size; j++) {
+                Board copyOfBoard = board.copy();
+                if (isPossible(i, j, copyOfBoard)) {
+	                if (playMove(i, j, copyOfBoard)) {
+	                    playableMoves.add(new Point(i, j));
+	                }
+                }
+            }
+        }
+
+        return playableMoves;
+    }
 		
 	public static void setGameRule(String gameRule) {
 		GameMechanics.gameRule = gameRule;
