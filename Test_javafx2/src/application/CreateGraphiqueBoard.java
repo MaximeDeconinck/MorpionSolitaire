@@ -39,6 +39,7 @@ public class CreateGraphiqueBoard extends Application {
 	   private Button button2;
 	   private static Board board;
 	   private int counter = 1;
+	   private int valx = 12;
 	   
 	   
 	
@@ -173,6 +174,7 @@ public class CreateGraphiqueBoard extends Application {
 	   
 	   private void setMouseEvent_cicle() {
 		   for (Circle circle : intersectionPoints) {
+		   
 		   Point2D point = (Point2D)circle.getUserData();
 		   if(!LineIntersectionDrawer.Point_depart().contains(point)) {
 		   // Crée un événement qui se déclenche lorsque l'utilisateur clique sur le cercle
@@ -181,7 +183,12 @@ public class CreateGraphiqueBoard extends Application {
 		   circle.setOpacity(circle.getOpacity() == 0 ? 1 : 0);
            // Crée un canvas de la même taille et position que le cercle
            Canvas canvas = new Canvas(20, 20);
-           canvas.setLayoutX(circle.getCenterX() - 12);
+           
+           if (counter >= 10) {
+        	   valx = 15;
+        	   }
+
+           canvas.setLayoutX(circle.getCenterX() - valx);
            canvas.setLayoutY(circle.getCenterY() -5);
 
            // Dessine le nombre 1 sur le canvas
