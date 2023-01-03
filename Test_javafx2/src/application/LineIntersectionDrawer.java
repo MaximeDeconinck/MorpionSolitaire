@@ -11,7 +11,8 @@ import javafx.scene.shape.Circle;
 public class LineIntersectionDrawer {
     
     private static final double RADIUS = 5;
-    private static final Paint FILL_COLOR = Color.BLUE;
+    
+    Color maCouleur = Color.web("#31AEDB");
     int row = 0;
     int col = 0;
     
@@ -21,9 +22,10 @@ public class LineIntersectionDrawer {
         List<Circle> intersectionPoints = new ArrayList<>();
         for (Point2D point : intersectionCoordinates) {
             Circle circle = new Circle(point.getX(), point.getY(), RADIUS);
-            circle.setFill(FILL_COLOR);
+            circle.setFill(maCouleur);
             circle.setOpacity(0);
             circle.setUserData(new Point2D(row, col));
+            circle.setRadius(circle.getRadius() + 4);
             intersectionPoints.add(circle);
             col++;
             if (col > 16) {

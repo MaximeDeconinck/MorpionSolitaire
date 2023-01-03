@@ -124,7 +124,7 @@ public class CreateGraphiqueBoard extends Application {
 	      // Ajoutez les éléments à anchor ici
 	      
 	      setMouseEvent_cicle();
-	      drawLine(1, 1, 4, 4 );
+	
 	     
 	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw , choiceBox ,buttonValider);
 	      
@@ -211,7 +211,7 @@ public class CreateGraphiqueBoard extends Application {
 		        line.setEndX(c2.getCenterX());
 		        line.setEndY(c2.getCenterY());
 		        line.setStroke(Color.BLUE);
-		        line.setStrokeWidth(5);
+		        line.setStrokeWidth(50);
 		        System.out.println(line);
 		        lineDraw.getChildren().add(line);
 		    }
