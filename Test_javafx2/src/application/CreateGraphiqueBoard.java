@@ -231,13 +231,14 @@ public class CreateGraphiqueBoard extends Application {
 		   }
 		   // Vide la liste de canvas
 		   Canvaslist.clear();
+		   counter = 1;
 	   }
 
 
 	   
 
 	   
-	   private void drawLine(double x1, double y1, double x2, double y2) {
+	   public void drawLine(double x1, double y1, double x2, double y2) {
 		    Circle c1 = null;
 		    Circle c2 = null;
 		    for (Circle circle : intersectionPoints) {
