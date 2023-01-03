@@ -14,12 +14,22 @@ public class Tests {
 		
 		GameMechanics.playMove(3, 5, tab);
 		tab.printBoard();
-		System.out.println("lines : " + GameMechanics.lines);
-		System.out.println("moves : " + GameMechanics.moves);
+		System.out.println(GameMechanics.moves);
+		System.out.println(GameMechanics.lines);
 		
-		GameMechanics.playMove(3, 4, tab);
+		GameMechanics.playMove(2, 6, tab);
 		tab.printBoard();
-		System.out.println("lines : " + GameMechanics.lines);
-		System.out.println("moves : " + GameMechanics.moves);
+		System.out.println(GameMechanics.moves);
+		System.out.println(GameMechanics.lines);
+		
+		GameMechanics.playMove(5, 5, tab);
+		tab.printBoard();
+		System.out.println(GameMechanics.moves);
+		System.out.println(GameMechanics.lines);
+		
+		GameMechanics.playMove(10, 5, tab);
+		tab.printBoard();
+		System.out.println(GameMechanics.moves);
+		System.out.println(GameMechanics.lines);
 	}
 }

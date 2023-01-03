@@ -19,30 +19,25 @@ public class UtilFunctions {
 	}
 	
 	public static Line canPlay5D(ArrayList<Line> testLines, ArrayList<Line> playedLines) {
-		for (Line testLine : testLines) {
-			boolean valid = true;
-
-			for (Point p : testLine.getPoints()) {
-				for (Line playedLine : playedLines) {
-					if (playedLine.getPoints().contains(p)) {
-						if (playedLine.getDirection() == testLine.getDirection()) {
-							valid = false;
-							break;
-						}
-					}
-				}
-				if (!valid) {
-					break;
-				}
-			}
-
-			if (valid) {
-				System.out.println("valid testLine : " + testLine);
-				return testLine;
-			}
-		}
-
-		return new Line();
+	    for (Line testLine : testLines) {
+	    	// System.out.println("testLine : " + testLine);
+	        boolean valid = true;
+	        for (Line playedLine : playedLines) {
+	        	// System.out.println("playedLine : " + playedLine);
+	            if (testLine.hasCommonPoint(playedLine)) {
+	            	// System.out.println("point en commun trouvé");
+	                if (playedLine.getDirection() == testLine.getDirection()) {
+	                    valid = false;
+	                    break;
+	                }
+	            }
+	        }
+	        if (valid) {
+	            return testLine;
+	        }
+	    }
+	    return new Line();
 	}
+
 
 }

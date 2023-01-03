@@ -24,11 +24,11 @@ public class Line {
 		for (Point point1 : this.points) {
 			for (Point point2 : line.points) {
 				if (point1.equals(point2)) {
-					return false;
+					return true;
 				}
 			}
 		}
-		return true;
+		return false;
 	}
 	
 	public boolean isParallelTo(Line line) {
