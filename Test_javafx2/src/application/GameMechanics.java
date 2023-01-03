@@ -131,18 +131,19 @@ public class GameMechanics {
 		if (!UtilFunctions.canPlay5D(testLines, lines).points.isEmpty()) {
 			Line newLine = UtilFunctions.canPlay5D(testLines, lines);
 			return newLine;
-		}
+			}
 		return null;
-	}
+		}
 	
 	/**
-	 * Makes a move on the board at the specified coordinates.
+	 * Makes a move on the board at the specified coordinates if possible.
 	 * 
 	 * @param x The x coordinate of the move.
 	 * @param y The y coordinate of the move.
 	 * @param board The board on which to make the move.
+	 * @return true if the move was made, false if the move was not possible.
 	 */
-	public static void playMove(int x, int y, Board board) {
+	public static boolean playMove(int x, int y, Board board) {
 		if (!board.grid.get(x).get(y)) {
 			if (gameRule.equals("5D")) {
 				if (isPossible(x, y, board)) {
@@ -151,11 +152,13 @@ public class GameMechanics {
 						lines.add(newLine);
 						moves.add(new Point(x, y));
 						board.grid.get(x).set(y, true);
+						return true;
+						}
 					}
 				}
 			}
+		return false;
 		}
-	}
 		
 	public static void setGameRule(String gameRule) {
 		GameMechanics.gameRule = gameRule;
