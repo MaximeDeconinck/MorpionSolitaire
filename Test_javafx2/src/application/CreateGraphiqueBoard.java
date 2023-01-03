@@ -8,6 +8,7 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -27,10 +28,12 @@ public class CreateGraphiqueBoard extends Application {
 	   private List<Line> horizontalLines;
 	   private List<Line> verticalLines;
 	   private List<Circle> intersectionPoints;
+	   private List<Canvas> intersectionCanvas;
 	   private ChoiceBox<String> choiceBox;
 	   private Group linesGroup;
 	   private Group lineDraw;
 	   private AnchorPane anchor;
+	   private Canvas canvas;
 	   private Label label;
 	   private Button button1;
 	   private Button button2;
@@ -48,6 +51,9 @@ public class CreateGraphiqueBoard extends Application {
 		   this.anchor = new AnchorPane();
 	       this.anchor.setPrefHeight(650.68);
 	       this.anchor.setPrefWidth(959.04);
+	       
+	       this.canvas = new Canvas(anchor.getPrefWidth(), anchor.getPrefHeight());
+	       anchor.getChildren().add(canvas);
 	       
 	       this.label = new Label("");
 	       this.label.setLayoutX((anchor.getPrefWidth() - label.getPrefWidth()) / 2);

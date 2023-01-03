@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Line;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -20,13 +21,27 @@ public class LineIntersectionDrawer {
         LineIntersectionFinder finder = new LineIntersectionFinder();
         List<Point2D> intersectionCoordinates = finder.getIntersectionCoordinates(horizontalLines, verticalLines);
         List<Circle> intersectionPoints = new ArrayList<>();
+        List<Canvas> intersectionCanvas = new ArrayList<>();
         for (Point2D point : intersectionCoordinates) {
             Circle circle = new Circle(point.getX(), point.getY(), RADIUS);
+            Canvas canvas = new Canvas(2 * RADIUS, 2 * RADIUS);
+            
+            
             circle.setFill(maCouleur);
             circle.setOpacity(0);
+            
+            
             circle.setUserData(new Point2D(row, col));
+            canvas.setUserData(new Point2D(row, col));
+            
             circle.setRadius(circle.getRadius() + 4);
+            
+            
+           
+            
             intersectionPoints.add(circle);
+            intersectionCanvas.add(canvas);
+            
             col++;
             if (col > 16) {
                 row++;
