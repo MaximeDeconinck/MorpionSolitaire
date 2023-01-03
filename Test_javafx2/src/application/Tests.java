@@ -12,10 +12,10 @@ public class Tests {
 
 		tab.initBoard();
 		
-		tab.addPoint(1, 0);
-		tab.addPoint(2, 0);
-		tab.addPoint(3, 0);
-		tab.addPoint(4, 0);
+		tab.addPoint(0, 1);
+		tab.addPoint(0, 2);
+		tab.addPoint(0, 3);
+		tab.addPoint(0, 4);
 		
 		tab.printBoard();
 		GameMechanics.playMove(0, 0, tab);
@@ -41,6 +41,17 @@ public class Tests {
 		
 		tab.printBoard();
 		GameMechanics.playMove(15, 4, tab);
+		tab.printBoard();
+		System.out.println(GameMechanics.moves);
+		System.out.println(GameMechanics.lines);
+		
+		tab.addPoint(0, 11);
+		tab.addPoint(0, 12);
+		tab.addPoint(0, 13);
+		tab.addPoint(0, 14);
+		
+		tab.printBoard();
+		GameMechanics.playMove(0, 15, tab);
 		tab.printBoard();
 		System.out.println(GameMechanics.moves);
 		System.out.println(GameMechanics.lines);

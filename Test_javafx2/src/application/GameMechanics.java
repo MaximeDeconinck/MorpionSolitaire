@@ -113,7 +113,7 @@ public class GameMechanics {
 		return true;
 	}
 	
-	public static void playMove(int x, int y, Board board) {
+	public static boolean playMove(int x, int y, Board board) {
 		if (!board.grid.get(x).get(y)) {
 			if (gameRule.equals("5D")) {
 				if (checkPossible(x, y, board)) {
@@ -128,6 +128,7 @@ public class GameMechanics {
 						lines.add(newLine);
 						moves.add(new Point(x, y));
 						board.grid.get(x).set(y, true);
+						return true;
 					}
 					// Pas de ligne jouable en 5D, on ne fait rien
 				}
@@ -135,6 +136,7 @@ public class GameMechanics {
 			}
 			// Partie en 5T
 		}
+		return false;
 		// Case occupée, on ne fait rien
 	}
 	
