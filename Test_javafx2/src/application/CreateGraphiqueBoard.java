@@ -255,6 +255,7 @@ public class CreateGraphiqueBoard extends Application {
 		   // Vide la liste de canvas
 		   Canvaslist.clear();
 		   counter = 1;
+		   hintPoints.clear();
 	   }
 
 
