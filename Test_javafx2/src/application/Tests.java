@@ -8,13 +8,17 @@ public class Tests {
 	
 	public static void main(String[] args) {
 		Board tab = new Board(16, "Tableau de jeu");
-		GameMechanics.gameRule = "5D";
+		GameMechanics.gameRule = "5T";
 		
 		tab.initBoard();
 		tab.printBoard();
 		
-		System.out.println(GameMechanics.playableMoves(tab));
-		GameMechanics.playMove(3, 5, tab);
+		GameMechanics.playMove(6, 7, tab);
+		System.out.println(GameMechanics.lines);
+		
+		GameMechanics.playMove(6, 8, tab);
+		System.out.println(GameMechanics.lines);
+		
 		tab.printBoard();
 		
 		/*

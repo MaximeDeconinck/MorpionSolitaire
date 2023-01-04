@@ -136,7 +136,8 @@ public class GameMechanics {
 			}
 			if (!UtilFunctions.canPlay5T(testLines, lines).points.isEmpty() && gameRule.equals("5T")) {
 				// On est en 5T et on peut jouer
-				Line newLine = UtilFunctions.canPlay5D(testLines, lines);
+				Line newLine = UtilFunctions.canPlay5T(testLines, lines);
+				// System.out.println("new line to play : " + newLine);
 				return newLine;
 			}
 		}

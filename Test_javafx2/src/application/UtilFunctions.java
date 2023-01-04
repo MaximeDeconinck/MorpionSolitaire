@@ -41,28 +41,20 @@ public class UtilFunctions {
 	
 	public static Line canPlay5T(ArrayList<Line> testLines, ArrayList<Line> playedLines) {
 	    for (Line testLine : testLines) {
-	        boolean valid = true;
 	        for (Line playedLine : playedLines) {
+	        	// System.out.println("testLine extremities : " + testLine.firstExtremity() + " ; " + testLine.secondExtremity());
+	        	// System.out.println("playedLine extremities : " + playedLine.firstExtremity() + " ; " + playedLine.secondExtremity());
 	            if (playedLine.getDirection().equals(testLine.getDirection()) && 
 	                (playedLine.firstExtremity().equals(testLine.firstExtremity()) || 
 	                 playedLine.secondExtremity().equals(testLine.firstExtremity()) || 
 	                 playedLine.firstExtremity().equals(testLine.secondExtremity()) || 
 	                 playedLine.secondExtremity().equals(testLine.secondExtremity()))) {
-	                valid = true;
-	                break;
+	            	// System.out.println("SAME DIRECTION AND EXTREMITIES");
+	                return testLine;
 	            }
-	            if (testLine.hasCommonPoint(playedLine)) {
-	                if (playedLine.getDirection().equals(testLine.getDirection())) {
-	                    valid = false;
-	                    break;
-	                }
-	            }
-	        }
-	        if (valid) {
-	            return testLine;
 	        }
 	    }
-	    return new Line();
+	    return canPlay5D(testLines, playedLines);
 	}
 
 }
