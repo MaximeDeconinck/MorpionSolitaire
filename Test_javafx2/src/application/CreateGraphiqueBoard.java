@@ -28,6 +28,9 @@ public class CreateGraphiqueBoard extends Application {
 	   private List<Line> horizontalLines;
 	   private List<Line> verticalLines;
 	   private static List<Circle> intersectionPoints;
+
+	   
+       
 	   private List<Canvas> Canvaslist;
 	   private ChoiceBox<String> choiceBox;
 	   private Group linesGroup;
@@ -37,6 +40,7 @@ public class CreateGraphiqueBoard extends Application {
 	   private Label label;
 	   private Button button1;
 	   private Button button2;
+	   private Button hintbutton;
 	   private static Board board;
 	   private int counter = 1;
 	   private int valx = 12;
@@ -48,7 +52,7 @@ public class CreateGraphiqueBoard extends Application {
 	   public CreateGraphiqueBoard() {
 	      // Initialise les membres
 		   
-		 
+		   
 		   Canvaslist = new ArrayList<>();
 		   
 		   this.anchor = new AnchorPane();
@@ -74,6 +78,8 @@ public class CreateGraphiqueBoard extends Application {
 	       
 	       
 	       anchor.getChildren().add(title);
+	       
+	       
 
 	       this.button1 = new Button("Reset");
 	       this.button1.setLayoutX(label.getLayoutX() + label.getPrefWidth() + 50);
@@ -82,6 +88,14 @@ public class CreateGraphiqueBoard extends Application {
 	       this.button1.setOnAction(event -> btnRefreshClicked());
 	       this.button1.setPrefHeight(25);
 	       this.button1.setPrefWidth(161);
+	       
+	       this.hintbutton = new Button("Hint");
+	       this.hintbutton.setOnAction(event -> giveHint());
+	       this.hintbutton.setLayoutX(button1.getLayoutX());
+	       this.hintbutton.setLayoutY(180);
+	       this.hintbutton.setMnemonicParsing(false);
+	       this.hintbutton.setPrefHeight(25);
+	       this.hintbutton.setPrefWidth(161);
 	       
 	       ObservableList<String> options = FXCollections.observableArrayList("5D", "5T");
 		   choiceBox = new ChoiceBox<>(options);
@@ -101,13 +115,12 @@ public class CreateGraphiqueBoard extends Application {
 		   
 		   buttonValider.setOnAction(event -> {
 			   String selectedValue = choiceBox.getValue();
-			   System.out.println(selectedValue);
 			   GameMechanics.setGameRule(selectedValue);
 			});
 
 	       this.button2 = new Button("Recherche de solution");
 	       this.button2.setLayoutX(label.getLayoutX() + label.getPrefWidth() + 50);
-	       this.button2.setLayoutY(199);
+	       this.button2.setLayoutY(210);
 	       this.button2.setMnemonicParsing(false);
 	       this.button2.setPrefHeight(25);
 	       this.button2.setPrefWidth(161);
@@ -135,7 +148,7 @@ public class CreateGraphiqueBoard extends Application {
 	      setMouseEvent_cicle();
 	
 	     
-	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw , choiceBox ,buttonValider);
+	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw , choiceBox ,buttonValider ,hintbutton);
 	      
 	      // Crï¿½ez la scï¿½ne et affichez la fenï¿½tre ici
 	        
@@ -174,40 +187,50 @@ public class CreateGraphiqueBoard extends Application {
 	   
 	   
 	   private void setMouseEvent_cicle() {
-		    for (Circle circle : intersectionPoints) {
-		        Point2D point = (Point2D)circle.getUserData();
-		        if(!containsPoint2D(LineIntersectionDrawer.Point_depart(), point)) {
-		            // Crï¿½e un ï¿½vï¿½nement qui se dï¿½clenche lorsque l'utilisateur clique sur le cercle
-		            circle.setOnMouseClicked(event -> {
-		                // Appelle la fonction playMove
-		            	System.out.println((int)point.getX());
-		            	System.out.println((int)point.getY());
-		                if (GameMechanics.playMove((int)point.getX(), (int)point.getY(), board)) {
-		                    // Modifie l'opacitï¿½ du cercle
-		                	System.out.println("vrai");
-		                    circle.setOpacity(circle.getOpacity() == 0 ? 1 : 0);
-		                    // Crï¿½e un canvas de la mï¿½me taille et position que le cercle
-		                    Canvas canvas = new Canvas(20, 20);
-		                    if (counter >= 10) {
-		                        valx = 15;
-		                    }
-		                    canvas.setLayoutX(circle.getCenterX() - valx);
-		                    canvas.setLayoutY(circle.getCenterY() - 5);
+			for (Circle circle : intersectionPoints) {
+				Point2D point = (Point2D)circle.getUserData();
+				if(!containsPoint2D(LineIntersectionDrawer.Point_depart(), point)) {
+					// Crée un événement qui se déclenche lorsque l'utilisateur clique sur le cercle
+					circle.setOnMouseClicked(event -> {
+						// Appelle la fonction playMove
+						if (GameMechanics.playMove((int)point.getX(), (int)point.getY(), board)) {
+							// Modifie l'opacité du cercle
+							
+							if( hintPoints.contains(point)) {
+								circle.setOpacity(0);
+							}
+							
+							hintPoints.remove(point);
+							resetHintCircles();
+							hintPoints.clear();
+							
+							circle.setOpacity(circle.getOpacity() == 0 ? 1 : 0);
+							// Crée un canvas de la même taille et position que le cercle
+							Canvas canvas = new Canvas(20, 20);
+							if (counter >= 10) {
+								valx = 15;
+							}
+							canvas.setLayoutX(circle.getCenterX() - valx);
+							canvas.setLayoutY(circle.getCenterY() - 5);
 
-		                    // Dessine le nombre 1 sur le canvas
-		                    canvas.getGraphicsContext2D().setFill(Color.WHITE);
-		                    canvas.getGraphicsContext2D().setFont(new Font("Arial", 10));
-		                    canvas.getGraphicsContext2D().fillText(Integer.toString(counter), circle.getRadius(), circle.getRadius());
+							// Dessine le nombre 1 sur le canvas
+							canvas.getGraphicsContext2D().setFill(Color.WHITE);
+							canvas.getGraphicsContext2D().setFont(new Font("Arial", 10));
+							canvas.getGraphicsContext2D().fillText(Integer.toString(counter), circle.getRadius(), circle.getRadius());
 
-		                    // Ajoute le canvas ï¿½ l'anchor
-		                    anchor.getChildren().add(canvas);
+							// Ajoute le canvas à l'anchor
+							anchor.getChildren().add(canvas);
 
-		                    counter++;
-		                    Canvaslist.add(canvas);
-		                }
-		            });
-		        }
-		    }
+							counter++;
+							Canvaslist.add(canvas);
+							
+							
+						}
+							// Réinitialise l'opacité des cercles dans hintPoints et vide la liste
+							
+					});
+				}
+			}
 		}
 
 
@@ -266,7 +289,7 @@ public class CreateGraphiqueBoard extends Application {
 		    }
 		}
 	   
-	   public static void linkBoard(Board board1) { // ajoutez cette fonction ï¿½ votre classe
+	   public static void linkBoard(Board board1) { 
 		    board = board1;
 		}
 	   
@@ -300,6 +323,34 @@ public class CreateGraphiqueBoard extends Application {
 		        }
 		    }
 		    return false;
+		}
+       
+	   
+
+	   private List<Point2D> hintPoints = new ArrayList<>();
+
+	   private void giveHint() {
+	   ArrayList<Point> playableMoves = GameMechanics.playableMoves(board);
+	   for (Circle circle : intersectionPoints) {
+	   Point2D point = (Point2D)circle.getUserData();
+	   for (Point p : playableMoves) {
+	   if (point.getX() == p.x && point.getY() == p.y) {
+	   circle.setOpacity(0.5);
+	   hintPoints.add(point);
+	   }
+	   }
+	   }
+	   }
+	   
+	   private void resetHintCircles() {
+		    for (Point2D hintPoint : hintPoints) {
+		        for (Circle circle : intersectionPoints) {
+		            Point2D point = (Point2D)circle.getUserData();
+		            if (point.equals(hintPoint)) {
+		                circle.setOpacity(0);
+		            }
+		        }
+		    }
 		}
 
 
