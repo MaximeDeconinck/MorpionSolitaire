@@ -8,11 +8,20 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.TreeMap;
 
+/**
+A class representing a board in a game.
+*/
 public class Board {
 	public int size; // fixée à 16 dans le futur
     public String name;
     public ArrayList<ArrayList<Boolean>> grid;
     
+    /**
+     * Constructs a new board with the specified size and name.
+     * 
+     * @param size the size of the board
+     * @param name the name of the board
+     */
     public Board(int size, String name) {
         this.size = size;
         this.name = name;
@@ -27,12 +36,24 @@ public class Board {
         this.grid = grid1;
     }
     
+    /**
+     * Constructs a new board with the specified grid, size, and name.
+     * 
+     * @param grid the grid representing the board
+     * @param size the size of the board
+     * @param name the name of the board
+     */
     public Board(ArrayList<ArrayList<Boolean>> grid, int size, String name) {
     	this.grid = grid;
     	this.size = size;
     	this.name = name;
     }
     
+    /**
+     * Makes a copy of this board.
+     * 
+     * @return a copy of this board
+     */
     public Board copy() {
         ArrayList<ArrayList<Boolean>> copiedGrid = new ArrayList<>();
         for (ArrayList<Boolean> row : this.grid) {
@@ -41,6 +62,9 @@ public class Board {
         return new Board(copiedGrid, this.size, this.name);
     }
     
+    /**
+     * Initializes the board with a set of predefined points.
+     */
     public void initBoard() {
     	addPoint(3, 6);
     	addPoint(3, 7);
@@ -84,6 +108,9 @@ public class Board {
     	addPoint(11, 9);
     }
     
+    /**
+     * Resets the board to its state after calling initBoard().
+     */
     public void resetBoard() {
         for (int i = 0; i < this.size; i++) {
             for (int j = 0; j < this.size; j++) {
@@ -93,10 +120,19 @@ public class Board {
         initBoard();
     }
     
+    /**
+     * Adds a point at the specified coordinates on the board.
+     * 
+     * @param x the x-coordinate of the point
+     * @param y the y-coordinate of the point
+     */
     public void addPoint(int x, int y) {
     	grid.get(x).set(y, true);
     }
 	
+    /**
+     * Prints the board to the console.
+     */
 	public void printBoard() {
 		for (ArrayList<Boolean> row : this.grid) {
 			ArrayList<String> temp = new ArrayList<>();
