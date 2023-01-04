@@ -114,6 +114,7 @@ public class CreateGraphiqueBoard extends Application {
 		   buttonValider.setPrefWidth(161);
 		   
 		   buttonValider.setOnAction(event -> {
+			   btnRefreshClicked();
 			   String selectedValue = choiceBox.getValue();
 			   GameMechanics.setGameRule(selectedValue);
 			});
