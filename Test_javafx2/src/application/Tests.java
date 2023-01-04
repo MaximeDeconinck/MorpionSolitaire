@@ -10,16 +10,13 @@ public class Tests {
 		Board tab = new Board(16, "Tableau de jeu");
 		GameMechanics.gameRule = "5T";
 		
-		tab.initBoard();
 		tab.printBoard();
 		
-		GameMechanics.playMove(6, 7, tab);
-		System.out.println(GameMechanics.lines);
+		System.out.println(GameMechanics.isGameOver(tab));
 		
-		GameMechanics.playMove(6, 8, tab);
-		System.out.println(GameMechanics.lines);
-		
+		tab.initBoard();		
 		tab.printBoard();
+		System.out.println(GameMechanics.isGameOver(tab));
 		
 		/*
 		GameMechanics.playMove(3, 5, tab);

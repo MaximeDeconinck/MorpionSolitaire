@@ -218,9 +218,9 @@ public class GameMechanics {
 	public static boolean isGameOver(Board board) {
 		ArrayList<Point> playableMoves = playableMoves(board);
 		if (playableMoves.isEmpty()) {
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 		
 	public static void setGameRule(String gameRule) {
