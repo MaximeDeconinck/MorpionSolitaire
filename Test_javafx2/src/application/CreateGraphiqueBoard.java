@@ -9,10 +9,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -52,6 +56,12 @@ public class CreateGraphiqueBoard extends Application {
 	   public CreateGraphiqueBoard() {
 	      // Initialise les membres
 		   
+		   
+		   /*Alert alert = new Alert(Alert.AlertType.WARNING);
+		   alert.setTitle("Titre de la fenêtre");
+		   alert.setHeaderText("Titre du message");
+		   alert.setContentText("Contenu du message");
+		   alert.showAndWait(); */
 		   
 		   Canvaslist = new ArrayList<>();
 		   
@@ -125,6 +135,8 @@ public class CreateGraphiqueBoard extends Application {
 	       this.button2.setMnemonicParsing(false);
 	       this.button2.setPrefHeight(25);
 	       this.button2.setPrefWidth(161);
+	       
+	       this.button2.setOnAction(event -> searchSolution());
 
 	
 	      
@@ -224,6 +236,7 @@ public class CreateGraphiqueBoard extends Application {
 
 							counter++;
 							Canvaslist.add(canvas);
+						    isItTheEnd();
 							
 							
 						}
@@ -403,6 +416,41 @@ public class CreateGraphiqueBoard extends Application {
 		                circle.setOpacity(0);
 		            }
 		        }
+		    }
+		}
+	   
+	   
+	   private void isItTheEnd() {
+		   if (GameMechanics.isGameOver(board)) {
+			   Alert alert = new Alert(AlertType.INFORMATION);
+			   alert.setTitle("Partie terminée");
+			   alert.setHeaderText(null);
+			   alert.setContentText("La partie est terminée, veuillez relancer une partie.");
+			   alert.showAndWait();
+		   	}
+		 }
+	   
+	   private void searchSolution() {
+		    btnRefreshClicked();
+		    while (!GameMechanics.isGameOver(board)) {
+		        // Récupère la liste des mouvements possibles
+		        ArrayList<Point> playableMoves = GameMechanics.playableMoves(board);
+		        // Choisit un mouvement au hasard
+		        Point randomMove = playableMoves.get((int) (Math.random() * playableMoves.size()));
+		        // Récupère le cercle correspondant au mouvement
+		        Circle targetCircle = null;
+		        for (Circle circle : intersectionPoints) {
+		            Point2D data = (Point2D) circle.getUserData();
+		            if (data.getX() == randomMove.x && data.getY() == randomMove.y) {
+		                targetCircle = circle;
+		                break;
+		            }
+		        }
+		        // Simule un clic sur le cercle
+		       
+		        targetCircle.fireEvent(new MouseEvent(MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, MouseButton.PRIMARY, 1, true, true, true, true, true, true, true, true, true, true, null));
+		       
+		    
 		    }
 		}
 

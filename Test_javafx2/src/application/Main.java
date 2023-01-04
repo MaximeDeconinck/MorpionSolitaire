@@ -144,9 +144,7 @@ public class Main {
 		
 		tab.printBoard();
 		
-		
-		
-        
+	
 		CreateGraphiqueBoard.linkBoard(tab);
     	Application.launch(CreateGraphiqueBoard.class, args);  
     	
