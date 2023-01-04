@@ -14,7 +14,7 @@ import javafx.geometry.Point2D;
 
 public class Score {
 	
-	public static void addPoint(int numGame, Point2D point, String textFile) {
+	public static void addPoint(String name, int numGame, Point2D point, String textFile) {
 	    try {
 	        String pointString = "(" + point.getX() + "," + point.getY() + ")";
 	        BufferedReader reader = new BufferedReader(new FileReader(textFile));
@@ -22,22 +22,21 @@ public class Score {
 	        boolean found = false;
 	        StringBuilder sb = new StringBuilder();
 	        while ((line = reader.readLine()) != null) {
-	            if (line.startsWith("numgame: " + numGame)) {
+	            if (line.startsWith("nom: " + name) && line.contains("numgame: " + numGame)) {
 	                String[] parts = line.split(", ");
-	                int moves = Integer.parseInt(parts[1].split(": ")[1]) + 1;
-	                line = parts[0] + ", moves: " + moves + ", " + parts[2] + " " + pointString;
-	               
+	                int moves = Integer.parseInt(parts[2].split(": ")[1]) + 1;
+	                line = parts[0] + ", " + parts[1] + ", moves: " + moves + ", " + parts[3] + " " + pointString;
 	                found = true;
 	            }
 	            sb.append(line).append("\n");
 	        }
 	        reader.close();
-	        
+
 	        if (!found) {
-	            String newLine = "numgame: " + numGame + ", moves: 1, " + pointString;
+	            String newLine = "nom: " + name + ", numgame: " + numGame + ", moves: 1, " + pointString;
 	            sb.append(newLine).append("\n");
 	        }
-	        
+
 	        BufferedWriter bw = new BufferedWriter(new FileWriter(textFile, false));
 	        bw.write(sb.toString());
 	        bw.close();

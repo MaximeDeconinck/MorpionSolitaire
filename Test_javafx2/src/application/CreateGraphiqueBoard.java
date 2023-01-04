@@ -15,12 +15,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
@@ -42,6 +44,7 @@ public class CreateGraphiqueBoard extends Application {
 	   private AnchorPane anchor;
 	   private Canvas canvas;
 	   private Label label;
+	   private Label label4;
 	   private Button button1;
 	   private Button button2;
 	   private Button hintbutton;
@@ -78,13 +81,43 @@ public class CreateGraphiqueBoard extends Application {
 	       this.label.setPrefHeight(0);
 	       this.label.setPrefWidth(100);
 	       
+	       TextField textField = new TextField();
+	       textField.setLayoutX(100); // Définissez la position du champ de texte sur l'axe x
+	       textField.setLayoutY(30);
+	       
+	       Label label2 = new Label("Nom utilisateur :");
+	       label2.setLayoutX(11);
+	       label2.setLayoutY(32);
+	       
+	       Label label3 = new Label("Etat de la partie :");
+	       label3.setLayoutX(160);
+	       label3.setLayoutY(600);
+	       label3.setFont(new Font(17));
+	        
+	       this.label4 = new Label("EN COURS");
+	       this.label4.setLayoutX(295);
+	       this.label4.setLayoutY(597);
+	       this.label4.setFont(new Font(22));
+	       this.label4.setTextFill(Color.GREEN);
+	       
+	       Rectangle rect = new Rectangle(155, 590, 250, 40);
+	       rect.setArcWidth(10);
+	       rect.setArcHeight(10);
+	       rect.setStroke(Color.GREY);
+	       rect.setStrokeWidth(2);
+	       rect.setFill(Color.TRANSPARENT);
+	       
+	       
+
+	       
 	       
 	       Label title = new Label("Morpion Solitaire");
 	       Font comicSans = Font.font("Georgia", 20);
 	       title.setFont(comicSans);
 	       title.setPrefWidth(959.04); // largeur de la fenï¿½tre
 	       title.setAlignment(Pos.TOP_CENTER);
-	       title.setLayoutY(25);
+	       title.setLayoutY(15);
+	       
 	       
 	       
 	       anchor.getChildren().add(title);
@@ -161,7 +194,7 @@ public class CreateGraphiqueBoard extends Application {
 	      setMouseEvent_cicle();
 	
 	     
-	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw , choiceBox ,buttonValider ,hintbutton);
+	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw , choiceBox ,buttonValider ,hintbutton, textField, label2, label3, label4, rect);
 	      
 	      // Crï¿½ez la scï¿½ne et affichez la fenï¿½tre ici
 	        
@@ -270,6 +303,9 @@ public class CreateGraphiqueBoard extends Application {
 		   Canvaslist.clear();
 		   counter = 1;
 		   hintPoints.clear();
+		   
+		   label4.setText("EN COURS");
+		   this.label4.setTextFill(Color.GREEN);
 	   }
 
 
@@ -422,11 +458,8 @@ public class CreateGraphiqueBoard extends Application {
 	   
 	   private void isItTheEnd() {
 		   if (GameMechanics.isGameOver(board)) {
-			   Alert alert = new Alert(AlertType.INFORMATION);
-			   alert.setTitle("Partie terminée");
-			   alert.setHeaderText(null);
-			   alert.setContentText("La partie est terminée, veuillez relancer une partie.");
-			   alert.showAndWait();
+			   label4.setText("TERMINÉ");
+			   label4.setTextFill(Color.web("#3EC0F5"));
 		   	}
 		 }
 	   
