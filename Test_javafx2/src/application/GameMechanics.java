@@ -11,14 +11,15 @@ public class GameMechanics {
 	static ArrayList<Line> lines = new ArrayList<>();
 	static String gameRule = "5D";
 	
-	
-	// Ajouter fonction qui modifie gameRule en fonction du menu d�roulant
-	
+	/**
+	* Resets the board and the list of moves and lines.
+	*
+	* @param board the board to reset
+	*/
 	public static void reset(Board board) {
 		board.resetBoard();
 		moves = new ArrayList<>();
 		lines = new ArrayList<>();
-		// partie graphique
 	}
 	
 	public static ArrayList<Line> isHorizontalPossible(int x, int y, Board board) {
@@ -100,7 +101,14 @@ public class GameMechanics {
 	    return lines1;
 	}
 
-	
+	/**
+	 * Determines if a move on the board at the specified coordinates if possible (i.e. would align with 4 others points).
+	 * 
+	 * @param x The x coordinate of the move.
+	 * @param y The y coordinate of the move.
+	 * @param board The board on which to make the move.
+	 * @return true if the move is possible, false if the move was not possible.
+	 */
 	public static boolean isPossible(int x, int y, Board board) {
 		if (isHorizontalPossible(x, y, board).isEmpty()) {
 			if (isVerticalPossible(x, y, board).isEmpty()) {
@@ -182,6 +190,12 @@ public class GameMechanics {
 		return false;
 	}
 	
+	/**
+	 * Returns every playable moves on the board.
+	 * 
+	 * @param board The board on which to make the move.
+	 * @return a list of points representing the playable points.
+	 */
 	public static ArrayList<Point> playableMoves(Board board) {
         ArrayList<Point> playableMoves = new ArrayList<>();
         for (int i = 0; i < board.size; i++) {
@@ -195,6 +209,12 @@ public class GameMechanics {
         return playableMoves;
     }
 	
+	/**
+	* Determines if the game is over by checking if there are any playable moves left.
+	*
+	* @param board The board to test on
+	* @return true if the game is over, false otherwise
+	*/
 	public static boolean isGameOver(Board board) {
 		ArrayList<Point> playableMoves = playableMoves(board);
 		if (playableMoves.isEmpty()) {
