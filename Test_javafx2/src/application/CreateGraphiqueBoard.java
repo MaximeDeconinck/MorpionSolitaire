@@ -270,26 +270,77 @@ public class CreateGraphiqueBoard extends Application {
 		        Point2D data = (Point2D) circle.getUserData();
 		        if (data.getX() == x1 && data.getY() == y1) {
 		            c1 = circle;
-		          
 		        }
 		        if (data.getX() == x2 && data.getY() == y2) {
 		            c2 = circle;
-		            
 		        }
 		    }
 		    if (c1 != null && c2 != null) {
 		        Line line = new Line();
 		        
-		        line.setStartX(c1.getCenterX());
-		        line.setStartY(c1.getCenterY());
-		        line.setEndX(c2.getCenterX());
-		        line.setEndY(c2.getCenterY());
+		        // Si la ligne est horizontale
+		        if (x1 == x2) {
+		            line.setStartX(c1.getCenterX() + 10);
+		            line.setEndX(c2.getCenterX() - 10);
+		            line.setStartY(c1.getCenterY());
+			        line.setEndY(c2.getCenterY());
+		            
+		        }
+		        // Si la ligne est verticale
+		        else if (y1 == y2) {
+		      
+		            line.setStartX(c1.getCenterX());
+		            line.setEndX(c2.getCenterX());
+		            
+		            line.setStartY(c1.getCenterY() + 10);
+			        line.setEndY(c2.getCenterY() - 10);
+		         
+		        }
+		        // Si la ligne est diagonale
+		        else {
+		        	// en haut à droite 
+		        	if (x1 > x2 && y1 < y2) {
+		        		line.setStartX(c1.getCenterX() - 5);
+		        		line.setEndX(c2.getCenterX() + 5);   
+			            line.setStartY(c1.getCenterY() + 5);
+				        line.setEndY(c2.getCenterY() - 5);
+			        }
+			        // Cas où c1 est en bas à droite de c2
+			        else if (x1 > x2 && y1 > y2) {
+			            line.setStartX(c1.getCenterX() + 5);
+			            line.setEndX(c2.getCenterX() - 5);
+			            
+			            line.setStartY(c1.getCenterY() + 5);
+				        line.setEndY(c2.getCenterY() - 5);
+			        }
+			        // Cas où c1 est en haut à gauche de c2
+			        else if (x1 < x2 && y1 < y2) {
+			            line.setStartX(c1.getCenterX() + 5);
+			            line.setEndX(c2.getCenterX() - 5);
+			            
+			            line.setStartY(c1.getCenterY() + 5);
+				        line.setEndY(c2.getCenterY() - 5);
+			        }
+			        // Cas où c1 est en bas à gauche de c2
+			        else if (x1 < x2 && y1 > y2) {
+			            line.setStartX(c1.getCenterX() - 5);
+			            line.setEndX(c2.getCenterX() + 5);
+			            
+			            line.setStartY(c1.getCenterY() + 5);
+				        line.setEndY(c2.getCenterY() - 5);
+			        }
+
+		           
+		        }
+		        
+		       
 		        line.setStroke(Color.BLUE);
 		        line.setStrokeWidth(3);
 		        System.out.println(line);
 		        lineDraw.getChildren().add(line);
 		    }
 		}
+
 	   
 	   public static void linkBoard(Board board1) { 
 		    board = board1;
