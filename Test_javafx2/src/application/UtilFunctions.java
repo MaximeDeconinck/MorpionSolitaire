@@ -26,7 +26,7 @@ public class UtilFunctions {
 	        	// System.out.println("playedLine : " + playedLine);
 	            if (testLine.hasCommonPoint(playedLine)) {
 	            	// System.out.println("point en commun trouvé");
-	                if (playedLine.getDirection() == testLine.getDirection()) {
+	                if (playedLine.getDirection().equals(testLine.getDirection())) {
 	                    valid = false;
 	                    break;
 	                }
@@ -40,8 +40,29 @@ public class UtilFunctions {
 	}
 	
 	public static Line canPlay5T(ArrayList<Line> testLines, ArrayList<Line> playedLines) {
-		// To do 
-		return new Line();
+	    for (Line testLine : testLines) {
+	        boolean valid = true;
+	        for (Line playedLine : playedLines) {
+	            if (playedLine.getDirection().equals(testLine.getDirection()) && 
+	                (playedLine.firstExtremity().equals(testLine.firstExtremity()) || 
+	                 playedLine.secondExtremity().equals(testLine.firstExtremity()) || 
+	                 playedLine.firstExtremity().equals(testLine.secondExtremity()) || 
+	                 playedLine.secondExtremity().equals(testLine.secondExtremity()))) {
+	                valid = true;
+	                break;
+	            }
+	            if (testLine.hasCommonPoint(playedLine)) {
+	                if (playedLine.getDirection().equals(testLine.getDirection())) {
+	                    valid = false;
+	                    break;
+	                }
+	            }
+	        }
+	        if (valid) {
+	            return testLine;
+	        }
+	    }
+	    return new Line();
 	}
 
 }

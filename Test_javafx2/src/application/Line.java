@@ -21,11 +21,17 @@ public class Line {
 	}
 	
 	public Point firstExtremity() {
-		return this.points.get(0);
+		if (!this.points.isEmpty()) {
+			return this.points.get(0);
+		}
+		return null;
 	}
 	
 	public Point secondExtremity() {
-		return this.points.get(this.points.size()-1);
+		if (!this.points.isEmpty()) {
+			return this.points.get(this.points.size()-1);
+		}
+		return null;
 	}
 	
 	public boolean hasCommonPoint(Line line) {

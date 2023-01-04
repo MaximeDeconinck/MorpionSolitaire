@@ -166,7 +166,16 @@ public class GameMechanics {
 				}
 			}
 			if (gameRule.equals("5T")) {
-				// Partie en 5T
+				if (isPossible(x, y, board)) {
+					if (isPlayable(x, y, board) != null) {
+						Line newLine = isPlayable(x, y, board);
+						lines.add(newLine);
+						moves.add(new Point(x, y));
+						board.grid.get(x).set(y, true);
+						CreateGraphiqueBoard.drawLine(newLine.firstExtremity().x, newLine.firstExtremity().y, newLine.secondExtremity().x, newLine.secondExtremity().y);
+						return true;
+					}
+				}
 			}
 		}
 		return false;
