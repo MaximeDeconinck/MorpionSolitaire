@@ -20,6 +20,14 @@ public class Line {
 		return dir;
 	}
 	
+	public Point firstExtremity() {
+		return this.points.get(0);
+	}
+	
+	public Point secondExtremity() {
+		return this.points.get(this.points.size()-1);
+	}
+	
 	public boolean hasCommonPoint(Line line) {
 		for (Point point1 : this.points) {
 			for (Point point2 : line.points) {

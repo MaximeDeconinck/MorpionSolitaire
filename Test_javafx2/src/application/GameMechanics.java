@@ -160,7 +160,7 @@ public class GameMechanics {
 						lines.add(newLine);
 						moves.add(new Point(x, y));
 						board.grid.get(x).set(y, true);
-						CreateGraphiqueBoard.drawLine(newLine.points.get(0).x, newLine.points.get(0).y, newLine.points.get(newLine.points.size()-1).x, newLine.points.get(newLine.points.size()-1).y);
+						CreateGraphiqueBoard.drawLine(newLine.firstExtremity().x, newLine.firstExtremity().y, newLine.secondExtremity().x, newLine.secondExtremity().y);
 						return true;
 					}
 				}
