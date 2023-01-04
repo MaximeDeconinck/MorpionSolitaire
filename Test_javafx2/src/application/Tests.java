@@ -14,9 +14,7 @@ public class Tests {
 		tab.printBoard();
 		
 		System.out.println(GameMechanics.playableMoves(tab));
-		
-		tab.printBoard();
-		
+				
 		/*
 		GameMechanics.playMove(3, 5, tab);
 		tab.printBoard();

@@ -123,16 +123,23 @@ public class GameMechanics {
 	 * @return A Line object representing the line that can be formed by making the move, or null if the move is not playable.
 	 */
 	public static Line isPlayable(int x, int y, Board board) {
-		ArrayList<Line> testLines = new ArrayList<>();
-		if (!isHorizontalPossible(x, y, board).isEmpty()) { testLines.addAll(isHorizontalPossible(x, y, board)); }
-		if (!isVerticalPossible(x, y, board).isEmpty()) { testLines.addAll(isVerticalPossible(x, y, board)); }
-		if (!isLeftDiagPossible(x, y, board).isEmpty()) { testLines.addAll(isLeftDiagPossible(x, y, board)); }
-		if (!isRightDiagPossible(x, y, board).isEmpty()) { testLines.addAll(isRightDiagPossible(x, y, board)); }
-		// System.out.println(testLines);
-		if (!UtilFunctions.canPlay5D(testLines, lines).points.isEmpty()) {
-			Line newLine = UtilFunctions.canPlay5D(testLines, lines);
-			return newLine;
+		if (!board.grid.get(x).get(y)) {
+			ArrayList<Line> testLines = new ArrayList<>();
+			if (!isHorizontalPossible(x, y, board).isEmpty()) { testLines.addAll(isHorizontalPossible(x, y, board)); }
+			if (!isVerticalPossible(x, y, board).isEmpty()) { testLines.addAll(isVerticalPossible(x, y, board)); }
+			if (!isLeftDiagPossible(x, y, board).isEmpty()) { testLines.addAll(isLeftDiagPossible(x, y, board)); }
+			if (!isRightDiagPossible(x, y, board).isEmpty()) { testLines.addAll(isRightDiagPossible(x, y, board)); }
+			if (!UtilFunctions.canPlay5D(testLines, lines).points.isEmpty() && gameRule.equals("5D")) {
+				// On est en 5D et on peut jouer
+				Line newLine = UtilFunctions.canPlay5D(testLines, lines);
+				return newLine;
 			}
+			if (!UtilFunctions.canPlay5T(testLines, lines).points.isEmpty() && gameRule.equals("5T")) {
+				// On est en 5T et on peut jouer
+				Line newLine = UtilFunctions.canPlay5D(testLines, lines);
+				return newLine;
+			}
+		}
 		return null;
 	}
 	
@@ -158,26 +165,33 @@ public class GameMechanics {
 					}
 				}
 			}
+			if (gameRule.equals("5T")) {
+				// Partie en 5T
+			}
 		}
 		return false;
 	}
 	
 	public static ArrayList<Point> playableMoves(Board board) {
         ArrayList<Point> playableMoves = new ArrayList<>();
-
         for (int i = 0; i < board.size; i++) {
             for (int j = 0; j < board.size; j++) {
                 Board copyOfBoard = board.copy();
-                if (isPossible(i, j, copyOfBoard)) {
-	                if (playMove(i, j, copyOfBoard)) {
-	                    playableMoves.add(new Point(i, j));
-	                }
-                }
+	            if (isPlayable(i, j, copyOfBoard) != null) {
+	                playableMoves.add(new Point(i, j));
+	            }
             }
         }
-
         return playableMoves;
     }
+	
+	public static boolean isGameOver(Board board) {
+		ArrayList<Point> playableMoves = playableMoves(board);
+		if (playableMoves.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 		
 	public static void setGameRule(String gameRule) {
 		GameMechanics.gameRule = gameRule;

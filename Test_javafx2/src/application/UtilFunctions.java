@@ -38,6 +38,10 @@ public class UtilFunctions {
 	    }
 	    return new Line();
 	}
-
+	
+	public static Line canPlay5T(ArrayList<Line> testLines, ArrayList<Line> playedLines) {
+		// To do 
+		return new Line();
+	}
 
 }
