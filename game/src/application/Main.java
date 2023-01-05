@@ -1,5 +1,8 @@
 package application;	
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,16 @@ public class Main {
 		tab.printBoard();
 		
 		CreateGraphiqueBoard.linkBoard(tab);
+		
+		
+		File file2 = new File("score2.txt");
+		if (!file2.exists()) {
+		    file2.createNewFile();
+		}
+		
+		Point2D point = new Point2D(6.0, 7.0);
+	    Score.addPoint(1, point, "score2.txt");
+	    //Score.incrementCounter("score2.txt");
 		
     	Application.launch(CreateGraphiqueBoard.class, args);  
     	

@@ -425,7 +425,8 @@ public class CreateGraphiqueBoard extends Application {
 		   	}
 		 }
 	   
-	   private void searchSolution() {
+	   @SuppressWarnings("null")
+	private void searchSolution() {
 		    btnRefreshClicked();
 		    while (!GameMechanics.isGameOver(board)) {
 		        ArrayList<Point> playableMoves = GameMechanics.playableMoves(board);
