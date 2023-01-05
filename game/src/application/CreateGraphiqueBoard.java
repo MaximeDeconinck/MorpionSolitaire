@@ -59,13 +59,6 @@ public class CreateGraphiqueBoard extends Application {
 	   public CreateGraphiqueBoard() {
 	      // Initialise les membres
 		   
-		   
-		   /*Alert alert = new Alert(Alert.AlertType.WARNING);
-		   alert.setTitle("Titre de la fenêtre");
-		   alert.setHeaderText("Titre du message");
-		   alert.setContentText("Contenu du message");
-		   alert.showAndWait(); */
-		   
 		   Canvaslist = new ArrayList<>();
 		   
 		   this.anchor = new AnchorPane();
@@ -80,15 +73,6 @@ public class CreateGraphiqueBoard extends Application {
 	       this.label.setLayoutY(23);
 	       this.label.setPrefHeight(0);
 	       this.label.setPrefWidth(100);
-	       
-	       /*
-	       TextField textField = new TextField();
-	       textField.setLayoutX(100); // Définissez la position du champ de texte sur l'axe x
-	       textField.setLayoutY(30);
-	       
-	       Label label2 = new Label("Nom utilisateur :");
-	       label2.setLayoutX(11);
-	       label2.setLayoutY(32);  */
 	       
 	       Label label3 = new Label("Etat de la partie :");
 	       label3.setLayoutX(160);
@@ -109,7 +93,7 @@ public class CreateGraphiqueBoard extends Application {
 	       Label title = new Label("Morpion Solitaire");
 	       Font comicSans = Font.font("Georgia", 20);
 	       title.setFont(comicSans);
-	       title.setPrefWidth(959.04); // largeur de la fenï¿½tre
+	       title.setPrefWidth(959.04);
 	       title.setAlignment(Pos.TOP_CENTER);
 	       title.setLayoutY(15);
 	       
@@ -137,7 +121,7 @@ public class CreateGraphiqueBoard extends Application {
 	       
 	       ObservableList<String> options = FXCollections.observableArrayList("5D", "5T");
 		   choiceBox = new ChoiceBox<>(options);
-		   choiceBox.setValue("5D"); // dï¿½finit la valeur par dï¿½faut
+		   choiceBox.setValue("5D");
 		   choiceBox.setLayoutX(label.getLayoutX() + label.getPrefWidth() + 50);
 		   choiceBox.setLayoutY(70);
 		   choiceBox.setPrefHeight(button1.getPrefHeight());
@@ -167,9 +151,7 @@ public class CreateGraphiqueBoard extends Application {
 	       this.button2.setOnAction(event -> searchSolution());
 
 	
-	      
-	      // Crï¿½er les lignes horizontal et vertical
-	      
+	      	      
 	      this.horizontalLines = createHorizontalLines();
 	      this.verticalLines = createVerticalLines();
 	      this.linesGroup = new Group();
@@ -183,16 +165,12 @@ public class CreateGraphiqueBoard extends Application {
 	      linesGroup.getChildren().addAll(horizontalLines);
 	      linesGroup.getChildren().addAll(verticalLines);
 	      linesGroup.getChildren().addAll(intersectionPoints);
-	      
-	      // Ajoutez les ï¿½lï¿½ments ï¿½ anchor ici
-	      
+	      	      
 	      setMouseEvent_cicle();
 	
 	     
 	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw , choiceBox ,buttonValider ,hintbutton, label3, label4);
-	      
-	      // Crï¿½ez la scï¿½ne et affichez la fenï¿½tre ici
-	        
+	      	        
 	   }
 	   
 	   @Override
@@ -202,7 +180,6 @@ public class CreateGraphiqueBoard extends Application {
 	       primaryStage.show();
 	   }
 	   
-	   // Mï¿½thode pour crï¿½er les lignes horizontal
 	   public List<Line> createHorizontalLines() {
 		    List<Line> myHorizontalLines = new ArrayList<>();
 		    for (int i = 0; i <= 17; i++) {
@@ -213,7 +190,6 @@ public class CreateGraphiqueBoard extends Application {
 		    return myHorizontalLines;
 		}
 	   
-	   // Mï¿½thode pour crï¿½er les lignes vertical
 	   private List<Line> createVerticalLines() {
 		   
 		   List<Line> myVerticalLines = new ArrayList<>();
@@ -231,11 +207,9 @@ public class CreateGraphiqueBoard extends Application {
 			for (Circle circle : intersectionPoints) {
 				Point2D point = (Point2D)circle.getUserData();
 				if(!containsPoint2D(LineIntersectionDrawer.Point_depart(), point)) {
-					// Crée un événement qui se déclenche lorsque l'utilisateur clique sur le cercle
 					circle.setOnMouseClicked(event -> {
 						// Appelle la fonction playMove
 						if (GameMechanics.playMove((int)point.getX(), (int)point.getY(), board)) {
-							// Modifie l'opacité du cercle
 							
 							if( hintPoints.contains(point)) {
 								circle.setOpacity(0);
@@ -246,7 +220,6 @@ public class CreateGraphiqueBoard extends Application {
 							hintPoints.clear();
 							
 							circle.setOpacity(circle.getOpacity() == 0 ? 1 : 0);
-							// Crée un canvas de la même taille et position que le cercle
 							Canvas canvas = new Canvas(20, 20);
 							if (counter >= 10) {
 								valx = 15;
@@ -259,7 +232,6 @@ public class CreateGraphiqueBoard extends Application {
 							canvas.getGraphicsContext2D().setFont(new Font("Arial", 10));
 							canvas.getGraphicsContext2D().fillText(Integer.toString(counter), circle.getRadius(), circle.getRadius());
 
-							// Ajoute le canvas à l'anchor
 							anchor.getChildren().add(canvas);
 
 							counter++;
@@ -268,7 +240,6 @@ public class CreateGraphiqueBoard extends Application {
 							
 							
 						}
-							// Réinitialise l'opacité des cercles dans hintPoints et vide la liste
 							
 					});
 				}
@@ -290,7 +261,7 @@ public class CreateGraphiqueBoard extends Application {
 		   lineDraw.getChildren().clear();
 		   GameMechanics.reset(board);
 		   board.printBoard();
-		// Supprime tous les canvas de l'anchor
+		   // Supprime tous les canvas de l'anchor
 		   for (Canvas c : Canvaslist) {
 		       anchor.getChildren().remove(c);
 		   }
@@ -342,14 +313,12 @@ public class CreateGraphiqueBoard extends Application {
 		        }
 		        // Si la ligne est diagonale
 		        else {
-		        	// en haut à droite 
 		        	if (x1 > x2 && y1 < y2) {
 		        		line.setStartX(c1.getCenterX() - 5);
 		        		line.setEndX(c2.getCenterX() + 5);   
 			            line.setStartY(c1.getCenterY() + 5);
 				        line.setEndY(c2.getCenterY() - 5);
 			        }
-			        // Cas où c1 est en bas à droite de c2
 			        else if (x1 > x2 && y1 > y2) {
 			            line.setStartX(c1.getCenterX() + 5);
 			            line.setEndX(c2.getCenterX() - 5);
@@ -357,7 +326,6 @@ public class CreateGraphiqueBoard extends Application {
 			            line.setStartY(c1.getCenterY() + 5);
 				        line.setEndY(c2.getCenterY() - 5);
 			        }
-			        // Cas où c1 est en haut à gauche de c2
 			        else if (x1 < x2 && y1 < y2) {
 			            line.setStartX(c1.getCenterX() + 5);
 			            line.setEndX(c2.getCenterX() - 5);
@@ -365,7 +333,6 @@ public class CreateGraphiqueBoard extends Application {
 			            line.setStartY(c1.getCenterY() + 5);
 				        line.setEndY(c2.getCenterY() - 5);
 			        }
-			        // Cas où c1 est en bas à gauche de c2
 			        else if (x1 < x2 && y1 > y2) {
 			            line.setStartX(c1.getCenterX() - 5);
 			            line.setEndX(c2.getCenterX() + 5);
@@ -453,7 +420,7 @@ public class CreateGraphiqueBoard extends Application {
 	   
 	   private void isItTheEnd() {
 		   if (GameMechanics.isGameOver(board)) {
-			   label4.setText("TERMINÉ");
+			   label4.setText("TERMINï¿½");
 			   label4.setTextFill(Color.web("#3EC0F5"));
 		   	}
 		 }
@@ -461,11 +428,9 @@ public class CreateGraphiqueBoard extends Application {
 	   private void searchSolution() {
 		    btnRefreshClicked();
 		    while (!GameMechanics.isGameOver(board)) {
-		        // Récupère la liste des mouvements possibles
 		        ArrayList<Point> playableMoves = GameMechanics.playableMoves(board);
 		        // Choisit un mouvement au hasard
 		        Point randomMove = playableMoves.get((int) (Math.random() * playableMoves.size()));
-		        // Récupère le cercle correspondant au mouvement
 		        Circle targetCircle = null;
 		        for (Circle circle : intersectionPoints) {
 		            Point2D data = (Point2D) circle.getUserData();

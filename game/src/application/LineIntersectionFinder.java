@@ -31,20 +31,16 @@ public class LineIntersectionFinder {
 		double y3 = line2.getStartY();
 		double x4 = line2.getEndX();
 		double y4 = line2.getEndY();
-		// Calcul du déterminant
+		
 		double det = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
 
-		// Si le déterminant est nul, cela signifie que les lignes sont parallèles et qu'elles n'ont donc pas d'intersection
 		if (det == 0) {
 		    return null;
 		}
 
-		// Calcul de l'abscisse de l'intersection
 		double xIntersection = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / det;
-		// Calcul de l'ordonnée de l'intersection
 		double yIntersection = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) / det;
 
-		// Vérification que l'intersection se trouve bien sur les deux lignes
 		
 
 		return new Point2D(xIntersection, yIntersection);
