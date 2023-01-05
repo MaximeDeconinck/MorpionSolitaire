@@ -1,4 +1,5 @@
-package application;	
+package application;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -23,39 +24,38 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class Main {
-   
-    public static void main(String[] args) throws IOException {
-    	
-    	Board tab = new Board(16, "Tableau de jeu");
-        
+
+	public static void main(String[] args) throws IOException {
+
+		Board tab = new Board(16, "Tableau de jeu");
+
 		tab.initBoard();
-		
+
 		tab.printBoard();
-		
+
 		CreateGraphiqueBoard.linkBoard(tab);
-		
-		
+
 		File file2 = new File("num_game.txt");
 		if (!file2.exists()) {
-		    file2.createNewFile();
-		    FileWriter fw = new FileWriter(file2);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("Counter: 0");
-            bw.close();
+			file2.createNewFile();
+			FileWriter fw = new FileWriter(file2);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write("Counter: 0");
+			bw.close();
 		}
-		
+
 		File file1 = new File("score2.txt");
 		if (!file1.exists()) {
-		    file1.createNewFile();
+			file1.createNewFile();
 		}
-		
-		//Point2D point = new Point2D(6.0, 7.0);
-	    //Score.addPoint(1, point, "score2.txt");
-	    //Score.incrementCounter("num_game.txt");
-	    //System.out.println(Score.getCounter("num_game.txt"));
-	    //Score.incrementCounter("score2.txt");
-		
-    	Application.launch(CreateGraphiqueBoard.class, args);  
-    	
-    }
+
+		// Point2D point = new Point2D(6.0, 7.0);
+		// Score.addPoint(1, point, "score2.txt");
+		// Score.incrementCounter("num_game.txt");
+		// System.out.println(Score.getCounter("num_game.txt"));
+		// Score.incrementCounter("score2.txt");
+
+		Application.launch(CreateGraphiqueBoard.class, args);
+
+	}
 }
