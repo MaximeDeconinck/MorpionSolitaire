@@ -1,13 +1,24 @@
 package application;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import javafx.geometry.Point2D;
 import javafx.scene.control.CheckBox;
 import javafx.scene.shape.Line;
 
+/**
+A utility class for finding the intersection points of a list of horizontal lines and a list of vertical lines.
+*/
 public class LineIntersectionFinder {
 	
+	/**
+	* Finds the intersection points of the given horizontal and vertical lines and returns them as a list of Point2D objects.
+	*
+	* @param horizontalLines the list of horizontal lines
+	* @param verticalLines the list of vertical lines
+	* @return the list of intersection points, or an empty list if there are no intersection points
+	*/
 	public List<Point2D> getIntersectionCoordinates(List<Line> horizontalLines, List<Line> verticalLines) {
         List<Point2D> intersectionCoordinates = new ArrayList<>();
         for (Line horizontalLine : horizontalLines) {
@@ -22,6 +33,13 @@ public class LineIntersectionFinder {
         return intersectionCoordinates;
     }
     
+	/**
+	 * Calculates the intersection point of the given lines, if it exists.
+	 * 
+	 * @param line1 the first line
+	 * @param line2 the second line
+	 * @return the intersection point, or null if the lines do not intersect
+	 */
 	private Point2D getIntersection(Line line1, Line line2) {
 		double x1 = line1.getStartX();
 		double y1 = line1.getStartY();
@@ -44,8 +62,15 @@ public class LineIntersectionFinder {
 		
 
 		return new Point2D(xIntersection, yIntersection);
-}
+	}
 	
+	/**
+
+	Creates checkboxes for each intersection point in the given list and returns them as a list of CheckBox objects.
+	The checkboxes will be positioned at the coordinates of the intersection points.
+	@param intersectionCoordinates the list of intersection points
+	@return the list of CheckBox objects
+	*/
 	public List<CheckBox> getIntersectionCheckBoxes(List<Point2D> intersectionCoordinates) {
         List<CheckBox> intersectionCheckBoxes = new ArrayList<>();
         for (Point2D intersectionCoordinate : intersectionCoordinates) {
@@ -58,7 +83,4 @@ public class LineIntersectionFinder {
         return intersectionCheckBoxes;
     }
 
-    
-    
-  
 }
