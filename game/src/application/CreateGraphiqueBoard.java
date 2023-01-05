@@ -81,13 +81,14 @@ public class CreateGraphiqueBoard extends Application {
 	       this.label.setPrefHeight(0);
 	       this.label.setPrefWidth(100);
 	       
+	       /*
 	       TextField textField = new TextField();
 	       textField.setLayoutX(100); // Définissez la position du champ de texte sur l'axe x
 	       textField.setLayoutY(30);
 	       
 	       Label label2 = new Label("Nom utilisateur :");
 	       label2.setLayoutX(11);
-	       label2.setLayoutY(32);
+	       label2.setLayoutY(32);  */
 	       
 	       Label label3 = new Label("Etat de la partie :");
 	       label3.setLayoutX(160);
@@ -100,13 +101,7 @@ public class CreateGraphiqueBoard extends Application {
 	       this.label4.setFont(new Font(22));
 	       this.label4.setTextFill(Color.GREEN);
 	       
-	       Rectangle rect = new Rectangle(155, 590, 250, 40);
-	       rect.setArcWidth(10);
-	       rect.setArcHeight(10);
-	       rect.setStroke(Color.GREY);
-	       rect.setStrokeWidth(2);
-	       rect.setFill(Color.TRANSPARENT);
-	       
+	      
 	       
 
 	       
@@ -194,7 +189,7 @@ public class CreateGraphiqueBoard extends Application {
 	      setMouseEvent_cicle();
 	
 	     
-	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw , choiceBox ,buttonValider ,hintbutton, textField, label2, label3, label4, rect);
+	      this.anchor.getChildren().addAll(label, button1, button2, linesGroup ,lineDraw , choiceBox ,buttonValider ,hintbutton, label3, label4);
 	      
 	      // Crï¿½ez la scï¿½ne et affichez la fenï¿½tre ici
 	        
