@@ -38,6 +38,11 @@ public class Main {
 		    file2.createNewFile();
 		}
 		
+		File file1 = new File("score2.txt");
+		if (!file1.exists()) {
+		    file1.createNewFile();
+		}
+		
 		//Point2D point = new Point2D(6.0, 7.0);
 	    //Score.addPoint(1, point, "score2.txt");
 	    //Score.incrementCounter("num_game.txt");
