@@ -69,7 +69,7 @@ public class CreateGraphiqueBoard extends Application {
 		Canvaslist = new ArrayList<>();
 
 		this.anchor = new AnchorPane();
-		this.anchor.setPrefHeight(650.68);
+		this.anchor.setPrefHeight(640.68);
 		this.anchor.setPrefWidth(740.04);
 		
 
@@ -101,11 +101,11 @@ public class CreateGraphiqueBoard extends Application {
 		counterfich = Score.getCounter("num_game.txt");
 
 		Label title = new Label("Morpion Solitaire");
-		Font comicSans = Font.font("Georgia", 25);
+		Font comicSans = Font.font("Arial", 27);
 		title.setFont(comicSans);
 		title.setPrefWidth(800);
 		title.setAlignment(Pos.TOP_CENTER);
-		title.setLayoutY(15);
+		title.setLayoutY(20);
 
 		anchor.getChildren().add(title);
 
