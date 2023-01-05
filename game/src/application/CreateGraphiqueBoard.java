@@ -50,6 +50,7 @@ public class CreateGraphiqueBoard extends Application {
 	private Canvas canvas;
 	private Label label;
 	private Label label4;
+	private Label label5;
 	private Button button1;
 	private Button button2;
 	private Button hintbutton;
@@ -57,6 +58,7 @@ public class CreateGraphiqueBoard extends Application {
 	private int counter = 1;
 	private int valx = 12;
 	private int counterfich;
+	private int score = 0;
 
 	/**
 	 * Constructs a CreateGraphiqueBoard object and initializing all attributes.
@@ -68,7 +70,8 @@ public class CreateGraphiqueBoard extends Application {
 
 		this.anchor = new AnchorPane();
 		this.anchor.setPrefHeight(650.68);
-		this.anchor.setPrefWidth(959.04);
+		this.anchor.setPrefWidth(740.04);
+		
 
 		this.canvas = new Canvas(anchor.getPrefWidth(), anchor.getPrefHeight());
 		anchor.getChildren().add(canvas);
@@ -77,25 +80,30 @@ public class CreateGraphiqueBoard extends Application {
 		this.label.setLayoutX((anchor.getPrefWidth() - label.getPrefWidth()) / 2);
 		this.label.setLayoutY(23);
 		this.label.setPrefHeight(0);
-		this.label.setPrefWidth(100);
+		this.label.setPrefWidth(160);
+		
+		this.label5 = new Label("0");
+		this.label5.setLayoutX(532);
+		this.label5.setLayoutY(601);
+		this.label5.setFont(new Font(17));
 
 		Label label3 = new Label("Etat de la partie :");
-		label3.setLayoutX(160);
+		label3.setLayoutX(30);
 		label3.setLayoutY(600);
 		label3.setFont(new Font(17));
 
 		this.label4 = new Label("EN COURS");
-		this.label4.setLayoutX(295);
-		this.label4.setLayoutY(597);
-		this.label4.setFont(new Font(22));
+		this.label4.setLayoutX(160);
+		this.label4.setLayoutY(601);
+		this.label4.setFont(new Font(17));
 		this.label4.setTextFill(Color.GREEN);
 
 		counterfich = Score.getCounter("num_game.txt");
 
 		Label title = new Label("Morpion Solitaire");
-		Font comicSans = Font.font("Georgia", 20);
+		Font comicSans = Font.font("Georgia", 25);
 		title.setFont(comicSans);
-		title.setPrefWidth(959.04);
+		title.setPrefWidth(800);
 		title.setAlignment(Pos.TOP_CENTER);
 		title.setLayoutY(15);
 
@@ -107,7 +115,7 @@ public class CreateGraphiqueBoard extends Application {
 		this.button1.setMnemonicParsing(false);
 		this.button1.setOnAction(event -> btnRefreshClicked());
 		this.button1.setPrefHeight(25);
-		this.button1.setPrefWidth(161);
+		this.button1.setPrefWidth(180);
 
 		this.hintbutton = new Button("Hint");
 		this.hintbutton.setOnAction(event -> giveHint());
@@ -115,7 +123,7 @@ public class CreateGraphiqueBoard extends Application {
 		this.hintbutton.setLayoutY(180);
 		this.hintbutton.setMnemonicParsing(false);
 		this.hintbutton.setPrefHeight(25);
-		this.hintbutton.setPrefWidth(161);
+		this.hintbutton.setPrefWidth(180);
 
 		ObservableList<String> options = FXCollections.observableArrayList("5D", "5T");
 		choiceBox = new ChoiceBox<>(options);
@@ -130,7 +138,7 @@ public class CreateGraphiqueBoard extends Application {
 		buttonValider.setLayoutY(choiceBox.getLayoutY() + choiceBox.getPrefHeight() + 20); // +20 pour l'espacement
 		buttonValider.setMnemonicParsing(false);
 		buttonValider.setPrefHeight(25);
-		buttonValider.setPrefWidth(161);
+		buttonValider.setPrefWidth(180);
 
 		buttonValider.setOnAction(event -> {
 			btnRefreshClicked();
@@ -143,7 +151,7 @@ public class CreateGraphiqueBoard extends Application {
 		this.button2.setLayoutY(210);
 		this.button2.setMnemonicParsing(false);
 		this.button2.setPrefHeight(25);
-		this.button2.setPrefWidth(161);
+		this.button2.setPrefWidth(180);
 
 		this.button2.setOnAction(event -> searchSolution());
 
@@ -164,7 +172,7 @@ public class CreateGraphiqueBoard extends Application {
 		setMouseEvent_cicle();
 
 		this.anchor.getChildren().addAll(label, button1, button2, linesGroup, lineDraw, choiceBox, buttonValider,
-				hintbutton, label3, label4);
+				hintbutton, label3, label4, label5);
 
 	}
 
@@ -240,6 +248,8 @@ public class CreateGraphiqueBoard extends Application {
 
 						counter++;
 						Canvaslist.add(canvas);
+						score ++;
+						label5.setText(String.valueOf(score));
 						Score.addPoint(counterfich, point, "score2.txt");
 
 						isItTheEnd();
@@ -278,6 +288,8 @@ public class CreateGraphiqueBoard extends Application {
 
 		Score.incrementCounter("num_game.txt");
 		counterfich = Score.getCounter("num_game.txt");
+		score = 0;
+		label5.setText(String.valueOf(score));
 		createScoresTable();
 
 	}
@@ -373,11 +385,11 @@ public class CreateGraphiqueBoard extends Application {
 		Map<Integer, List<Object>> scores = Score.getScores("score2.txt");
 		TableView<Map.Entry<Integer, List<Object>>> table = new TableView<>();
 
-		TableColumn<Map.Entry<Integer, List<Object>>, String> numgameColumn = new TableColumn<>("Numero de partie");
+		TableColumn<Map.Entry<Integer, List<Object>>, String> numgameColumn = new TableColumn<>("Parties");
 		numgameColumn
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getKey().toString()));
 
-		TableColumn<Map.Entry<Integer, List<Object>>, String> movesColumn = new TableColumn<>("Mouvements");
+		TableColumn<Map.Entry<Integer, List<Object>>, String> movesColumn = new TableColumn<>("Score");
 		movesColumn.setCellValueFactory(
 				cellData -> new SimpleStringProperty(cellData.getValue().getValue().get(0).toString()));
 
@@ -385,14 +397,24 @@ public class CreateGraphiqueBoard extends Application {
 		data.sort(
 				(entry1, entry2) -> ((Integer) entry2.getValue().get(0)).compareTo((Integer) entry1.getValue().get(0)));
 		table.setItems(data);
+		
+		numgameColumn.setMaxWidth(90);
+		
+
+		movesColumn.setMaxWidth(90);
+		
+		
 		table.getColumns().addAll(numgameColumn, movesColumn);
 
 		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-		table.setMaxHeight(350);
+		table.setMaxHeight(315);
+		table.setMaxWidth(180);
+		
+		
 
 		this.anchor.getChildren().add(table);
 		AnchorPane.setTopAnchor(table, button2.getLayoutY() + button2.getPrefHeight() + 30);
-		AnchorPane.setLeftAnchor(table, label.getLayoutX() + 120);
+		AnchorPane.setLeftAnchor(table, label.getLayoutX() + 210);
 	}
 
 	/**
