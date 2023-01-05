@@ -49,6 +49,13 @@ public class Point {
 	public String toString() {
 		return "("+x+","+y+")";
 	}
-
+	
+	public int getX() {
+		return this.x;
+	}
+	
+	public int getY() {
+		return this.y;
+	}
 }
 

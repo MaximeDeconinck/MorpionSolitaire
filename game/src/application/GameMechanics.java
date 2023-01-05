@@ -7,9 +7,9 @@ import application.CreateGraphiqueBoard;
 
 public class GameMechanics {
 	
-	static ArrayList<Point> moves = new ArrayList<>();
-	static ArrayList<Line> lines = new ArrayList<>();
-	static String gameRule = "5D";
+	public static ArrayList<Point> moves = new ArrayList<>();
+	public static ArrayList<Line> lines = new ArrayList<>();
+	public static String gameRule = "5D";
 	
 	/**
 	* Resets the board and the list of moves and lines.
