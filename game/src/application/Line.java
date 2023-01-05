@@ -13,12 +13,12 @@ public class Line {
 	/**
 	* The list of points.
 	*/
-	ArrayList<Point> points;
+	public ArrayList<Point> points;
 
 	/**
 	* The direction of the line.
 	*/
-	String dir;
+	public String dir;
 
 	/**
 	* Constructs a Line object with an empty list of points.
