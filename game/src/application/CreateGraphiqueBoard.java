@@ -29,17 +29,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ChoiceBox;
 
-/**
-This class represents the graphical version of the Morpion Solitaire game. It displays a grid of circles, representing the intersections
-of lines, where the player can place their game pieces. It also includes a label for the current state of the game and buttons for
-making moves and getting hints.
-*/
+
 public class CreateGraphiqueBoard extends Application {
 	   // Attributs de la classe
 	   private List<Line> horizontalLines;
 	   private List<Line> verticalLines;
 	   private static List<Circle> intersectionPoints;
-
+	  
 	   
        
 	   private List<Canvas> Canvaslist;
@@ -59,9 +55,9 @@ public class CreateGraphiqueBoard extends Application {
 	   private int counterfich;
 	   
 	   
-	   /**
-		* Constructs a CreateGraphiqueBoard object and initializing all attributes.
-		*/
+	
+	   
+	   // Constructeur de la classe
 	   public CreateGraphiqueBoard() {
 	      // Initialise les membres
 		   
@@ -186,9 +182,6 @@ public class CreateGraphiqueBoard extends Application {
 	       primaryStage.show();
 	   }
 	   
-	   /**
-		* Constructs the horizontal lines of the board.
-		*/
 	   public List<Line> createHorizontalLines() {
 		    List<Line> myHorizontalLines = new ArrayList<>();
 		    for (int i = 0; i <= 17; i++) {
@@ -199,9 +192,6 @@ public class CreateGraphiqueBoard extends Application {
 		    return myHorizontalLines;
 		}
 	   
-	   /**
-		* Constructs the vertical lines of the board.
-		*/
 	   private List<Line> createVerticalLines() {
 		   
 		   List<Line> myVerticalLines = new ArrayList<>();
@@ -214,9 +204,7 @@ public class CreateGraphiqueBoard extends Application {
 	       return myVerticalLines;
 	   }
 	   
-	   /**
-		* Program the event happening when clicking a circle.
-		*/
+	   
 	   private void setMouseEvent_cicle() {
 			for (Circle circle : intersectionPoints) {
 				Point2D point = (Point2D)circle.getUserData();
@@ -250,6 +238,8 @@ public class CreateGraphiqueBoard extends Application {
 
 							counter++;
 							Canvaslist.add(canvas);
+							Score.addPoint(counterfich, point, "score2.txt");
+							
 						    isItTheEnd();
 							
 							
@@ -261,9 +251,10 @@ public class CreateGraphiqueBoard extends Application {
 		}
 
 
-	   /**
-		* Refresh the entire board.
-		*/
+
+
+
+	   
 	   private void btnRefreshClicked() {
 		   for (Circle circle : intersectionPoints) {
 		   Point2D data = (Point2D) circle.getUserData();
@@ -288,17 +279,16 @@ public class CreateGraphiqueBoard extends Application {
 		   
 		   Score.incrementCounter("num_game.txt");
 		   counterfich = Score.getCounter("num_game.txt");
+		   createScoresTable();
+		   
+		   
+		   
 	   }
 
 
 	   
-	   /**
-		* Draw a line between 2 points.
-		* @param x1 the first coordinate of the x point
-		* @param x2 the second coordinate of the x point
-		* @param y1 the first coordinate of the y point
-		* @param y2 the second coordinate of the y point
-		*/
+
+	   
 	   public static void drawLine(double x1, double y1, double x2, double y2) {
 		    Circle c1 = null;
 		    Circle c2 = null;
@@ -373,18 +363,13 @@ public class CreateGraphiqueBoard extends Application {
 		    }
 		}
 
-	   /**
-		* Link the board.
-		*/
+	   
 	   public static void linkBoard(Board board1) { 
 		    board = board1;
 		}
 	   
-	   /**
-		* Creates the score table.
-		*/
 	   private void createScoresTable() {
-		    Map<Integer, List<Object>> scores = Score.getScores("score.txt");
+		    Map<Integer, List<Object>> scores = Score.getScores("score2.txt");
 		    TableView<Map.Entry<Integer, List<Object>>> table = new TableView<>();
 
 		    TableColumn<Map.Entry<Integer, List<Object>>, String> numgameColumn = new TableColumn<>("Num�ro de partie");
@@ -406,13 +391,6 @@ public class CreateGraphiqueBoard extends Application {
 		    AnchorPane.setLeftAnchor(table, label.getLayoutX() + 120);
 		}
 	   
-	   /**
-		* Check if a point is in a list.
-		* 
-		* @param list the list of points
-		* @param point the point to check
-		* @return true if the point is in the list, false otherwise
-		*/
 	   private boolean containsPoint2D(List<Point2D> list, Point2D point) {
 		    for (Point2D p : list) {
 		        if (p.getX() == point.getX() && p.getY() == point.getY()) {
@@ -425,10 +403,7 @@ public class CreateGraphiqueBoard extends Application {
 	   
 
 	   private List<Point2D> hintPoints = new ArrayList<>();
-	   
-	   /**
-		* Gives a hint to the player.
-		*/
+
 	   private void giveHint() {
 	   ArrayList<Point> playableMoves = GameMechanics.playableMoves(board);
 	   for (Circle circle : intersectionPoints) {
@@ -442,9 +417,6 @@ public class CreateGraphiqueBoard extends Application {
 	   }
 	   }
 	   
-	   /**
-		* Hide all hints.
-		*/
 	   private void resetHintCircles() {
 		    for (Point2D hintPoint : hintPoints) {
 		        for (Circle circle : intersectionPoints) {
@@ -456,9 +428,7 @@ public class CreateGraphiqueBoard extends Application {
 		    }
 		}
 	   
-	   /**
-		* Check if the game is over.
-		*/
+	   
 	   private void isItTheEnd() {
 		   if (GameMechanics.isGameOver(board)) {
 			   label4.setText("TERMIN�");
@@ -467,29 +437,26 @@ public class CreateGraphiqueBoard extends Application {
 		 }
 	   
 	   @SuppressWarnings("null")
-	   /**
-		* Search a solution on the board.
-		*/
-	   private void searchSolution() {
-			btnRefreshClicked();
-			while (!GameMechanics.isGameOver(board)) {
-				ArrayList<Point> playableMoves = GameMechanics.playableMoves(board);
-				// Choisit un mouvement au hasard
-				Point randomMove = playableMoves.get((int) (Math.random() * playableMoves.size()));
-				Circle targetCircle = null;
-				for (Circle circle : intersectionPoints) {
-					Point2D data = (Point2D) circle.getUserData();
-					if (data.getX() == randomMove.x && data.getY() == randomMove.y) {
-						targetCircle = circle;
-						break;
-					}
-				}
-				// Simule un clic sur le cercle
-
-				targetCircle.fireEvent(new MouseEvent(MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, MouseButton.PRIMARY, 1,
-						true, true, true, true, true, true, true, true, true, true, null));
-
-			}
+	private void searchSolution() {
+		    btnRefreshClicked();
+		    while (!GameMechanics.isGameOver(board)) {
+		        ArrayList<Point> playableMoves = GameMechanics.playableMoves(board);
+		        // Choisit un mouvement au hasard
+		        Point randomMove = playableMoves.get((int) (Math.random() * playableMoves.size()));
+		        Circle targetCircle = null;
+		        for (Circle circle : intersectionPoints) {
+		            Point2D data = (Point2D) circle.getUserData();
+		            if (data.getX() == randomMove.x && data.getY() == randomMove.y) {
+		                targetCircle = circle;
+		                break;
+		            }
+		        }
+		        // Simule un clic sur le cercle
+		       
+		        targetCircle.fireEvent(new MouseEvent(MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, MouseButton.PRIMARY, 1, true, true, true, true, true, true, true, true, true, true, null));
+		       
+		    
+		    }
 		}
 
 
