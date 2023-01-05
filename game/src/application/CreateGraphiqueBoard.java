@@ -51,6 +51,7 @@ public class CreateGraphiqueBoard extends Application {
 	   private static Board board;
 	   private int counter = 1;
 	   private int valx = 12;
+	   private int counterfich;
 	   
 	   
 	
@@ -86,7 +87,7 @@ public class CreateGraphiqueBoard extends Application {
 	       this.label4.setTextFill(Color.GREEN);
 	       
 	      
-	       
+	       counterfich = Score.getCounter("num_game.txt");
 
 	       
 	       
@@ -272,6 +273,9 @@ public class CreateGraphiqueBoard extends Application {
 		   
 		   label4.setText("EN COURS");
 		   this.label4.setTextFill(Color.GREEN);
+		   
+		   Score.incrementCounter("num_game.txt");
+		   counterfich = Score.getCounter("num_game.txt");
 	   }
 
 

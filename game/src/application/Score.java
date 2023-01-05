@@ -101,8 +101,50 @@ public class Score {
 	    }
 	}
 	
-	
-	
+	public static void incrementCounter(String textFile) {
+	    try {
+	        // Lire le fichier texte
+	        BufferedReader reader = new BufferedReader(new FileReader(textFile));
+	        String line;
+	        int counter = 0;
+	        StringBuilder sb = new StringBuilder();
+	        while ((line = reader.readLine()) != null) {
+	            if (line.startsWith("Counter: ")) {
+	                // Incrémenter le compteur
+	                counter = Integer.parseInt(line.split(": ")[1]) + 1;
+	                // Remplacer la ligne du compteur par la nouvelle valeur
+	                line = "Counter: " + counter;
+	            }
+	            sb.append(line).append("\n");
+	        }
+	        reader.close();
+
+	        // Écrire les données modifiées dans le fichier
+	        BufferedWriter bw = new BufferedWriter(new FileWriter(textFile, false));
+	        bw.write(sb.toString());
+	        bw.close();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	public static int getCounter(String textFile) {
+	    int counter = 0;
+	    try {
+	        BufferedReader reader = new BufferedReader(new FileReader(textFile));
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            if (line.startsWith("Counter: ")) {
+	                counter = Integer.parseInt(line.split(": ")[1]);
+	                break;
+	            }
+	        }
+	        reader.close();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    return counter;
+	}
 	
 	
 

@@ -33,13 +33,15 @@ public class Main {
 		CreateGraphiqueBoard.linkBoard(tab);
 		
 		
-		File file2 = new File("score2.txt");
+		File file2 = new File("num_game.txt");
 		if (!file2.exists()) {
 		    file2.createNewFile();
 		}
 		
-		Point2D point = new Point2D(6.0, 7.0);
-	    Score.addPoint(1, point, "score2.txt");
+		//Point2D point = new Point2D(6.0, 7.0);
+	    //Score.addPoint(1, point, "score2.txt");
+	    //Score.incrementCounter("num_game.txt");
+	    //System.out.println(Score.getCounter("num_game.txt"));
 	    //Score.incrementCounter("score2.txt");
 		
     	Application.launch(CreateGraphiqueBoard.class, args);  
