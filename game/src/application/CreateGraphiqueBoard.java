@@ -373,7 +373,7 @@ public class CreateGraphiqueBoard extends Application {
 		Map<Integer, List<Object>> scores = Score.getScores("score2.txt");
 		TableView<Map.Entry<Integer, List<Object>>> table = new TableView<>();
 
-		TableColumn<Map.Entry<Integer, List<Object>>, String> numgameColumn = new TableColumn<>("N° de partie");
+		TableColumn<Map.Entry<Integer, List<Object>>, String> numgameColumn = new TableColumn<>("Numero de partie");
 		numgameColumn
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getKey().toString()));
 
