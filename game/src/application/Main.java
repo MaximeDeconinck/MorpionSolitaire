@@ -1,8 +1,10 @@
 package application;	
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,10 @@ public class Main {
 		File file2 = new File("num_game.txt");
 		if (!file2.exists()) {
 		    file2.createNewFile();
+		    FileWriter fw = new FileWriter(file2);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write("Counter: 0");
+            bw.close();
 		}
 		
 		File file1 = new File("score2.txt");
